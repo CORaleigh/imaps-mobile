@@ -35,7 +35,7 @@
 		C7AE688B29F9B6C100C616BB /* SearchListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7AE688A29F9B6C100C616BB /* SearchListViewModel.swift */; };
 		C7AE688D29F9B6D200C616BB /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7AE688C29F9B6D200C616BB /* Utilities.swift */; };
 		C7AE688F29F9B6E200C616BB /* PropertyInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7AE688E29F9B6E200C616BB /* PropertyInfoViewModel.swift */; };
-		C7AE689129F9B71100C616BB /* SubLayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7AE689029F9B71100C616BB /* SubLayerView.swift */; };
+		C7AE689129F9B71100C616BB /* SublayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7AE689029F9B71100C616BB /* SublayerView.swift */; };
 		C7AE689329F9B74B00C616BB /* PropertyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7AE689229F9B74B00C616BB /* PropertyView.swift */; };
 /* End PBXBuildFile section */
 
@@ -69,7 +69,7 @@
 		C7AE688A29F9B6C100C616BB /* SearchListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchListViewModel.swift; sourceTree = "<group>"; };
 		C7AE688C29F9B6D200C616BB /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		C7AE688E29F9B6E200C616BB /* PropertyInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyInfoViewModel.swift; sourceTree = "<group>"; };
-		C7AE689029F9B71100C616BB /* SubLayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubLayerView.swift; sourceTree = "<group>"; };
+		C7AE689029F9B71100C616BB /* SublayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SublayerView.swift; sourceTree = "<group>"; };
 		C7AE689229F9B74B00C616BB /* PropertyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -117,7 +117,7 @@
 				C70CB4C429E6F7C200B6A157 /* PropertyInfoViews */,
 				C706EF2E29E8D84D005EEAE0 /* PropertyListView.swift */,
 				C70CB4B529E6E83200B6A157 /* LayersView.swift */,
-				C7AE689029F9B71100C616BB /* SubLayerView.swift */,
+				C7AE689029F9B71100C616BB /* SublayerView.swift */,
 				C738262429EB08FC0087431D /* LayerInfoView.swift */,
 				C70CB4B729E6E84000B6A157 /* BasemapView.swift */,
 				C7AE688729F9B68A00C616BB /* Utility */,
@@ -261,7 +261,7 @@
 				C70CB4BE29E6F76800B6A157 /* PropertyInfoView.swift in Sources */,
 				C70CB4D029E6F81500B6A157 /* DeedView.swift in Sources */,
 				C70CB4C029E6F77500B6A157 /* WebView.swift in Sources */,
-				C7AE689129F9B71100C616BB /* SubLayerView.swift in Sources */,
+				C7AE689129F9B71100C616BB /* SublayerView.swift in Sources */,
 				C7AE688929F9B6B300C616BB /* MapDataModel.swift in Sources */,
 				C735C23729E9DFB3006A3767 /* AppSecrets.swift.masque.swift in Sources */,
 				C738262929ED800E0087431D /* PropertyLinksView.swift in Sources */,
