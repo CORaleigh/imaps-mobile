@@ -30,6 +30,7 @@
 		C735C23729E9DFB3006A3767 /* AppSecrets.swift.masque.swift in Sources */ = {isa = PBXBuildFile; fileRef = C735C23629E9DFB3006A3767 /* AppSecrets.swift.masque.swift */; };
 		C738262529EB08FC0087431D /* LayerInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C738262429EB08FC0087431D /* LayerInfoView.swift */; };
 		C738262929ED800E0087431D /* PropertyLinksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C738262829ED800E0087431D /* PropertyLinksView.swift */; };
+		C7A0B58329F9EA9E00F1E56F /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C7A0B58229F9EA9E00F1E56F /* Info.plist */; };
 		C7AE688629F9B67400C616BB /* SearchItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7AE688529F9B67400C616BB /* SearchItemView.swift */; };
 		C7AE688929F9B6B300C616BB /* MapDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7AE688829F9B6B300C616BB /* MapDataModel.swift */; };
 		C7AE688B29F9B6C100C616BB /* SearchListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7AE688A29F9B6C100C616BB /* SearchListViewModel.swift */; };
@@ -63,7 +64,7 @@
 		C735C23629E9DFB3006A3767 /* AppSecrets.swift.masque.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSecrets.swift.masque.swift; sourceTree = "<group>"; };
 		C738262429EB08FC0087431D /* LayerInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayerInfoView.swift; sourceTree = "<group>"; };
 		C738262829ED800E0087431D /* PropertyLinksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyLinksView.swift; sourceTree = "<group>"; };
-		C738262A29EDB1AA0087431D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		C7A0B58229F9EA9E00F1E56F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		C7AE688529F9B67400C616BB /* SearchItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchItemView.swift; sourceTree = "<group>"; };
 		C7AE688829F9B6B300C616BB /* MapDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapDataModel.swift; sourceTree = "<group>"; };
 		C7AE688A29F9B6C100C616BB /* SearchListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchListViewModel.swift; sourceTree = "<group>"; };
@@ -105,7 +106,6 @@
 		C70CB49D29E6E49D00B6A157 /* imaps-mobile */ = {
 			isa = PBXGroup;
 			children = (
-				C738262A29EDB1AA0087431D /* Info.plist */,
 				C70CB49E29E6E49D00B6A157 /* imaps_mobileApp.swift */,
 				C70CB4A029E6E49D00B6A157 /* ContentView.swift */,
 				C70CB4A229E6E49E00B6A157 /* Assets.xcassets */,
@@ -125,6 +125,7 @@
 				C7AE688529F9B67400C616BB /* SearchItemView.swift */,
 				C72D934429F574F6004815D9 /* SearchHistoryView.swift */,
 				C735C23629E9DFB3006A3767 /* AppSecrets.swift.masque.swift */,
+				C7A0B58229F9EA9E00F1E56F /* Info.plist */,
 			);
 			path = "imaps-mobile";
 			sourceTree = "<group>";
@@ -231,6 +232,7 @@
 			files = (
 				C70CB4A729E6E49E00B6A157 /* Preview Assets.xcassets in Resources */,
 				C70CB4A329E6E49E00B6A157 /* Assets.xcassets in Resources */,
+				C7A0B58329F9EA9E00F1E56F /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
