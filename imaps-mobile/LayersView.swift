@@ -30,6 +30,23 @@ struct LayersView: View {
                                 .environmentObject(self.layerVM)
                         }
                     }
+                    .toolbar {
+                        ToolbarTitleMenu {
+//                            Button("Expand All") {
+//                                self.layerVM.expanded = true
+//                            }
+//                            Button("Collapse All") {
+//                                self.layerVM.expanded = false
+//                            }
+                            Button("Reset Layers") {
+                                Task {
+                                    UserDefaults.standard.removeObject(forKey:"visibleLayers")
+                                    await dataModel.setLayerVisibility(map: dataModel.map)
+                                    self.layerVM.layersReset.toggle()
+                                }
+                            }
+                        }
+                    }
                 }
                 .navigationTitle("Layers")
                 .navigationBarTitleDisplayMode(.inline)
