@@ -1,54 +1,53 @@
 //
 //  ContentView.swift
-//  imaps-mobile
+//  layout-test
 //
-//  Created by Greco, Justin on 4/12/23.
+//  Created by Greco, Justin on 4/24/23.
 //
 
 import SwiftUI
 import ArcGIS
 import ArcGISToolkit
 import CoreLocation
-class SharedData: ObservableObject {
-    @Published var map: Map = Map()
 
-    @Published var viewpoint: Viewpoint? = nil
-    @Published var graphics = GraphicsOverlay(graphics: [])
-    @Published var table: FeatureTable? = nil
-    @Published var layersLoaded: Bool = false
-    @Published var longPressResults: [Feature]?
-    @Published var proxy: MapViewProxy? = nil
+enum SelectedPanel {
+case search, layers, basemap, property
 }
 
 struct ContentView: View {
-    @ObservedObject var shared = SharedData()
-    
-    @State private var showingSearch = false
-    @State private var showingLayers = false
-    @State private var showingBasemaps = false
-    @State private var showingInfo = false
+    @State var selectedDetent: FloatingPanelDetent = .full
+    @State private var popupDetent: FloatingPanelDetent = .full
 
-    @State private var floatingPanelDetent: FloatingPanelDetent = .full
+    @State var isPresented = true
+    @State var selectedPanel = SelectedPanel.search
+
+    @State var selectedPinNum: String = ""
+    private let locationDisplay = LocationDisplay(dataSource: SystemLocationDataSource())
+    @State private var failedToStart = false
+    @State private var locationEnabled = false
+    
     @State private var showPopup = false
     @State private var identifyScreenPoint: CGPoint?
     @State private var popup: Popup?
     @State private var identifyResultCount = 0
     @State private var identifyResultIndex = 0
     @State private var identifyResults:[IdentifyLayerResult]? = []
-    private let locationDisplay = LocationDisplay(dataSource: SystemLocationDataSource())
-    @State private var failedToStart = false
-    @State private var locationEnabled = false
-    @State private var sheetDetent: PresentationDetent = .medium
     
-
+    @StateObject private var dataModel = MapDataModel(
+        map: Map (
+            item: PortalItem(portal: .arcGISOnline(connection: .anonymous), id: PortalItem.ID("95092428774c4b1fb6a3b6f5fed9fbc4")!)
+        ),
+        graphics: GraphicsOverlay(graphics: []),
+        viewpoint: Viewpoint(latitude: 35.7796, longitude: -78.6382, scale: 500_000)
+    )
+    private var initialViewpoint = Viewpoint(latitude: 35.7796, longitude: -78.6382, scale: 500_000)
     var body: some View {
-        
-        VStack {
+        NavigationView {
             MapViewReader { proxy in
                 MapView(
-                    map: shared.map,
-                    viewpoint: shared.viewpoint,
-                    graphicsOverlays: [shared.graphics]
+                    map: dataModel.map,
+                    viewpoint: dataModel.viewpoint,
+                    graphicsOverlays: [dataModel.graphics]
                 )
                 .onViewpointChanged(kind: .centerAndScale) { viewpoint in
                     UserDefaults.standard.set(viewpoint.targetScale, forKey: "scale")
@@ -58,9 +57,7 @@ struct ContentView: View {
                 .onSingleTapGesture {screenPoint, _ in
                     identifyScreenPoint = screenPoint
                 }
-
                 .onLongPressGesture(perform: { viewPoint, mapPoint in
-                    self.showingInfo = false
                     Task {
                         let screenpoint: CGPoint? = viewPoint
                         guard let screenpoint = screenpoint,
@@ -76,18 +73,24 @@ struct ContentView: View {
                             return
                         }
                         let result = try? identifyResult.get().first(where: {$0.layerContent.name == "Property"})
-                        await getCondos(result: result, table: shared.table as! ServiceFeatureTable, completion: { condos in
+                        if result != nil {
+                            if result!.geoElements.count > 0 {
+                                self.selectedPinNum = result?.geoElements.first?.attributes["PIN_NUM"] as! String
 
-                            shared.longPressResults = condos
-                            self.showingBasemaps = false
-                            self.showingLayers = false
-                            self.showPopup = false
-                            self.showingSearch = false
-                            self.showingInfo = false
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                                self.showingInfo = true
+                                let encoder = JSONEncoder()
+                                let history = updateStorageHistory(field: "SITE_ADDRESS", value: result?.geoElements.first?.attributes["SITE_ADDRESS"] as! String)
+                                if let encoded = try? encoder.encode(history) {
+                                    UserDefaults.standard.set(encoded, forKey: "searchHistory")
+                                }
+                        
+
+                                self.selectedPanel = .property
+//                                self.isPresented = false
+//                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+//                                    self.isPresented = true
+//                                }
                             }
-                        })
+                        }
                     }
                 })
                 .locationDisplay(locationDisplay)
@@ -110,261 +113,157 @@ struct ContentView: View {
                     self.identifyResultCount = try! identifyResult.get().count
                     self.popup = try? identifyResult.get().first?.popups.first
                     self.showPopup = self.popup != nil
-                }
-                .floatingPanel(selectedDetent: $floatingPanelDetent,
-                               horizontalAlignment: .leading,
-                               isPresented: $showPopup
-                ) {
-                    VStack {
-                        if (identifyResultCount > 1) {
-                            HStack{
-                                Button {
-                                    if (identifyResultIndex == 0) {
-                                        identifyResultIndex = identifyResultCount - 1
-                                    } else {
-                                        identifyResultIndex -= 1
-                                    }
-                                    self.popup = identifyResults![identifyResultIndex].popups.first
-                                } label: {
-                                    Image(systemName: "chevron.left.circle.fill")
-                                }
-                                Text(String(identifyResultIndex+1)+" of "+String(identifyResultCount))
-                                Button {
-                                    if (identifyResultIndex == identifyResultCount - 1) {
-                                        identifyResultIndex = 0
-                                    } else {
-                                        identifyResultIndex += 1
-                                    }
-                                    self.popup = identifyResults![identifyResultIndex].popups.first
-                                } label: {
-                                    Image(systemName: "chevron.right.circle.fill")
-                                }
-                            }
-                        }
-                        if let popup = popup {
-                            PopupView(popup: popup, isPresented: $showPopup).showCloseButton(true)
-                        }
-                    }
+                    self.isPresented = false
                 }
                 .onAppear {
-                    shared.map = Map (
-                        item: PortalItem(portal: .arcGISOnline(connection: .anonymous), id: PortalItem.ID("95092428774c4b1fb6a3b6f5fed9fbc4")!)
-                    )
-                    shared.proxy = proxy
-                    Task {
-                        let center: String? = UserDefaults.standard.string(forKey: "center")
-                        let scale: Double = UserDefaults.standard.double(forKey: "scale")
-                        if (center != nil) {
-                            shared.viewpoint = try? Viewpoint(center:  Geometry.fromJSON(center!) as! Point, scale: scale)
-                        }
-                        else {
-                            shared.viewpoint = Viewpoint(latitude: 35.7796, longitude: -78.6382, scale: 500_000)
-                        }
-                        shared.layersLoaded = await setLayerVisibility(map: shared.map, layersLoaded: shared.layersLoaded)
-                        
+                    self.dataModel.proxy = proxy
+                    let center: String? = UserDefaults.standard.string(forKey: "center")
+                    let scale: Double = UserDefaults.standard.double(forKey: "scale")
+                    if (center != nil) {
+                        dataModel.viewpoint = try? Viewpoint(center:  Geometry.fromJSON(center!) as! Point, scale: scale)
                     }
-
-                }
-            }
-
-        }
-        .sheet(isPresented: $showingInfo) {
-            if (shared.longPressResults!.count == 1) {
-                if #available(iOS 16.4, *) {
-                    
-                    NavigationView {
-                        InfoView(feature: shared.longPressResults?.first, fromSearch: false)
+                    else {
+                        dataModel.viewpoint = Viewpoint(latitude: 35.7796, longitude: -78.6382, scale: 500_000)
                     }
-                    .navigationTitle("Property")
-                    .navigationBarTitleDisplayMode(.inline)
-                    .environmentObject(shared)
-                    .presentationDetents([.medium, .large, .height(80.0)], selection: $sheetDetent)
-                    .presentationBackgroundInteraction(.enabled(upThrough: .medium))
-                    .presentationContentInteraction(.scrolls)
-                } else {
-                    NavigationView {
-                        InfoView(feature: shared.longPressResults?.first, fromSearch: false)
-                    }
-                    .navigationTitle("Property")
-                    .presentationDetents([.medium, .large, .height(80.0)], selection: $sheetDetent)
-                    .navigationBarTitleDisplayMode(.inline)
-                    .environmentObject(shared)
-                }
-            } else if (shared.longPressResults!.count > 1) {
-                if #available(iOS 16.4, *) {
-                    
-                    NavigationView {
-                        PropertyListView(features: shared.longPressResults!, fromSearch: false)
-                    }
-                    .navigationTitle("Property List")
-                    .presentationDetents([.medium, .large, .height(80.0)], selection: $sheetDetent)
-                    .navigationBarTitleDisplayMode(.inline)
-                    .presentationBackgroundInteraction(.enabled(upThrough: .medium))
-                    .presentationContentInteraction(.scrolls)
-                    
-                } else {
-                    NavigationView {
-                        PropertyListView(features: shared.longPressResults!, fromSearch: false)
-                    }
-                    .navigationTitle("Property List")
-                    .presentationDetents([.medium, .large, .height(80.0)], selection: $sheetDetent)
-                    .navigationBarTitleDisplayMode(.inline)
-                    
                 }
 
             }
-
-        }
-        .toolbar {
-            ToolbarItemGroup(placement: .bottomBar) {
-                Button(action: {
-                    showingSearch.toggle()
-                    //sheetDetent = .large
-                }, label: {
-                    Image(systemName: "magnifyingglass")
-                })
-                .sheet(isPresented: $showingSearch) {
-                    if #available(iOS 16.4, *) {
-                        SearchView()
-                            .environmentObject(shared)
-                            .presentationDetents([.medium, .large, .height(80.0)], selection: $sheetDetent)
-                            .presentationBackgroundInteraction(.enabled(upThrough: .medium))
-                            .presentationContentInteraction(.scrolls)
-                    } else {
-                        SearchView()
-                            .environmentObject(shared)
-                            .presentationDetents([.medium, .large, .height(80.0)], selection: $sheetDetent)
-                    }
-
-                }
-                Spacer()
-
-                Button(action: {
-                    showingLayers.toggle()
-                    sheetDetent = .large
-
-                }, label: {
-                    Image(systemName: "square.3.layers.3d")
-
-                })
-                .sheet(isPresented: $showingLayers) {
-                    if #available(iOS 16.4, *) {
-                        
-                        NavigationView {
-                            LayersView()
-                                .environmentObject(shared)
-                                                    
+            
+            .floatingPanel(selectedDetent: $popupDetent,
+                           horizontalAlignment: .trailing,
+                           isPresented: $showPopup
+            ) {
+                VStack {
+                    if (identifyResultCount > 1) {
+                        HStack{
+                            Button {
+                                if (identifyResultIndex == 0) {
+                                    identifyResultIndex = identifyResultCount - 1
+                                } else {
+                                    identifyResultIndex -= 1
+                                }
+                                self.popup = identifyResults![identifyResultIndex].popups.first
+                            } label: {
+                                Image(systemName: "chevron.left.circle.fill")
+                            }
+                            Text(String(identifyResultIndex+1)+" of "+String(identifyResultCount))
+                            Button {
+                                if (identifyResultIndex == identifyResultCount - 1) {
+                                    identifyResultIndex = 0
+                                } else {
+                                    identifyResultIndex += 1
+                                }
+                                self.popup = identifyResults![identifyResultIndex].popups.first
+                            } label: {
+                                Image(systemName: "chevron.right.circle.fill")
+                            }
                         }
-                        .navigationViewStyle(.stack)
-                        .presentationDetents([.medium, .large, .height(40.0)], selection: $sheetDetent)
-                        .presentationBackgroundInteraction(.enabled(upThrough: .medium))
-                        .presentationContentInteraction(.scrolls)
-
-                    } else {
-                        NavigationView {
-                            LayersView()
-                                .environmentObject(shared)
-
-                            
-
-                            
-                        }
-                        .navigationViewStyle(.stack)
-                        .presentationDetents([.medium, .large, .height(40.0)], selection: $sheetDetent)
-                        
                     }
-
-  
+                    if let popup = popup {
+                        PopupView(popup: popup, isPresented: $showPopup).showCloseButton(true)
+                    }
                 }
-                Spacer()
-
-                Button(action: {
-                    showingBasemaps.toggle()
-                    sheetDetent = .large
-
-                }, label: {
-                    Image(systemName: "map")
-                })
-                .sheet(isPresented: $showingBasemaps) {
-                    if #available(iOS 16.4, *) {
-                    NavigationView {
+            }
+            .floatingPanel(selectedDetent: $selectedDetent, horizontalAlignment: .leading, isPresented: $isPresented) {
+                VStack {
+                    if selectedPanel == .search {
+                        SearchView()
+                        .environmentObject(dataModel)
+                    }
+                    if selectedPanel == .layers {
+                        LayersView()
+                            .environmentObject(dataModel)
+                    }
+                    if selectedPanel == .basemap {
                         BasemapView()
-                            .environmentObject(shared)
-                            .navigationTitle("Base Maps")
-                            .navigationBarTitleDisplayMode(NavigationBarItem.TitleDisplayMode.inline)
+                            .environmentObject(dataModel)
                     }
-                    .navigationViewStyle(.stack)
-                    .presentationDetents([.medium, .large, .height(40.0)], selection: $sheetDetent)
-
-                        .presentationBackgroundInteraction(.enabled(upThrough: .medium))
-                        .presentationContentInteraction(.scrolls)
-
-
-                    } else {
-                        NavigationView {
-                            BasemapView()
-                                .environmentObject(shared)
-                                .navigationTitle("Base Maps")
-                                .navigationBarTitleDisplayMode(NavigationBarItem.TitleDisplayMode.inline)
-                        }
-                        .navigationViewStyle(.stack)
-                        .presentationDetents([.medium, .large, .height(40.0)], selection: $sheetDetent)
+                    if selectedPanel == .property {
+                        let viewModel: ViewModel = ViewModel(text: self.selectedPinNum)
+                        PropertyView(viewModel: viewModel, group: SearchGroup(field: "PIN_NUM", alias: "PIN", features: []), source: .map)
+                            .environmentObject(dataModel)
                     }
                 }
-                Spacer()
-
-                Button(action: {
-                    locationEnabled.toggle()
-                    Task {
-                        let locationManager = CLLocationManager()
-                        if locationManager.authorizationStatus == .notDetermined {
-                            locationManager.requestWhenInUseAuthorization()
+            }
+            .toolbar {
+                ToolbarItemGroup(placement: .navigation) {
+                    Button( action: {
+                        if selectedPanel == .search {
+                            isPresented.toggle()
+                        } else {
+                            isPresented = true
                         }
+                        selectedPanel = .search
+                    }, label: {
+                        Image(systemName: "magnifyingglass")
 
-                        do {
-                            if (locationEnabled) {
-                                try await locationDisplay.dataSource.start()
+                    })
+                    Button(action: {
+                        if selectedPanel == .layers {
+                            isPresented.toggle()
+                        } else {
+                            isPresented = true
+                        }
+                        selectedPanel = .layers
+                    }, label: {
+                        Image(systemName: "square.3.layers.3d")
 
-                                locationDisplay.initialZoomScale = 40_000
-                                locationDisplay.autoPanMode = .recenter
-                            } else {
-                                await  locationDisplay.dataSource.stop()
+                    })
+                    Button(action: {
+                        if selectedPanel == .basemap {
+                            isPresented.toggle()
+                        } else {
+                            isPresented = true
+                        }
+                        selectedPanel = .basemap
+                    }, label: {
+                        Image(systemName: "map")
+
+                    })
+                }
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(action: {
+                        locationEnabled.toggle()
+                        Task {
+                            let locationManager = CLLocationManager()
+                            if locationManager.authorizationStatus == .notDetermined {
+                                locationManager.requestWhenInUseAuthorization()
                             }
 
+                            do {
+                                if (locationEnabled) {
+                                    try await locationDisplay.dataSource.start()
 
-                        } catch {
+                                    locationDisplay.initialZoomScale = 40_000
+                                    locationDisplay.autoPanMode = .recenter
+                                } else {
+                                    await  locationDisplay.dataSource.stop()
+                                }
 
-                            self.failedToStart = true
 
+                            } catch {
+
+                                self.failedToStart = true
+
+                            }
                         }
-                    }
-                }, label: {
-                    Image(systemName: "location.circle")
-                })
+                    }, label: {
+                        Image(systemName: "location.circle")
 
-            }
-       
-
-        }
-        .environmentObject(shared)
-        .onAppear {
-            Task {
-                
-                try await shared.map.load()
-                for table in shared.map.tables {
-                    do {
-                        try await table.load()
-                        if table.tableName.contains("Condos") {
-                            shared.table = table
-                        }
-                    }
+                    })
                 }
-
             }
+            
+            
+        }
+        .navigationViewStyle(StackNavigationViewStyle())
+        .onAppear {
+            self.isPresented = UIDevice.current.userInterfaceIdiom == .pad
         }
     }
+
     
-   
+
 }
 
 struct ContentView_Previews: PreviewProvider {

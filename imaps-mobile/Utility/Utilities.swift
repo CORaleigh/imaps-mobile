@@ -1,11 +1,12 @@
 //
-//  Utils.swift
-//  imaps-mobile
+//  Utilities.swift
+//  layout-test
 //
-//  Created by Greco, Justin on 4/12/23.
+//  Created by Greco, Justin on 4/26/23.
 //
 
 import Foundation
+
 extension Formatter {
     static let withSeparator: NumberFormatter = {
         let formatter = NumberFormatter()
@@ -71,8 +72,12 @@ func updateStorageHistory(field: String, value: String) -> SearchHistory {
             if (jsonDecoded.historyItems.count == 10) {
                 jsonDecoded.historyItems.removeFirst()
             }
+            var index = jsonDecoded.historyItems.firstIndex(where: {$0.field == field && $0.value == value})
+            if index != nil {
+                jsonDecoded.historyItems.remove(at: index!)
+            }
             jsonDecoded.historyItems.append(HistoryItem(field: field, value: value))
-            
+           // jsonDecoded.historyItems = []
             return jsonDecoded
         } else {
             return SearchHistory(historyItems: [HistoryItem(field: field, value: value)])

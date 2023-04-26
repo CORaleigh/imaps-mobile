@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		C706EF2F29E8D84D005EEAE0 /* PropertyListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C706EF2E29E8D84D005EEAE0 /* PropertyListView.swift */; };
-		C706EF3129E8D936005EEAE0 /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C706EF3029E8D936005EEAE0 /* InfoView.swift */; };
 		C70CB49F29E6E49D00B6A157 /* imaps_mobileApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70CB49E29E6E49D00B6A157 /* imaps_mobileApp.swift */; };
 		C70CB4A129E6E49D00B6A157 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70CB4A029E6E49D00B6A157 /* ContentView.swift */; };
 		C70CB4A329E6E49E00B6A157 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C70CB4A229E6E49E00B6A157 /* Assets.xcassets */; };
@@ -18,8 +17,6 @@
 		C70CB4B429E6E82700B6A157 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70CB4B329E6E82700B6A157 /* SearchView.swift */; };
 		C70CB4B629E6E83200B6A157 /* LayersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70CB4B529E6E83200B6A157 /* LayersView.swift */; };
 		C70CB4B829E6E84000B6A157 /* BasemapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70CB4B729E6E84000B6A157 /* BasemapView.swift */; };
-		C70CB4BA29E6E9D100B6A157 /* SublayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70CB4B929E6E9D100B6A157 /* SublayerView.swift */; };
-		C70CB4BC29E6F55C00B6A157 /* SearchSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70CB4BB29E6F55C00B6A157 /* SearchSource.swift */; };
 		C70CB4BE29E6F76800B6A157 /* PropertyInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70CB4BD29E6F76800B6A157 /* PropertyInfoView.swift */; };
 		C70CB4C029E6F77500B6A157 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70CB4BF29E6F77500B6A157 /* WebView.swift */; };
 		C70CB4C629E6F7D400B6A157 /* GeneralView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70CB4C529E6F7D400B6A157 /* GeneralView.swift */; };
@@ -28,22 +25,22 @@
 		C70CB4CC29E6F7FE00B6A157 /* SaleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70CB4CB29E6F7FE00B6A157 /* SaleView.swift */; };
 		C70CB4CE29E6F80E00B6A157 /* BuildingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70CB4CD29E6F80E00B6A157 /* BuildingView.swift */; };
 		C70CB4D029E6F81500B6A157 /* DeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70CB4CF29E6F81500B6A157 /* DeedView.swift */; };
-		C70CB4D229E70D0000B6A157 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70CB4D129E70D0000B6A157 /* Utils.swift */; };
-		C70CB4D429E71A3C00B6A157 /* PhotoViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70CB4D329E71A3C00B6A157 /* PhotoViews.swift */; };
-		C717A3E429F633580028A75B /* MapUiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C717A3E329F633580028A75B /* MapUiView.swift */; };
-		C717A3E829F638D00028A75B /* MapPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C717A3E729F638D00028A75B /* MapPopupView.swift */; };
+		C70CB4D429E71A3C00B6A157 /* PhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70CB4D329E71A3C00B6A157 /* PhotoView.swift */; };
 		C72D934529F574F6004815D9 /* SearchHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72D934429F574F6004815D9 /* SearchHistoryView.swift */; };
-		C72D934729F58E3A004815D9 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72D934629F58E3A004815D9 /* InfoViewController.swift */; };
-		C72D934929F59227004815D9 /* ContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72D934829F59227004815D9 /* ContentViewController.swift */; };
 		C735C23729E9DFB3006A3767 /* AppSecrets.swift.masque.swift in Sources */ = {isa = PBXBuildFile; fileRef = C735C23629E9DFB3006A3767 /* AppSecrets.swift.masque.swift */; };
 		C738262529EB08FC0087431D /* LayerInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C738262429EB08FC0087431D /* LayerInfoView.swift */; };
 		C738262929ED800E0087431D /* PropertyLinksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C738262829ED800E0087431D /* PropertyLinksView.swift */; };
-		C74FCFDB29F6BBCB0077F9B7 /* ContentViewiPad.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74FCFDA29F6BBCB0077F9B7 /* ContentViewiPad.swift */; };
+		C7AE688629F9B67400C616BB /* SearchItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7AE688529F9B67400C616BB /* SearchItemView.swift */; };
+		C7AE688929F9B6B300C616BB /* MapDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7AE688829F9B6B300C616BB /* MapDataModel.swift */; };
+		C7AE688B29F9B6C100C616BB /* SearchListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7AE688A29F9B6C100C616BB /* SearchListViewModel.swift */; };
+		C7AE688D29F9B6D200C616BB /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7AE688C29F9B6D200C616BB /* Utilities.swift */; };
+		C7AE688F29F9B6E200C616BB /* PropertyInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7AE688E29F9B6E200C616BB /* PropertyInfoViewModel.swift */; };
+		C7AE689129F9B71100C616BB /* SubLayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7AE689029F9B71100C616BB /* SubLayerView.swift */; };
+		C7AE689329F9B74B00C616BB /* PropertyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7AE689229F9B74B00C616BB /* PropertyView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		C706EF2E29E8D84D005EEAE0 /* PropertyListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyListView.swift; sourceTree = "<group>"; };
-		C706EF3029E8D936005EEAE0 /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
 		C70CB49B29E6E49D00B6A157 /* iMAPS Beta.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "iMAPS Beta.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C70CB49E29E6E49D00B6A157 /* imaps_mobileApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = imaps_mobileApp.swift; sourceTree = "<group>"; };
 		C70CB4A029E6E49D00B6A157 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -53,8 +50,6 @@
 		C70CB4B329E6E82700B6A157 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		C70CB4B529E6E83200B6A157 /* LayersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayersView.swift; sourceTree = "<group>"; };
 		C70CB4B729E6E84000B6A157 /* BasemapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasemapView.swift; sourceTree = "<group>"; };
-		C70CB4B929E6E9D100B6A157 /* SublayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SublayerView.swift; sourceTree = "<group>"; };
-		C70CB4BB29E6F55C00B6A157 /* SearchSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchSource.swift; sourceTree = "<group>"; };
 		C70CB4BD29E6F76800B6A157 /* PropertyInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyInfoView.swift; sourceTree = "<group>"; };
 		C70CB4BF29E6F77500B6A157 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		C70CB4C529E6F7D400B6A157 /* GeneralView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralView.swift; sourceTree = "<group>"; };
@@ -63,18 +58,19 @@
 		C70CB4CB29E6F7FE00B6A157 /* SaleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaleView.swift; sourceTree = "<group>"; };
 		C70CB4CD29E6F80E00B6A157 /* BuildingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingView.swift; sourceTree = "<group>"; };
 		C70CB4CF29E6F81500B6A157 /* DeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeedView.swift; sourceTree = "<group>"; };
-		C70CB4D129E70D0000B6A157 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
-		C70CB4D329E71A3C00B6A157 /* PhotoViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoViews.swift; sourceTree = "<group>"; };
-		C717A3E329F633580028A75B /* MapUiView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapUiView.swift; sourceTree = "<group>"; };
-		C717A3E729F638D00028A75B /* MapPopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapPopupView.swift; sourceTree = "<group>"; };
+		C70CB4D329E71A3C00B6A157 /* PhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoView.swift; sourceTree = "<group>"; };
 		C72D934429F574F6004815D9 /* SearchHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistoryView.swift; sourceTree = "<group>"; };
-		C72D934629F58E3A004815D9 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
-		C72D934829F59227004815D9 /* ContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewController.swift; sourceTree = "<group>"; };
 		C735C23629E9DFB3006A3767 /* AppSecrets.swift.masque.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSecrets.swift.masque.swift; sourceTree = "<group>"; };
 		C738262429EB08FC0087431D /* LayerInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayerInfoView.swift; sourceTree = "<group>"; };
 		C738262829ED800E0087431D /* PropertyLinksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyLinksView.swift; sourceTree = "<group>"; };
 		C738262A29EDB1AA0087431D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		C74FCFDA29F6BBCB0077F9B7 /* ContentViewiPad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewiPad.swift; sourceTree = "<group>"; };
+		C7AE688529F9B67400C616BB /* SearchItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchItemView.swift; sourceTree = "<group>"; };
+		C7AE688829F9B6B300C616BB /* MapDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapDataModel.swift; sourceTree = "<group>"; };
+		C7AE688A29F9B6C100C616BB /* SearchListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchListViewModel.swift; sourceTree = "<group>"; };
+		C7AE688C29F9B6D200C616BB /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		C7AE688E29F9B6E200C616BB /* PropertyInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyInfoViewModel.swift; sourceTree = "<group>"; };
+		C7AE689029F9B71100C616BB /* SubLayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubLayerView.swift; sourceTree = "<group>"; };
+		C7AE689229F9B74B00C616BB /* PropertyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,30 +106,25 @@
 			isa = PBXGroup;
 			children = (
 				C738262A29EDB1AA0087431D /* Info.plist */,
-				C70CB4C429E6F7C200B6A157 /* PropertyViews */,
 				C70CB49E29E6E49D00B6A157 /* imaps_mobileApp.swift */,
 				C70CB4A029E6E49D00B6A157 /* ContentView.swift */,
-				C717A3E329F633580028A75B /* MapUiView.swift */,
 				C70CB4A229E6E49E00B6A157 /* Assets.xcassets */,
 				C70CB4A429E6E49E00B6A157 /* imaps_mobile.entitlements */,
 				C70CB4A529E6E49E00B6A157 /* Preview Content */,
 				C70CB4B329E6E82700B6A157 /* SearchView.swift */,
-				C70CB4B529E6E83200B6A157 /* LayersView.swift */,
-				C70CB4B729E6E84000B6A157 /* BasemapView.swift */,
-				C70CB4B929E6E9D100B6A157 /* SublayerView.swift */,
-				C70CB4BB29E6F55C00B6A157 /* SearchSource.swift */,
+				C7AE689229F9B74B00C616BB /* PropertyView.swift */,
 				C70CB4BD29E6F76800B6A157 /* PropertyInfoView.swift */,
-				C70CB4BF29E6F77500B6A157 /* WebView.swift */,
-				C70CB4D129E70D0000B6A157 /* Utils.swift */,
+				C70CB4C429E6F7C200B6A157 /* PropertyInfoViews */,
 				C706EF2E29E8D84D005EEAE0 /* PropertyListView.swift */,
-				C706EF3029E8D936005EEAE0 /* InfoView.swift */,
-				C735C23629E9DFB3006A3767 /* AppSecrets.swift.masque.swift */,
+				C70CB4B529E6E83200B6A157 /* LayersView.swift */,
+				C7AE689029F9B71100C616BB /* SubLayerView.swift */,
 				C738262429EB08FC0087431D /* LayerInfoView.swift */,
+				C70CB4B729E6E84000B6A157 /* BasemapView.swift */,
+				C7AE688729F9B68A00C616BB /* Utility */,
+				C70CB4BF29E6F77500B6A157 /* WebView.swift */,
+				C7AE688529F9B67400C616BB /* SearchItemView.swift */,
 				C72D934429F574F6004815D9 /* SearchHistoryView.swift */,
-				C72D934629F58E3A004815D9 /* InfoViewController.swift */,
-				C72D934829F59227004815D9 /* ContentViewController.swift */,
-				C717A3E729F638D00028A75B /* MapPopupView.swift */,
-				C74FCFDA29F6BBCB0077F9B7 /* ContentViewiPad.swift */,
+				C735C23629E9DFB3006A3767 /* AppSecrets.swift.masque.swift */,
 			);
 			path = "imaps-mobile";
 			sourceTree = "<group>";
@@ -146,7 +137,7 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		C70CB4C429E6F7C200B6A157 /* PropertyViews */ = {
+		C70CB4C429E6F7C200B6A157 /* PropertyInfoViews */ = {
 			isa = PBXGroup;
 			children = (
 				C70CB4C529E6F7D400B6A157 /* GeneralView.swift */,
@@ -155,10 +146,21 @@
 				C70CB4CB29E6F7FE00B6A157 /* SaleView.swift */,
 				C70CB4CD29E6F80E00B6A157 /* BuildingView.swift */,
 				C70CB4CF29E6F81500B6A157 /* DeedView.swift */,
-				C70CB4D329E71A3C00B6A157 /* PhotoViews.swift */,
+				C70CB4D329E71A3C00B6A157 /* PhotoView.swift */,
 				C738262829ED800E0087431D /* PropertyLinksView.swift */,
 			);
-			path = PropertyViews;
+			path = PropertyInfoViews;
+			sourceTree = "<group>";
+		};
+		C7AE688729F9B68A00C616BB /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				C7AE688829F9B6B300C616BB /* MapDataModel.swift */,
+				C7AE688A29F9B6C100C616BB /* SearchListViewModel.swift */,
+				C7AE688C29F9B6D200C616BB /* Utilities.swift */,
+				C7AE688E29F9B6E200C616BB /* PropertyInfoViewModel.swift */,
+			);
+			path = Utility;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -239,34 +241,32 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C70CB4D429E71A3C00B6A157 /* PhotoViews.swift in Sources */,
+				C70CB4D429E71A3C00B6A157 /* PhotoView.swift in Sources */,
 				C706EF2F29E8D84D005EEAE0 /* PropertyListView.swift in Sources */,
+				C7AE688B29F9B6C100C616BB /* SearchListViewModel.swift in Sources */,
+				C7AE688F29F9B6E200C616BB /* PropertyInfoViewModel.swift in Sources */,
 				C70CB4A129E6E49D00B6A157 /* ContentView.swift in Sources */,
 				C70CB4B429E6E82700B6A157 /* SearchView.swift in Sources */,
 				C70CB4CE29E6F80E00B6A157 /* BuildingView.swift in Sources */,
 				C70CB4CC29E6F7FE00B6A157 /* SaleView.swift in Sources */,
-				C706EF3129E8D936005EEAE0 /* InfoView.swift in Sources */,
 				C70CB4B629E6E83200B6A157 /* LayersView.swift in Sources */,
-				C717A3E829F638D00028A75B /* MapPopupView.swift in Sources */,
 				C70CB4C629E6F7D400B6A157 /* GeneralView.swift in Sources */,
 				C70CB4CA29E6F7F100B6A157 /* ValuationView.swift in Sources */,
-				C70CB4D229E70D0000B6A157 /* Utils.swift in Sources */,
 				C738262529EB08FC0087431D /* LayerInfoView.swift in Sources */,
 				C70CB49F29E6E49D00B6A157 /* imaps_mobileApp.swift in Sources */,
 				C70CB4B829E6E84000B6A157 /* BasemapView.swift in Sources */,
+				C7AE688D29F9B6D200C616BB /* Utilities.swift in Sources */,
 				C72D934529F574F6004815D9 /* SearchHistoryView.swift in Sources */,
 				C70CB4C829E6F7E300B6A157 /* OwnerView.swift in Sources */,
 				C70CB4BE29E6F76800B6A157 /* PropertyInfoView.swift in Sources */,
 				C70CB4D029E6F81500B6A157 /* DeedView.swift in Sources */,
 				C70CB4C029E6F77500B6A157 /* WebView.swift in Sources */,
-				C74FCFDB29F6BBCB0077F9B7 /* ContentViewiPad.swift in Sources */,
-				C717A3E429F633580028A75B /* MapUiView.swift in Sources */,
-				C70CB4BC29E6F55C00B6A157 /* SearchSource.swift in Sources */,
-				C72D934929F59227004815D9 /* ContentViewController.swift in Sources */,
-				C70CB4BA29E6E9D100B6A157 /* SublayerView.swift in Sources */,
+				C7AE689129F9B71100C616BB /* SubLayerView.swift in Sources */,
+				C7AE688929F9B6B300C616BB /* MapDataModel.swift in Sources */,
 				C735C23729E9DFB3006A3767 /* AppSecrets.swift.masque.swift in Sources */,
-				C72D934729F58E3A004815D9 /* InfoViewController.swift in Sources */,
 				C738262929ED800E0087431D /* PropertyLinksView.swift in Sources */,
+				C7AE688629F9B67400C616BB /* SearchItemView.swift in Sources */,
+				C7AE689329F9B74B00C616BB /* PropertyView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

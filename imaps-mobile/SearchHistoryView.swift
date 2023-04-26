@@ -8,27 +8,32 @@
 import SwiftUI
 import ArcGIS
 struct SearchHistoryView: View {
-    @State var history: SearchHistory = SearchHistory(historyItems: [])
-    @EnvironmentObject var shared: SharedData
+    @EnvironmentObject var dataModel : MapDataModel
+
+    @State var history: SearchHistory
 
     var body: some View {
-        List {
-            ForEach(history.historyItems.reversed(), id:\.self) { item in
-                NavigationLink(item.value) {
-                    PropertyInfoView(value: ListValue(id: UUID(), objectid: 0, value: item.value, field: item.field, table: shared.table! as! ServiceFeatureTable), source: "history")
-                        .environmentObject(shared)
+        NavigationView {
+            List {
+                ForEach(history.historyItems.reversed(), id:\.self) { item in
+                    let viewModel: ViewModel = ViewModel(text: item.value)
+                    
+                    NavigationLink(item.value) {
+                        PropertyView(viewModel: viewModel, group: SearchGroup(field: item.field, alias: item.field, features: []), source: .history)
+                            .environmentObject(dataModel)
+                    }
                 }
             }
-        }
-        .onAppear {
-            self.history = getSearchHistory()
-        }
-        .navigationTitle("Search History")
+            //        .onAppear {
+            //            self.history = getSearchHistory()
+            //        }
+            .navigationTitle("Search History")
+        }.navigationViewStyle(.stack)
     }
 }
 
-struct SearchHistoryView_Previews: PreviewProvider {
-    static var previews: some View {
-        SearchHistoryView()
-    }
-}
+//struct SearchHistoryView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        SearchHistoryView(SearchHistory(historyItems: []))
+//    }
+//}

@@ -1,8 +1,8 @@
 //
 //  LayerInfoView.swift
-//  imaps-mobile
+//  layout-test
 //
-//  Created by Greco, Justin on 4/15/23.
+//  Created by Greco, Justin on 4/26/23.
 //
 
 import SwiftUI
@@ -23,9 +23,11 @@ class LegendSwatch: ObservableObject, Identifiable , Hashable {
         hasher.combine(swatch)
     }
 }
+
 struct LayerInfoView: View {
     @State var layer: Layer
     @State private var swatches: [LegendSwatch] = []
+
     var body: some View {
         ScrollView {
             VStack {
