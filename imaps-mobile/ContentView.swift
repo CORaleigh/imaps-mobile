@@ -16,6 +16,7 @@ case search, layers, basemap, property
 
 class PanelViewModel: ObservableObject {
     @Published var isPresented: Bool
+    @Published var selectedDetent: FloatingPanelDetent = .full
     init(isPresented: Bool) {
         self.isPresented = isPresented
     }
@@ -25,7 +26,6 @@ class PanelViewModel: ObservableObject {
 }
 
 struct ContentView: View {
-    @State var selectedDetent: FloatingPanelDetent = .full
     @State private var popupDetent: FloatingPanelDetent = .full
 
     @StateObject var panelVM = PanelViewModel(isPresented: true)
@@ -42,6 +42,9 @@ struct ContentView: View {
     @State private var identifyResultCount = 0
     @State private var identifyResultIndex = 0
     @State private var identifyResults:[IdentifyLayerResult]? = []
+
+    @State private var isKeyboardVisible = false
+
     
     @StateObject private var dataModel = MapDataModel(
         map: Map (
@@ -176,7 +179,7 @@ struct ContentView: View {
                     }
                 }
             }
-            .floatingPanel(selectedDetent: $selectedDetent, horizontalAlignment: .leading, isPresented: $panelVM.isPresented
+            .floatingPanel(selectedDetent: $panelVM.selectedDetent, horizontalAlignment: .leading, isPresented: $panelVM.isPresented
             
             ) {
                 VStack {
@@ -285,6 +288,24 @@ struct ContentView: View {
         .navigationViewStyle(StackNavigationViewStyle())
         .onAppear {
             self.panelVM.isPresented = UIDevice.current.userInterfaceIdiom == .pad
+        }
+        .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardWillShowNotification)) { _ in
+            self.panelVM.selectedDetent = .full
+            self.isKeyboardVisible = true
+        }
+        .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardWillHideNotification)) { _ in
+            self.isKeyboardVisible = false
+        }
+        .onReceive(panelVM.$selectedDetent) { _ in
+            if (self.isKeyboardVisible && self.panelVM.selectedDetent != .full) {
+                self.panelVM.selectedDetent = .full
+            }
+        }
+        .onReceive(panelVM.$isPresented) { _ in
+            if !panelVM.isPresented {
+                UIApplication.shared.windows.filter {$0.isKeyWindow}.first?.endEditing(true)
+            }
+            
         }
     }
 

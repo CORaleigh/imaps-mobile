@@ -76,6 +76,8 @@ struct SearchView: View {
 
     @State private var searchText: String = ""
     @State var searching: Bool = false
+    @FocusState private var isFocused: Bool
+
 
     var body: some View {
         NavigationView {
@@ -96,8 +98,9 @@ struct SearchView: View {
                             }
                         }
                     }
-                    
+
                     .searchable(text: $searchText, placement: .navigationBarDrawer)
+
                     .onChange(of: searchText) { value in
                         Task {
                             searching = true
@@ -118,8 +121,9 @@ struct SearchView: View {
 
                             }
                         }
-                        
+
                     }
+
                     .autocapitalization(.none)
                     .autocorrectionDisabled(true)
 
@@ -162,8 +166,15 @@ struct SearchView: View {
     
 }
 
-//struct SearchView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        SearchView(mapDataModel: MapDataModel(map: nil))
-//    }
-//}
+struct SearchView_Previews: PreviewProvider {
+    static var previews: some View {
+        SearchView()
+            .environmentObject(MapDataModel(
+            map: Map (
+                item: PortalItem(portal: .arcGISOnline(connection: .anonymous), id: PortalItem.ID("95092428774c4b1fb6a3b6f5fed9fbc4")!)
+            ),
+            graphics: GraphicsOverlay(graphics: []),
+            viewpoint: Viewpoint(latitude: 35.7796, longitude: -78.6382, scale: 500_000)
+        ))
+    }
+}

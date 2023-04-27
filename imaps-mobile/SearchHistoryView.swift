@@ -43,8 +43,8 @@ struct SearchHistoryView: View {
     }
 }
 
-//struct SearchHistoryView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        SearchHistoryView(SearchHistory(historyItems: []))
-//    }
-//}
+struct SearchHistoryView_Previews: PreviewProvider {
+    static var previews: some View {
+        SearchHistoryView(history: SearchHistory(historyItems: []))
+    }
+}

@@ -124,6 +124,7 @@ func queryFeatures(for table: ServiceFeatureTable, field: String, value: String,
 
 //struct PropertyView_Previews: PreviewProvider {
 //    static var previews: some View {
-//        PropertyView(text: "TEST")
+//        PropertyView(group: SearchGroup(field: "SITE_ADDRESS", alias: "Site Address", features: []), source: .search)
+//
 //    }
 //}
