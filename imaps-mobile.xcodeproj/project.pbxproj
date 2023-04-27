@@ -63,6 +63,7 @@
 		C735C23629E9DFB3006A3767 /* AppSecrets.swift.masque.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSecrets.swift.masque.swift; sourceTree = "<group>"; };
 		C738262429EB08FC0087431D /* LayerInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayerInfoView.swift; sourceTree = "<group>"; };
 		C738262829ED800E0087431D /* PropertyLinksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyLinksView.swift; sourceTree = "<group>"; };
+		C7A0B58429FAD08C00F1E56F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		C7AE688529F9B67400C616BB /* SearchItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchItemView.swift; sourceTree = "<group>"; };
 		C7AE688829F9B6B300C616BB /* MapDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapDataModel.swift; sourceTree = "<group>"; };
 		C7AE688A29F9B6C100C616BB /* SearchListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchListViewModel.swift; sourceTree = "<group>"; };
@@ -104,6 +105,7 @@
 		C70CB49D29E6E49D00B6A157 /* imaps-mobile */ = {
 			isa = PBXGroup;
 			children = (
+				C7A0B58429FAD08C00F1E56F /* Info.plist */,
 				C70CB49E29E6E49D00B6A157 /* imaps_mobileApp.swift */,
 				C70CB4A029E6E49D00B6A157 /* ContentView.swift */,
 				C70CB4A229E6E49E00B6A157 /* Assets.xcassets */,
@@ -402,8 +404,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "";
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_FILE = "imaps-mobile/Info.plist";
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "our location is used to show your position on the map.";
 				INFOPLIST_KEY_NSLocationUsageDescription = "our location is used to show your position on the map.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "our location is used to show your position on the map.";
@@ -453,8 +454,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "";
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_FILE = "imaps-mobile/Info.plist";
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "our location is used to show your position on the map.";
 				INFOPLIST_KEY_NSLocationUsageDescription = "our location is used to show your position on the map.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "our location is used to show your position on the map.";
