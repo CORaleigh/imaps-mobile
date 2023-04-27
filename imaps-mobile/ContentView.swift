@@ -14,11 +14,21 @@ enum SelectedPanel {
 case search, layers, basemap, property
 }
 
+class PanelViewModel: ObservableObject {
+    @Published var isPresented: Bool
+    init(isPresented: Bool) {
+        self.isPresented = isPresented
+    }
+    func dismiss() {
+        self.isPresented = false
+    }
+}
+
 struct ContentView: View {
     @State var selectedDetent: FloatingPanelDetent = .full
     @State private var popupDetent: FloatingPanelDetent = .full
 
-    @State var isPresented = true
+    @StateObject var panelVM = PanelViewModel(isPresented: true)
     @State var selectedPanel = SelectedPanel.search
 
     @State var selectedPinNum: String = ""
@@ -40,6 +50,7 @@ struct ContentView: View {
         graphics: GraphicsOverlay(graphics: []),
         viewpoint: Viewpoint(latitude: 35.7796, longitude: -78.6382, scale: 500_000)
     )
+
     private var initialViewpoint = Viewpoint(latitude: 35.7796, longitude: -78.6382, scale: 500_000)
     var body: some View {
         NavigationView {
@@ -85,6 +96,7 @@ struct ContentView: View {
                         
 
                                 self.selectedPanel = .property
+                                self.panelVM.isPresented = true
 //                                self.isPresented = false
 //                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
 //                                    self.isPresented = true
@@ -113,7 +125,7 @@ struct ContentView: View {
                     self.identifyResultCount = try! identifyResult.get().count
                     self.popup = try? identifyResult.get().first?.popups.first
                     self.showPopup = self.popup != nil
-                    self.isPresented = false
+                    self.panelVM.isPresented = false
                 }
                 .onAppear {
                     self.dataModel.proxy = proxy
@@ -164,34 +176,48 @@ struct ContentView: View {
                     }
                 }
             }
-            .floatingPanel(selectedDetent: $selectedDetent, horizontalAlignment: .leading, isPresented: $isPresented) {
+            .floatingPanel(selectedDetent: $selectedDetent, horizontalAlignment: .leading, isPresented: $panelVM.isPresented
+            
+            ) {
                 VStack {
                     if selectedPanel == .search {
                         SearchView()
                         .environmentObject(dataModel)
+                        .environmentObject(panelVM)
+
+
                     }
                     if selectedPanel == .layers {
                         LayersView()
                             .environmentObject(dataModel)
+                            .environmentObject(panelVM)
+
                     }
                     if selectedPanel == .basemap {
                         BasemapView()
                             .environmentObject(dataModel)
+                            .environmentObject(panelVM)
+
+                        
                     }
                     if selectedPanel == .property {
                         let viewModel: ViewModel = ViewModel(text: self.selectedPinNum)
                         PropertyView(viewModel: viewModel, group: SearchGroup(field: "PIN_NUM", alias: "PIN", features: []), source: .map)
                             .environmentObject(dataModel)
+                            .environmentObject(panelVM)
+
                     }
                 }
+
             }
+            
             .toolbar {
                 ToolbarItemGroup(placement: .navigation) {
                     Button( action: {
                         if selectedPanel == .search {
-                            isPresented.toggle()
+                            panelVM.isPresented.toggle()
                         } else {
-                            isPresented = true
+                            panelVM.isPresented = true
                         }
                         selectedPanel = .search
                     }, label: {
@@ -200,9 +226,9 @@ struct ContentView: View {
                     })
                     Button(action: {
                         if selectedPanel == .layers {
-                            isPresented.toggle()
+                            panelVM.isPresented.toggle()
                         } else {
-                            isPresented = true
+                            panelVM.isPresented = true
                         }
                         selectedPanel = .layers
                     }, label: {
@@ -211,9 +237,9 @@ struct ContentView: View {
                     })
                     Button(action: {
                         if selectedPanel == .basemap {
-                            isPresented.toggle()
+                            panelVM.isPresented.toggle()
                         } else {
-                            isPresented = true
+                            panelVM.isPresented = true
                         }
                         selectedPanel = .basemap
                     }, label: {
@@ -258,7 +284,7 @@ struct ContentView: View {
         }
         .navigationViewStyle(StackNavigationViewStyle())
         .onAppear {
-            self.isPresented = UIDevice.current.userInterfaceIdiom == .pad
+            self.panelVM.isPresented = UIDevice.current.userInterfaceIdiom == .pad
         }
     }
 

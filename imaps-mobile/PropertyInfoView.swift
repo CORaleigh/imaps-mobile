@@ -10,12 +10,12 @@ import ArcGIS
 
 struct PropertyInfoView: View {
     @EnvironmentObject var dataModel : MapDataModel
+    @EnvironmentObject var panelVM: PanelViewModel
 
     @State var feature: Feature
     @State var fromSearch: Bool
     @State var popped: Bool = false
     @ObservedObject private var propertyInfoVM: PropertyInfoViewModel = PropertyInfoViewModel(deed: nil, photos: [], property: nil)
-   // var propertySelected : (Feature) -> Void
 
     var body: some View {
         NavigationView {
@@ -76,6 +76,15 @@ struct PropertyInfoView: View {
             }
                 .navigationTitle("Property")
                 .navigationBarTitleDisplayMode(.inline)
+                .toolbar {
+                    ToolbarItem (placement: .navigationBarTrailing){
+                        Button(action: {
+                            self.panelVM.dismiss()
+                        }, label: {
+                            Image(systemName: "xmark")
+                        })
+                    }
+                }
         }
         .navigationViewStyle(.stack)
 

@@ -18,7 +18,10 @@ class LayerViewModel: ObservableObject {
 
 struct LayersView: View {
     @EnvironmentObject var dataModel: MapDataModel
+    @EnvironmentObject var panelVM: PanelViewModel
+
     var layerVM = LayerViewModel(expanded: false)
+
     var body: some View {
         NavigationView {
             NavigationStack {
@@ -50,6 +53,15 @@ struct LayersView: View {
                 }
                 .navigationTitle("Layers")
                 .navigationBarTitleDisplayMode(.inline)
+                .toolbar {
+                    ToolbarItem (placement: .navigationBarTrailing){
+                        Button(action: {
+                            self.panelVM.dismiss()
+                        }, label: {
+                            Image(systemName: "xmark")
+                        })
+                    }
+                }
 
             }
         }

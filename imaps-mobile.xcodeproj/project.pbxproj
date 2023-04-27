@@ -402,7 +402,8 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "imaps-mobile/Info.plist";
+				INFOPLIST_FILE = "";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "our location is used to show your position on the map.";
 				INFOPLIST_KEY_NSLocationUsageDescription = "our location is used to show your position on the map.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "our location is used to show your position on the map.";
@@ -452,7 +453,8 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "imaps-mobile/Info.plist";
+				INFOPLIST_FILE = "";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "our location is used to show your position on the map.";
 				INFOPLIST_KEY_NSLocationUsageDescription = "our location is used to show your position on the map.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "our location is used to show your position on the map.";

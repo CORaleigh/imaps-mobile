@@ -72,9 +72,10 @@ struct SearchFeature: Decodable {
 struct SearchView: View {
     @ObservedObject private var searchListVM = SearchListViewModel()
     @EnvironmentObject var dataModel: MapDataModel
+    @EnvironmentObject var panelVM: PanelViewModel
+
     @State private var searchText: String = ""
     @State var searching: Bool = false
-   // var propertySelected : (Feature) -> Void
 
     var body: some View {
         NavigationView {
@@ -90,20 +91,9 @@ struct SearchView: View {
                                         let text = feature.feature.attributes.siteAddress ?? feature.feature.attributes.fullStreetName ?? feature.feature.attributes.owner ?? feature.feature.attributes.reid ?? feature.feature.attributes.pin ?? ""
                                         SearchItemView(text: text, group: group)
                                             .environmentObject(self.dataModel)
-
-//                                        NavigationLink(text) {
-//                                            PropertyView(text: text, group: group)
-//                                                .environmentObject(self.dataModel)
-//                                        }
-//                                        .onTapGesture {
-//                                            self.valueSelected(text)
-//                                        }
-                                        
                                     }
                                 }
                             }
-
-                            
                         }
                     }
                     
@@ -134,6 +124,8 @@ struct SearchView: View {
                     .autocorrectionDisabled(true)
 
                 }
+
+                
                 .navigationTitle("Search")
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar {
@@ -146,19 +138,27 @@ struct SearchView: View {
                                 
                             }
                         }
-     
+
             
                     }
+                    ToolbarItem (placement: .navigationBarTrailing){
+                        Button(action: {
+                            self.panelVM.dismiss()
+                        }, label: {
+                            Image(systemName: "xmark")
+                        })
+                    }
+                    
                 }
 
 
             }
-  
         }
 
         .navigationViewStyle(StackNavigationViewStyle())
 
     }
+    
     
 }
 

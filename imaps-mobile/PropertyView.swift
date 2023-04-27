@@ -35,28 +35,32 @@ enum PropertySource {
 
 struct PropertyView: View {
     @EnvironmentObject var dataModel : MapDataModel
+    @EnvironmentObject var panelVM: PanelViewModel
+
     @ObservedObject var viewModel: ViewModel = ViewModel(text: "")
 
     @ObservedObject private var propertyVM: PropertyViewModel = PropertyViewModel(feature: nil, features: [])
 
     @State var group: SearchGroup
     @State var source: PropertySource
-   // var propertySelected : (Feature) -> Void
-
+    
     var body: some View {
         NavigationView {
             VStack {
                 if (self.propertyVM.features.count == 1) {
-                        PropertyInfoView(feature: self.propertyVM.feature!, fromSearch: true)
+                    PropertyInfoView(feature: self.propertyVM.feature!, fromSearch: true)
                             .environmentObject(dataModel)
+                            .environmentObject(panelVM)
+
 
                     
        
 
 
                 } else if (self.propertyVM.features.count > 1) {
-                        PropertyListView(features: self.propertyVM.features, fromSearch: true)
-                    
+                    PropertyListView(features: self.propertyVM.features, fromSearch: true)
+                        .environmentObject(panelVM)
+
 
                         
                     

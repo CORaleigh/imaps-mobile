@@ -25,6 +25,8 @@ class LegendSwatch: ObservableObject, Identifiable , Hashable {
 }
 
 struct LayerInfoView: View {
+    @EnvironmentObject var panelVM: PanelViewModel
+
     @State var layer: Layer
     @State private var swatches: [LegendSwatch] = []
 
@@ -55,6 +57,15 @@ struct LayerInfoView: View {
                     let swatch = try? await info.symbol?.makeSwatch(scale: 1.0)
                     self.swatches.append(LegendSwatch(label: info.name, swatch: swatch!))
                 }
+            }
+        }
+        .toolbar {
+            ToolbarItem (placement: .navigationBarTrailing){
+                Button(action: {
+                    self.panelVM.dismiss()
+                }, label: {
+                    Image(systemName: "xmark")
+                })
             }
         }
     }

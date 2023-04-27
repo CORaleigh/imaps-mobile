@@ -9,9 +9,9 @@ import SwiftUI
 import ArcGIS
 struct SearchHistoryView: View {
     @EnvironmentObject var dataModel : MapDataModel
+    @EnvironmentObject var panelVM: PanelViewModel
 
     @State var history: SearchHistory
-
     var body: some View {
         NavigationView {
             List {
@@ -21,6 +21,8 @@ struct SearchHistoryView: View {
                     NavigationLink(item.value) {
                         PropertyView(viewModel: viewModel, group: SearchGroup(field: item.field, alias: item.field, features: []), source: .history)
                             .environmentObject(dataModel)
+                            .environmentObject(panelVM)
+
                     }
                 }
             }
@@ -28,6 +30,15 @@ struct SearchHistoryView: View {
             //            self.history = getSearchHistory()
             //        }
             .navigationTitle("Search History")
+            .toolbar {
+                ToolbarItem (placement: .navigationBarTrailing){
+                    Button(action: {
+                        panelVM.dismiss()
+                    }, label: {
+                        Image(systemName: "xmark")
+                    })
+                }
+            }
         }.navigationViewStyle(.stack)
     }
 }

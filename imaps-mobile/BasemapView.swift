@@ -24,6 +24,8 @@ class BasemapViewModel: ObservableObject {
 
 struct BasemapView: View {
     @EnvironmentObject var dataModel: MapDataModel
+    @EnvironmentObject var panelVM: PanelViewModel
+
     @ObservedObject private var basemapVM: BasemapViewModel = BasemapViewModel(selected: .Maps)
     @State var basemaps: [PortalItem] = [];
 
@@ -146,6 +148,16 @@ struct BasemapView: View {
             }
             .navigationTitle("Basemaps")
             .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem (placement: .navigationBarTrailing){
+                    Button(action: {
+                        self.panelVM.dismiss()
+                    }, label: {
+                        Image(systemName: "xmark")
+                    })
+                }
+            }
+
         }
 
         .navigationViewStyle(StackNavigationViewStyle())

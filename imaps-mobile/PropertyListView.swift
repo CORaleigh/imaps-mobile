@@ -9,9 +9,10 @@ import SwiftUI
 import ArcGIS
 
 struct PropertyListView: View {
+    @EnvironmentObject var panelVM: PanelViewModel
+
     @State var features: [Feature]
     @State var fromSearch: Bool
-
     var body: some View {
         NavigationView {
             List {
@@ -29,6 +30,15 @@ struct PropertyListView: View {
             }
             .navigationTitle("Property List")
             .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem (placement: .navigationBarTrailing){
+                    Button(action: {
+                        self.panelVM.dismiss()
+                    }, label: {
+                        Image(systemName: "xmark")
+                    })
+                }
+            }
         }
         .navigationViewStyle(.stack)
 
