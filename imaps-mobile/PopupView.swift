@@ -1,10 +1,3 @@
-//
-//  PopupView.swift
-//  imaps-mobile
-//
-//  Created by Greco, Justin on 4/24/23.
-//
-
 import SwiftUI
 
 struct PopupView: View {
