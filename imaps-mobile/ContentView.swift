@@ -1,317 +1,269 @@
-//
-//  ContentView.swift
-//  layout-test
-//
-//  Created by Greco, Justin on 4/24/23.
-//
-
 import SwiftUI
 import ArcGIS
 import ArcGISToolkit
 import CoreLocation
-
-enum SelectedPanel {
-case search, layers, basemap, property
-}
-
-class PanelViewModel: ObservableObject {
-    @Published var isPresented: Bool
-    @Published var selectedDetent: FloatingPanelDetent = .full
-    init(isPresented: Bool) {
-        self.isPresented = isPresented
-    }
-    func dismiss() {
-        self.isPresented = false
-    }
-}
+import SwiftUIIntrospect
 
 struct ContentView: View {
     @State private var popupDetent: FloatingPanelDetent = .full
-
     @StateObject var panelVM = PanelViewModel(isPresented: true)
-    @State var selectedPanel = SelectedPanel.search
-
-    @State var selectedPinNum: String = ""
     private let locationDisplay = LocationDisplay(dataSource: SystemLocationDataSource())
     @State private var failedToStart = false
     @State private var locationEnabled = false
-    
     @State private var showPopup = false
     @State private var identifyScreenPoint: CGPoint?
     @State private var popup: Popup?
     @State private var identifyResultCount = 0
     @State private var identifyResultIndex = 0
     @State private var identifyResults:[IdentifyLayerResult]? = []
-
+    @State private var longPressScreenPoint: CGPoint?
+    @State private var attributionBarHeight: CGFloat = 0
     @State private var isKeyboardVisible = false
-
-    
-    @StateObject private var dataModel = MapDataModel(
+    @State var basemapVM = BasemapViewModel(selected: .Maps, center: Point(x:0,y:0))
+    @State var isPortrait: Bool = UIDevice.current.orientation.isPortrait
+    @State var appSize: CGSize = CGSize(width: 0, height: 0)
+    @StateObject private var mapViewModel = MapViewModel(
         map: Map (
             item: PortalItem(portal: .arcGISOnline(connection: .anonymous), id: PortalItem.ID("95092428774c4b1fb6a3b6f5fed9fbc4")!)
         ),
         graphics: GraphicsOverlay(graphics: []),
         viewpoint: Viewpoint(latitude: 35.7796, longitude: -78.6382, scale: 500_000)
+            
     )
 
     private var initialViewpoint = Viewpoint(latitude: 35.7796, longitude: -78.6382, scale: 500_000)
     var body: some View {
-        NavigationView {
-            MapViewReader { proxy in
-                MapView(
-                    map: dataModel.map,
-                    viewpoint: dataModel.viewpoint,
-                    graphicsOverlays: [dataModel.graphics]
-                )
-                .onViewpointChanged(kind: .centerAndScale) { viewpoint in
-                    UserDefaults.standard.set(viewpoint.targetScale, forKey: "scale")
-                    UserDefaults.standard.set(viewpoint.targetGeometry.toJSON(), forKey: "center")
+        GeometryReader { geo in
+            ZStack (alignment: .topTrailing) {
+                MapViewReader { proxy in
+                    MapView(
+                        map: mapViewModel.map,
+                        viewpoint: mapViewModel.viewpoint,
+                        graphicsOverlays: [mapViewModel.graphics]
+                    )
+                    .magnifierDisabled(true)
+                    .onViewpointChanged(kind: .centerAndScale) { viewpoint in
+                        UserDefaults.standard.set(viewpoint.targetScale, forKey: "scale")
+                        UserDefaults.standard.set(viewpoint.targetGeometry.toJSON(), forKey: "center")
+                        self.basemapVM.objectWillChange.send()
+                        
+                        self.basemapVM.center = viewpoint.targetGeometry.extent.center
+                        
+                    }
+                    .onSingleTapGesture {screenPoint, _ in
+                        identifyScreenPoint = screenPoint
+                    }
+                    .onLongPressGesture {screenPoint, _ in
+                        longPressScreenPoint = screenPoint
+                    }
+                    .locationDisplay(locationDisplay)
+                    .onAttributionBarHeightChanged {
+                        attributionBarHeight = $0
+                    }
+                    .ignoresSafeArea(.keyboard, edges: .bottom)
+                    
+                    .alert("Location display failed to start", isPresented: $failedToStart) {}
+                    .task(id: identifyScreenPoint) {
+                        guard let identifyScreenPoint = identifyScreenPoint,
+                              
+                                let identifyResult = try? await proxy.identifyLayers(
+                                    screenPoint: identifyScreenPoint,
+                                    tolerance: 10,
+                                    returnPopupsOnly: true
+                                )
+                        else { return }
+                        self.identifyResults = identifyResult
+                        
+                        self.identifyResultCount = identifyResult.filter{result in result.layerContent.name != "Property"}.count
+                        self.popup = identifyResult.first(where: {$0.layerContent.name != "Property"})?.popups.first
+                        self.showPopup = self.popup != nil
+                    }
+                    .task (id: longPressScreenPoint) {
+                        guard let longPressScreenPoint else { return }
+                        do {
+                            let identifyResult = try await proxy.identifyLayers(
+                                screenPoint: longPressScreenPoint,
+                                tolerance: 10,
+                                returnPopupsOnly: false
+                            )
+                            let result = identifyResult.first(where: {$0.layerContent.name == "Property"})
+                            if result != nil {
+                                if result!.geoElements.count > 0 {
+                                    self.panelVM.selectedPinNum = result?.geoElements.first?.attributes["PIN_NUM"] as! String
+                                    
+                                    let encoder = JSONEncoder()
+                                    guard let address = result?.geoElements.first?.attributes["SITE_ADDRESS"] as? String else { return }
+                                    let history = updateStorageHistory(field: "SITE_ADDRESS", value: address)
+                                    if let encoded = try? encoder.encode(history) {
+                                        UserDefaults.standard.set(encoded, forKey: "searchHistory")
+                                    }
+                                    self.panelVM.selectedPanel = .search
+                                    self.panelVM.isPresented = true
+                                }
+                                if UIDevice.current.userInterfaceIdiom != .pad {
+                                    self.showPopup = false
+                                }
+                            }
+                        } catch {
+                            
+                        }
+                        
+                    }
+                    .onAppear {
+                        self.appSize = geo.size
+                        self.isPortrait = self.appSize.height > self.appSize.width
+                        self.mapViewModel.proxy = proxy
+                        let center: String? = UserDefaults.standard.string(forKey: "center")
+                        let scale: Double = UserDefaults.standard.double(forKey: "scale")
+                        if (center != nil) {
+                            mapViewModel.viewpoint = try? Viewpoint(center:  Geometry.fromJSON(center!) as! Point, scale: scale)
+                        }
+                        else {
+                            mapViewModel.viewpoint = Viewpoint(latitude: 35.7796, longitude: -78.6382, scale: 500_000)
+                        }
+                        basemapVM.center = (mapViewModel.viewpoint?.targetGeometry.extent.center)!
+                    }
+                }
+                .onChange(of: geo.size) { _ in
+                    self.appSize = geo.size
+                    self.isPortrait = self.appSize.height > self.appSize.width
+                    print(self.isPortrait)
                     
                 }
-                .onSingleTapGesture {screenPoint, _ in
-                    identifyScreenPoint = screenPoint
-                }
-                .onLongPressGesture(perform: { viewPoint, mapPoint in
-                    Task {
-                        let screenpoint: CGPoint? = viewPoint
-                        guard let screenpoint = screenpoint,
-                              let identifyResult = await Result(awaiting: {
-                                  try await proxy.identifyLayers(
-                                    screenPoint: screenpoint,
-                                    tolerance: 10,
-                                    returnPopupsOnly: false
-                                  )
-                              })
-                            .cancellationToNil()
-                        else {
-                            return
-                        }
-                        let result = try? identifyResult.get().first(where: {$0.layerContent.name == "Property"})
-                        if result != nil {
-                            if result!.geoElements.count > 0 {
-                                self.selectedPinNum = result?.geoElements.first?.attributes["PIN_NUM"] as! String
-
-                                let encoder = JSONEncoder()
-                                let history = updateStorageHistory(field: "SITE_ADDRESS", value: result?.geoElements.first?.attributes["SITE_ADDRESS"] as! String)
-                                if let encoded = try? encoder.encode(history) {
-                                    UserDefaults.standard.set(encoded, forKey: "searchHistory")
-                                }
-                        
-
-                                self.selectedPanel = .property
-                                self.panelVM.isPresented = true
-//                                self.isPresented = false
-//                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-//                                    self.isPresented = true
-//                                }
-                            }
-                        }
-                    }
-                })
-                .locationDisplay(locationDisplay)
                 .alert("Location display failed to start", isPresented: $failedToStart) {}
-                .task(id: identifyScreenPoint) {
-                    guard let identifyScreenPoint = identifyScreenPoint,
-                          let identifyResult = await Result(awaiting: {
-                              try await proxy.identifyLayers(
-                                screenPoint: identifyScreenPoint,
-                                tolerance: 10,
-                                returnPopupsOnly: true
-                              )
-                          })
-                        .cancellationToNil()
-                    else {
-                        return
-                    }
-                    self.identifyScreenPoint = nil
-                    self.identifyResults = try! identifyResult.get()
-                    self.identifyResultCount = try! identifyResult.get().count
-                    self.popup = try? identifyResult.get().first?.popups.first
-                    self.showPopup = self.popup != nil
-                    self.panelVM.isPresented = false
-                }
-                .onAppear {
-                    self.dataModel.proxy = proxy
-                    let center: String? = UserDefaults.standard.string(forKey: "center")
-                    let scale: Double = UserDefaults.standard.double(forKey: "scale")
-                    if (center != nil) {
-                        dataModel.viewpoint = try? Viewpoint(center:  Geometry.fromJSON(center!) as! Point, scale: scale)
-                    }
-                    else {
-                        dataModel.viewpoint = Viewpoint(latitude: 35.7796, longitude: -78.6382, scale: 500_000)
-                    }
-                }
 
             }
-            
-            .floatingPanel(selectedDetent: $popupDetent,
-                           horizontalAlignment: .trailing,
-                           isPresented: $showPopup
-            ) {
-                VStack {
-                    if (identifyResultCount > 1) {
-                        HStack{
-                            Button {
-                                if (identifyResultIndex == 0) {
-                                    identifyResultIndex = identifyResultCount - 1
-                                } else {
-                                    identifyResultIndex -= 1
-                                }
-                                self.popup = identifyResults![identifyResultIndex].popups.first
-                            } label: {
-                                Image(systemName: "chevron.left.circle.fill")
+                .floatingPanel(
+                    attributionBarHeight: attributionBarHeight,
+                    backgroundColor: Color("Background"),
+                    selectedDetent: $panelVM.selectedDetent,
+                    horizontalAlignment: .leading,
+                    isPresented: $panelVM.isPresented
+                ) {
+                    GeometryReader { geo in
+                        ZStack {
+                            switch self.panelVM.selectedPanel {
+                            case .search:
+                                SearchView()
+                                    .environmentObject(mapViewModel)
+                                    .environmentObject(panelVM)
+                            case .layers:
+                                LayersView(mapViewModel: mapViewModel)
+                                    .environmentObject(mapViewModel)
+                                    .environmentObject(panelVM)
+                            case .basemap:
+                                BasemapView(basemapVM: self.basemapVM)
+                                    .environmentObject(mapViewModel)
+                                    .environmentObject(panelVM)
+                            case .property:
+                                PropertyView(viewModel: ViewModel(text: self.panelVM.selectedPinNum), group: SearchGroup(field: "PIN_NUM", alias: "PIN", features: []), source: .map)
+                                    .environmentObject(mapViewModel)
+                                    .environmentObject(panelVM)
                             }
-                            Text(String(identifyResultIndex+1)+" of "+String(identifyResultCount))
-                            Button {
-                                if (identifyResultIndex == identifyResultCount - 1) {
-                                    identifyResultIndex = 0
-                                } else {
-                                    identifyResultIndex += 1
-                                }
-                                self.popup = identifyResults![identifyResultIndex].popups.first
-                            } label: {
-                                Image(systemName: "chevron.right.circle.fill")
-                            }
+                            
+                        }
+                        .background(Color("Background"))
+                        .onChange(of: geo.size) { _ in
+                            self.panelVM.size = geo.size
+  
+                            
                         }
                     }
-                    if let popup = popup {
-                        PopupView(popup: popup, isPresented: $showPopup).showCloseButton(true)
                     }
-                }
-            }
-            .floatingPanel(selectedDetent: $panelVM.selectedDetent, horizontalAlignment: .leading, isPresented: $panelVM.isPresented
-            
-            ) {
-                VStack {
-                    if selectedPanel == .search {
-                        SearchView()
-                        .environmentObject(dataModel)
-                        .environmentObject(panelVM)
-
-
-                    }
-                    if selectedPanel == .layers {
-                        LayersView()
-                            .environmentObject(dataModel)
-                            .environmentObject(panelVM)
-
-                    }
-                    if selectedPanel == .basemap {
-                        BasemapView()
-                            .environmentObject(dataModel)
-                            .environmentObject(panelVM)
-
+                .ignoresSafeArea(.keyboard, edges: .bottom)
+                .floatingPanel(
+                    attributionBarHeight: attributionBarHeight,
+                    backgroundColor: Color("Background"),
+                               selectedDetent: $popupDetent,
+                               horizontalAlignment: .trailing,
+                               isPresented: $showPopup
+                ) { [popup] in
+                    VStack {
+                        if (identifyResultCount > 1) {
+                            HStack{
+                                Button {
+                                    if (identifyResultIndex == 0) {
+                                        identifyResultIndex = identifyResultCount - 1
+                                    } else {
+                                        identifyResultIndex -= 1
+                                    }
+                                    self.popup = identifyResults![identifyResultIndex].popups.first
+                                } label: {
+                                    Image(systemName: "chevron.left.circle.fill")
+                                }
+                                Text(String(identifyResultIndex+1)+" of "+String(identifyResultCount))
+                                Button {
+                                    if (identifyResultIndex == identifyResultCount - 1) {
+                                        identifyResultIndex = 0
+                                    } else {
+                                        identifyResultIndex += 1
+                                    }
+                                    
+                                    self.popup = identifyResults?[identifyResultIndex].popups.first
+                                } label: {
+                                    Image(systemName: "chevron.right.circle.fill")
+                                }
+                            }
+                        }
+                        PopupView(popup: popup!, isPresented: $showPopup).showCloseButton(true)
+                            .padding(.all)
                         
-                    }
-                    if selectedPanel == .property {
-                        let viewModel: ViewModel = ViewModel(text: self.selectedPinNum)
-                        PropertyView(viewModel: viewModel, group: SearchGroup(field: "PIN_NUM", alias: "PIN", features: []), source: .map)
-                            .environmentObject(dataModel)
+                    }.padding(.all)
+                }
+                
+                .ignoresSafeArea(.keyboard, edges: .bottom)
+                .overlay(alignment: .topTrailing) {
+                    if (!self.panelVM.isPresented ||  ( self.panelVM.size.height < 500) &&  self.isKeyboardVisible == false) || UIDevice.current.userInterfaceIdiom == .pad   {
+                        ButtonBarView()
                             .environmentObject(panelVM)
 
                     }
                 }
-
-            }
-            
-            .toolbar {
-                ToolbarItemGroup(placement: .navigation) {
-                    Button( action: {
-                        if selectedPanel == .search {
-                            panelVM.isPresented.toggle()
-                        } else {
-                            panelVM.isPresented = true
-                        }
-                        selectedPanel = .search
-                    }, label: {
-                        Image(systemName: "magnifyingglass")
-
-                    })
-                    Button(action: {
-                        if selectedPanel == .layers {
-                            panelVM.isPresented.toggle()
-                        } else {
-                            panelVM.isPresented = true
-                        }
-                        selectedPanel = .layers
-                    }, label: {
-                        Image(systemName: "square.3.layers.3d")
-
-                    })
-                    Button(action: {
-                        if selectedPanel == .basemap {
-                            panelVM.isPresented.toggle()
-                        } else {
-                            panelVM.isPresented = true
-                        }
-                        selectedPanel = .basemap
-                    }, label: {
-                        Image(systemName: "map")
-
-                    })
-                }
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button(action: {
-                        locationEnabled.toggle()
-                        Task {
-                            let locationManager = CLLocationManager()
-                            if locationManager.authorizationStatus == .notDetermined {
-                                locationManager.requestWhenInUseAuthorization()
-                            }
-
-                            do {
-                                if (locationEnabled) {
-                                    try await locationDisplay.dataSource.start()
-
-                                    locationDisplay.initialZoomScale = 40_000
-                                    locationDisplay.autoPanMode = .recenter
-                                } else {
-                                    await  locationDisplay.dataSource.stop()
-                                }
-
-
-                            } catch {
-
-                                self.failedToStart = true
-
-                            }
-                        }
-                    }, label: {
-                        Image(systemName: "location.circle")
-
-                    })
+                
+                .overlay(alignment: UIDevice.current.userInterfaceIdiom == .pad  ? .bottomTrailing : self.isPortrait == true ? .topLeading : .bottomTrailing) {
+                    if (!self.panelVM.isPresented ||  ( self.panelVM.size.height < 500) &&  self.isKeyboardVisible == false) || UIDevice.current.userInterfaceIdiom == .pad  {
+                        
+                        LocationButtonView(locationEnabled: self.locationEnabled, failedToStart: self.failedToStart,
+                                           locationDisplay: locationDisplay
+                        )
+                            .padding(.vertical, UIDevice.current.userInterfaceIdiom == .pad  ? 30 : self.isPortrait ? 10 : 30).padding(.horizontal, 10)
+ 
+                    }
                 }
             }
             
-            
-        }
-        .navigationViewStyle(StackNavigationViewStyle())
-        .onAppear {
-            self.panelVM.isPresented = UIDevice.current.userInterfaceIdiom == .pad
-        }
-        .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardWillShowNotification)) { _ in
-            self.panelVM.selectedDetent = .full
-            self.isKeyboardVisible = true
-        }
-        .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardWillHideNotification)) { _ in
-            self.isKeyboardVisible = false
-        }
-        .onReceive(panelVM.$selectedDetent) { _ in
-            if (self.isKeyboardVisible && self.panelVM.selectedDetent != .full) {
+
+        
+            .onReceive(panelVM.$selectedDetent) { _ in
+                if (self.isKeyboardVisible && self.panelVM.selectedDetent != .full) {
+                    self.panelVM.selectedDetent = .full
+                }
+            }
+
+            .onReceive(panelVM.$isPresented) { _ in
+                if !panelVM.isPresented {
+                    var keyWindow: UIWindow? {
+                        return UIApplication.shared.connectedScenes
+                            .filter { $0.activationState == .foregroundActive }
+                            .first(where: { $0 is UIWindowScene })
+                            .flatMap({ $0 as? UIWindowScene })?.windows
+                            .first(where: \.isKeyWindow)
+                    }
+                    keyWindow?.endEditing(true)
+                }
+            }
+            .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardWillShowNotification)) { notification in
+                self.isKeyboardVisible = true
                 self.panelVM.selectedDetent = .full
             }
-        }
-        .onReceive(panelVM.$isPresented) { _ in
-            if !panelVM.isPresented {
-                UIApplication.shared.windows.filter {$0.isKeyWindow}.first?.endEditing(true)
+            .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardWillHideNotification)) { notification in
+                self.isKeyboardVisible = false
             }
-            
+            .onAppear {
+                self.panelVM.isPresented = UIDevice.current.userInterfaceIdiom == .pad
+            }
         }
     }
-
-    
-
-}
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {

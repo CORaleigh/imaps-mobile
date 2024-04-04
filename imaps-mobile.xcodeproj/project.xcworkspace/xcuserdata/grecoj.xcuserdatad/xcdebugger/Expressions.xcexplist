@@ -3,99 +3,7 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "closure #1 in closure #1 in closure #2 in PropertyInfoView.body.getter:PropertyInfoView.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "features">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "closure #1 in PropertyInfoView.getProperty(id:table:map:viewpoint:graphicsOverlay:):PropertyInfoView.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "feature?.geometry.extent">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "closure #1 in imaps_mobileApp.body.getter:imaps_mobileApp.swift">
-      </ContextState>
-      <ContextState
-         contextName = "closure #1 in closure #1 in PropertyListView.body.getter:PropertyListView.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "feature[&quot;SITE_ADDRESS&quot;]">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "GLOBAL">
-         <PersistentStrings>
-            <PersistentString
-               value = "UIDevice()">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "InfoView.body.getter:InfoView.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "shared">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "closure #1 in closure #2 in ContentView.body.getter:ContentView.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "shared.map.loadStatus">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "closure #1 in closure #2 in PropertyListView.body.getter:PropertyListView.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "feature.attributes[&quot;OBJECTID&quot;]">
-            </PersistentString>
-            <PersistentString
-               value = "self._listFeatures">
-            </PersistentString>
-            <PersistentString
-               value = "listFeatures">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "closure #1 in closure #1 in closure #1 in PhotoViews.body.getter:PhotoViews.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "url">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "closure #2 in closure #1 in closure #1 in closure #1 in closure #2 in PropertyInfoView.body.getter:PropertyInfoView.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "d">
-            </PersistentString>
-            <PersistentString
-               value = "Array(result).count">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "InfoView.feature.getter:InfoView.swift">
-      </ContextState>
-      <ContextState
-         contextName = "closure #1 in InfoView.body.getter:InfoView.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "feature!.attributes">
-            </PersistentString>
-         </PersistentStrings>
+         contextName = "_dispatch_timer_heap_resift:(null)">
       </ContextState>
       <ContextState
          contextName = "closure #1 in PropertyInfoView.body.getter:PropertyInfoView.swift">
@@ -112,45 +20,102 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "closure #1 in closure #2 in closure #1 in closure #1 in closure #1 in closure #1 in closure #1 in BasemapView.body.getter:BasemapView.swift">
-      </ContextState>
-      <ContextState
-         contextName = "closure #1 in closure #1 in closure #1 in LayersView.body.getter:LayersView.swift">
+         contextName = "closure #3 in closure #1 in closure #1 in DeedView.body.getter:DeedView.swift">
          <PersistentStrings>
             <PersistentString
-               value = "shared.map.loadStatus">
+               value = "attributes[&quot;DEED_PAGE&quot;]">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "closure #1 in PhotoViews.body.getter:PhotoViews.swift">
+         contextName = "closure #1 in closure #3 in closure #1 in closure #1 in closure #1 in ServicesView.getServices(layers:feature:category:viewModel:):ServicesView.swift">
       </ContextState>
       <ContextState
-         contextName = "closure #1 in SearchListView.body.getter:SearchView.swift">
+         contextName = "closure #3 in closure #1 in closure #1 in BasemapView.body.getter:BasemapView.swift">
+      </ContextState>
+      <ContextState
+         contextName = "closure #3 in closure #1 in ContentView.body.getter:ContentView.swift">
          <PersistentStrings>
             <PersistentString
-               value = "value.value">
+               value = "lastPinNum">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "MapPopupView.body.getter:MapPopupView.swift">
-      </ContextState>
-      <ContextState
-         contextName = "ContentView.setLayerVisibility():ContentView.swift">
+         contextName = "closure #1 in closure #1 in closure #1 in closure #1 in closure #1 in LayersView.body.getter:LayersView.swift">
          <PersistentStrings>
             <PersistentString
-               value = "shared.map.loadStatus">
+               value = "dataModel.map.operationalLayers">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "closure #2 in closure #1 in closure #1 in ContentView.body.getter:ContentView.swift">
+         contextName = "getBoundary():BasemapView.swift">
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in closure #3 in closure #1 in closure #1 in BasemapView.body.getter:BasemapView.swift">
          <PersistentStrings>
             <PersistentString
-               value = "locationManager.authorizationStatus">
+               value = "boundary">
             </PersistentString>
          </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in imaps_mobileApp.body.getter:imaps_mobileApp.swift">
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in closure #1 in closure #1 in InfoView.body.getter:InfoView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "shared.table">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in closure #3 in closure #2 in ServicesView.body.getter:ServicesView.swift">
+      </ContextState>
+      <ContextState
+         contextName = "closure #3 in closure #1 in closure #1 in closure #2 in closure #1 in ContentView.body.getter:ContentView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "identifyResults">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in closure #1 in closure #1 in closure #1 in closure #4 in closure #1 in closure #1 in BasemapView.body.getter:BasemapView.swift">
+      </ContextState>
+      <ContextState
+         contextName = "PanelViewModel.fullscreen():ContentView.swift">
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in PropertyView.body.getter:PropertyView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.propertyVM.feature">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #4 in LayerInfoView.body.getter:LayerInfoView.swift">
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in closure #1 in closure #1 in closure #1 in closure #1 in closure #1 in closure #1 in closure #1 in BasemapView.body.getter:BasemapView.swift">
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in closure #1 in ServicesView.getServices(layers:feature:category:viewModel:):ServicesView.swift">
+      </ContextState>
+      <ContextState
+         contextName = "queryServices(for:propertyFeature:completion:):ServicesModel.swift">
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in GeoMetalView.makeUIView(context:):GeoCommonView.swift">
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in closure #1 in closure #2 in closure #1 in ServicesView.body.getter:ServicesView.swift">
+      </ContextState>
+      <ContextState
+         contextName = "GeneralView.body.getter:GeneralView.swift">
       </ContextState>
       <ContextState
          contextName = "closure #1 in closure #2 in PropertyInfoView.body.getter:PropertyInfoView.swift">
@@ -167,7 +132,32 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "closure #1 in closure #1 in closure #1 in SearchListView.body.getter:SearchView.swift">
+         contextName = "closure #1 in closure #1 in closure #1 in closure #1 in PropertyInfoView.body.getter:PropertyInfoView.swift">
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in closure #1 in PropertyView.body.getter:PropertyView.swift">
+      </ContextState>
+      <ContextState
+         contextName = "setLocationYPosition(isPortrait:):ContentView.swift">
+      </ContextState>
+      <ContextState
+         contextName = "closure #2 in PropertyInfoView.getDeeds(for:feature:completion:):PropertyInfoView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "Array(result.features()) ">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in closure #1 in PropertyListView.body.getter:PropertyListView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "feature[&quot;SITE_ADDRESS&quot;]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in SearchListView.body.getter:SearchView.swift">
          <PersistentStrings>
             <PersistentString
                value = "value.value">
@@ -175,74 +165,20 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "closure #1 in closure #4 in ContentView.body.getter:ContentView.swift">
+         contextName = "closure #2 in ServicesView.body.getter:ServicesView.swift">
          <PersistentStrings>
             <PersistentString
-               value = "proxy">
+               value = "dataModel">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "closure #1 in closure #1 in closure #1 in InfoView.body.getter:InfoView.swift">
+         contextName = "closure #1 in closure #1 in closure #1 in SearchListView.body.getter:SearchView.swift">
          <PersistentStrings>
             <PersistentString
-               value = "shared.table">
+               value = "value.value">
             </PersistentString>
          </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "closure #3 in closure #1 in closure #1 in DeedView.body.getter:DeedView.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "attributes[&quot;DEED_PAGE&quot;]">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "closure #1 in ContentView.setLayerVisibility():ContentView.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "shared.map.loadStatus">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "closure #7 in closure #1 in closure #1 in ContentView.body.getter:ContentView.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "( Geometry.fromJSON(center!) as! Point).x">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "closure #1 in closure #2 in closure #1 in closure #1 in closure #1 in closure #2 in PropertyInfoView.body.getter:PropertyInfoView.swift">
-      </ContextState>
-      <ContextState
-         contextName = "imaps_mobileApp.license():imaps_mobileApp.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = ".iOS">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "closure #2 in closure #1 in InfoView.getProperty(id:table:map:viewpoint:graphicsOverlay:):InfoView.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "shared">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "closure #3 in closure #1 in closure #1 in closure #1 in closure #2 in PropertyInfoView.body.getter:PropertyInfoView.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "$0.attributes[&quot;OBJECTID&quot;]">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "closure #1 in closure #1 in closure #1 in closure #1 in closure #2 in PropertyInfoView.body.getter:PropertyInfoView.swift">
       </ContextState>
       <ContextState
          contextName = "closure #1 in closure #1 in closure #1 in closure #2 in PropertyInfoView.body.getter:PropertyInfoView.swift">
@@ -256,21 +192,117 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "closure #2 in closure #1 in closure #1 in LayersView.body.getter:LayersView.swift">
-      </ContextState>
-      <ContextState
-         contextName = "closure #1 in closure #2 in closure #1 in closure #1 in closure #1 in SearchView.body.getter:SearchView.swift">
+         contextName = "imaps_mobileApp.license():imaps_mobileApp.swift">
          <PersistentStrings>
             <PersistentString
-               value = "result.features()">
+               value = ".iOS">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "GeneralView.body.getter:GeneralView.swift">
+         contextName = "closure #1 in closure #2 in closure #1 in ContentView.body.getter:ContentView.swift">
       </ContextState>
       <ContextState
-         contextName = "closure #6 in closure #1 in closure #1 in ContentView.body.getter:ContentView.swift">
+         contextName = "closure #1 in closure #1 in closure #1 in PropertyInfoView.body.getter:PropertyInfoView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "feature.feature?.attributes[&quot;SITE_ADDRESS&quot;] as? String ">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "__pthread_kill:(null)">
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in closure #1 in closure #1 in PhotoViews.body.getter:PhotoViews.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "url">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #3 in closure #1 in closure #1 in closure #1 in ServicesView.getServices(layers:feature:category:viewModel:):ServicesView.swift">
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in closure #2 in closure #1 in closure #1 in closure #1 in closure #2 in PropertyInfoView.body.getter:PropertyInfoView.swift">
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in closure #2 in PropertyListView.body.getter:PropertyListView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "feature.attributes[&quot;OBJECTID&quot;]">
+            </PersistentString>
+            <PersistentString
+               value = "self._listFeatures">
+            </PersistentString>
+            <PersistentString
+               value = "listFeatures">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #2 in closure #1 in closure #1 in LayersView.body.getter:LayersView.swift">
+      </ContextState>
+      <ContextState
+         contextName = "closure #7 in closure #1 in closure #1 in ContentView.body.getter:ContentView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "( Geometry.fromJSON(center!) as! Point).x">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in closure #1 in closure #1 in LayersView.body.getter:LayersView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "shared.map.loadStatus">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in closure #1 in closure #3 in closure #2 in ServicesView.body.getter:ServicesView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "features">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in PropertyInfoView.getProperty(id:table:map:viewpoint:graphicsOverlay:):PropertyInfoView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "feature?.geometry.extent">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in InfoView.body.getter:InfoView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "feature!.attributes">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "PropertyInfoView.body.getter:PropertyInfoView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "shared">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #3 in closure #1 in closure #1 in closure #3 in closure #2 in ServicesView.body.getter:ServicesView.swift">
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in closure #2 in closure #2 in ContentView.body.getter:ContentView.swift">
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in closure #1 in closure #1 in closure #2 in closure #1 in ServicesView.body.getter:ServicesView.swift">
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in MapPopupView.body.getter:MapPopupView.swift">
       </ContextState>
       <ContextState
          contextName = "ContentView.init():ContentView.swift">
@@ -279,6 +311,138 @@
                value = "shared">
             </PersistentString>
          </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "static PropertyInfoView.== infix(_:_:):PropertyInfoView.swift">
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in PhotoViews.body.getter:PhotoViews.swift">
+      </ContextState>
+      <ContextState
+         contextName = "closure #2 in closure #1 in InfoView.getProperty(id:table:map:viewpoint:graphicsOverlay:):InfoView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "shared">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in closure #1 in closure #1 in closure #1 in closure #2 in PropertyInfoView.body.getter:PropertyInfoView.swift">
+      </ContextState>
+      <ContextState
+         contextName = "MapPopupView.body.getter:MapPopupView.swift">
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in closure #2 in ContentView.body.getter:ContentView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "shared.map.loadStatus">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #2 in closure #1 in closure #1 in ContentView.body.getter:ContentView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "locationManager.authorizationStatus">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "InfoView.body.getter:InfoView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "shared">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in closure #1 in closure #2 in PropertyInfoView.body.getter:PropertyInfoView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "features">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #6 in closure #1 in closure #1 in ContentView.body.getter:ContentView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "encoded">
+            </PersistentString>
+            <PersistentString
+               value = "lastPinNum">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in ContentView.setLayerVisibility():ContentView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "shared.map.loadStatus">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "static PropertyView.== infix(_:_:):PropertyView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "lhs.viewModel.text == rhs.viewModel.text">
+            </PersistentString>
+            <PersistentString
+               value = "lhs.viewModel.text">
+            </PersistentString>
+            <PersistentString
+               value = "rhs.viewModel.text">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ContentView.setLayerVisibility():ContentView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "shared.map.loadStatus">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "PropertyInfoView.getDeeds(for:feature:completion:):PropertyInfoView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "feature.attributes">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #6 in closure #1 in closure #2 in ContentView.body.getter:ContentView.swift">
+      </ContextState>
+      <ContextState
+         contextName = "closure #2 in closure #1 in closure #1 in closure #1 in closure #2 in PropertyInfoView.body.getter:PropertyInfoView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "d">
+            </PersistentString>
+            <PersistentString
+               value = "Array(result).count">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #4 in closure #1 in closure #1 in BasemapView.body.getter:BasemapView.swift">
+      </ContextState>
+      <ContextState
+         contextName = "filterMaps(inRaleigh:item:):BasemapView.swift">
+      </ContextState>
+      <ContextState
+         contextName = "GLOBAL">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.selectedPanel">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in closure #2 in closure #1 in PropertyView.body.getter:PropertyView.swift">
       </ContextState>
       <ContextState
          contextName = "closure #1 in closure #1 in search(for:params:newValue:):SearchView.swift">
@@ -292,34 +456,48 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "closure #2 in PropertyInfoView.getDeeds(for:feature:completion:):PropertyInfoView.swift">
+         contextName = "closure #1 in closure #2 in closure #1 in closure #1 in closure #1 in closure #1 in closure #1 in BasemapView.body.getter:BasemapView.swift">
+      </ContextState>
+      <ContextState
+         contextName = "closure #3 in closure #1 in closure #1 in closure #1 in closure #2 in PropertyInfoView.body.getter:PropertyInfoView.swift">
          <PersistentStrings>
             <PersistentString
-               value = "Array(result.features()) ">
+               value = "$0.attributes[&quot;OBJECTID&quot;]">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "PropertyInfoView.getDeeds(for:feature:completion:):PropertyInfoView.swift">
+         contextName = "PropertyView.body.getter:PropertyView.swift">
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in closure #4 in ContentView.body.getter:ContentView.swift">
          <PersistentStrings>
             <PersistentString
-               value = "feature.attributes">
+               value = "proxy">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "PropertyInfoView.body.getter:PropertyInfoView.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "shared">
-            </PersistentString>
-         </PersistentStrings>
+         contextName = "InfoView.feature.getter:InfoView.swift">
       </ContextState>
       <ContextState
          contextName = "closure #5 in closure #1 in closure #1 in ContentView.body.getter:ContentView.swift">
       </ContextState>
       <ContextState
-         contextName = "closure #1 in MapPopupView.body.getter:MapPopupView.swift">
+         contextName = "closure #1 in closure #2 in closure #1 in closure #1 in closure #1 in SearchView.body.getter:SearchView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "result.features()">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "static BasemapView.== infix(_:_:):BasemapView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "lhs.basemapVM.center.x">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
    </ContextStates>
 </VariablesViewState>

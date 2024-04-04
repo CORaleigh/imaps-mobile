@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		C706EF2F29E8D84D005EEAE0 /* PropertyListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C706EF2E29E8D84D005EEAE0 /* PropertyListView.swift */; };
+		C70CA3D52BAC9E6F00866A34 /* BasemapItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70CA3D42BAC9E6F00866A34 /* BasemapItemView.swift */; };
+		C70CA3DB2BADE1E700866A34 /* ServicesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70CA3DA2BADE1E700866A34 /* ServicesView.swift */; };
+		C70CA3DD2BADE25700866A34 /* ServicesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70CA3DC2BADE25700866A34 /* ServicesViewModel.swift */; };
 		C70CB49F29E6E49D00B6A157 /* imaps_mobileApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70CB49E29E6E49D00B6A157 /* imaps_mobileApp.swift */; };
 		C70CB4A129E6E49D00B6A157 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70CB4A029E6E49D00B6A157 /* ContentView.swift */; };
 		C70CB4A329E6E49E00B6A157 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C70CB4A229E6E49E00B6A157 /* Assets.xcassets */; };
@@ -26,12 +29,21 @@
 		C70CB4CE29E6F80E00B6A157 /* BuildingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70CB4CD29E6F80E00B6A157 /* BuildingView.swift */; };
 		C70CB4D029E6F81500B6A157 /* DeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70CB4CF29E6F81500B6A157 /* DeedView.swift */; };
 		C70CB4D429E71A3C00B6A157 /* PhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70CB4D329E71A3C00B6A157 /* PhotoView.swift */; };
+		C70E73312BBB2D060042A932 /* ButtonBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70E73302BBB2D060042A932 /* ButtonBarView.swift */; };
+		C70E73352BBB3A540042A932 /* PanelViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70E73342BBB3A540042A932 /* PanelViewModel.swift */; };
+		C70E73372BBF069B0042A932 /* Boundary.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70E73362BBF069B0042A932 /* Boundary.swift */; };
+		C70E73392BBF10160042A932 /* BasemapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70E73382BBF10160042A932 /* BasemapViewModel.swift */; };
+		C70E733B2BBF10A00042A932 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70E733A2BBF10A00042A932 /* SearchViewModel.swift */; };
+		C70E733F2BBF10F70042A932 /* PropertyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70E733E2BBF10F70042A932 /* PropertyViewModel.swift */; };
+		C70E73412BBF15230042A932 /* LayersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70E73402BBF15230042A932 /* LayersViewModel.swift */; };
+		C72688CE2BB3326D00EB0372 /* TaxInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72688CD2BB3326D00EB0372 /* TaxInfoView.swift */; };
+		C72A4B8F2BA8C89B00F994B9 /* SwiftUIIntrospect in Frameworks */ = {isa = PBXBuildFile; productRef = C72A4B8E2BA8C89B00F994B9 /* SwiftUIIntrospect */; };
 		C72D934529F574F6004815D9 /* SearchHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72D934429F574F6004815D9 /* SearchHistoryView.swift */; };
 		C735C23729E9DFB3006A3767 /* AppSecrets.swift.masque.swift in Sources */ = {isa = PBXBuildFile; fileRef = C735C23629E9DFB3006A3767 /* AppSecrets.swift.masque.swift */; };
 		C738262529EB08FC0087431D /* LayerInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C738262429EB08FC0087431D /* LayerInfoView.swift */; };
-		C738262929ED800E0087431D /* PropertyLinksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C738262829ED800E0087431D /* PropertyLinksView.swift */; };
+		C7692F2B2BBB27F8000DB711 /* LocationButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7692F2A2BBB27F8000DB711 /* LocationButtonView.swift */; };
 		C7AE688629F9B67400C616BB /* SearchItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7AE688529F9B67400C616BB /* SearchItemView.swift */; };
-		C7AE688929F9B6B300C616BB /* MapDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7AE688829F9B6B300C616BB /* MapDataModel.swift */; };
+		C7AE688929F9B6B300C616BB /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7AE688829F9B6B300C616BB /* MapViewModel.swift */; };
 		C7AE688B29F9B6C100C616BB /* SearchListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7AE688A29F9B6C100C616BB /* SearchListViewModel.swift */; };
 		C7AE688D29F9B6D200C616BB /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7AE688C29F9B6D200C616BB /* Utilities.swift */; };
 		C7AE688F29F9B6E200C616BB /* PropertyInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7AE688E29F9B6E200C616BB /* PropertyInfoViewModel.swift */; };
@@ -41,6 +53,9 @@
 
 /* Begin PBXFileReference section */
 		C706EF2E29E8D84D005EEAE0 /* PropertyListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyListView.swift; sourceTree = "<group>"; };
+		C70CA3D42BAC9E6F00866A34 /* BasemapItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasemapItemView.swift; sourceTree = "<group>"; };
+		C70CA3DA2BADE1E700866A34 /* ServicesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicesView.swift; sourceTree = "<group>"; };
+		C70CA3DC2BADE25700866A34 /* ServicesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicesViewModel.swift; sourceTree = "<group>"; };
 		C70CB49B29E6E49D00B6A157 /* iMAPS Beta.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "iMAPS Beta.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C70CB49E29E6E49D00B6A157 /* imaps_mobileApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = imaps_mobileApp.swift; sourceTree = "<group>"; };
 		C70CB4A029E6E49D00B6A157 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -59,13 +74,22 @@
 		C70CB4CD29E6F80E00B6A157 /* BuildingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingView.swift; sourceTree = "<group>"; };
 		C70CB4CF29E6F81500B6A157 /* DeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeedView.swift; sourceTree = "<group>"; };
 		C70CB4D329E71A3C00B6A157 /* PhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoView.swift; sourceTree = "<group>"; };
+		C70E73302BBB2D060042A932 /* ButtonBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonBarView.swift; sourceTree = "<group>"; };
+		C70E73342BBB3A540042A932 /* PanelViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanelViewModel.swift; sourceTree = "<group>"; };
+		C70E73362BBF069B0042A932 /* Boundary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Boundary.swift; sourceTree = "<group>"; };
+		C70E73382BBF10160042A932 /* BasemapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasemapViewModel.swift; sourceTree = "<group>"; };
+		C70E733A2BBF10A00042A932 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
+		C70E733E2BBF10F70042A932 /* PropertyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyViewModel.swift; sourceTree = "<group>"; };
+		C70E73402BBF15230042A932 /* LayersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayersViewModel.swift; sourceTree = "<group>"; };
+		C72688CD2BB3326D00EB0372 /* TaxInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaxInfoView.swift; sourceTree = "<group>"; };
 		C72D934429F574F6004815D9 /* SearchHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistoryView.swift; sourceTree = "<group>"; };
 		C735C23629E9DFB3006A3767 /* AppSecrets.swift.masque.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSecrets.swift.masque.swift; sourceTree = "<group>"; };
 		C738262429EB08FC0087431D /* LayerInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayerInfoView.swift; sourceTree = "<group>"; };
-		C738262829ED800E0087431D /* PropertyLinksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyLinksView.swift; sourceTree = "<group>"; };
+		C7692F0C2BB47170000DB711 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		C7692F2A2BBB27F8000DB711 /* LocationButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationButtonView.swift; sourceTree = "<group>"; };
 		C7A0B58429FAD08C00F1E56F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		C7AE688529F9B67400C616BB /* SearchItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchItemView.swift; sourceTree = "<group>"; };
-		C7AE688829F9B6B300C616BB /* MapDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapDataModel.swift; sourceTree = "<group>"; };
+		C7AE688829F9B6B300C616BB /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
 		C7AE688A29F9B6C100C616BB /* SearchListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchListViewModel.swift; sourceTree = "<group>"; };
 		C7AE688C29F9B6D200C616BB /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		C7AE688E29F9B6E200C616BB /* PropertyInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyInfoViewModel.swift; sourceTree = "<group>"; };
@@ -78,6 +102,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C72A4B8F2BA8C89B00F994B9 /* SwiftUIIntrospect in Frameworks */,
 				C70CB4B229E6E59700B6A157 /* ArcGISToolkit in Frameworks */,
 				C70CB4AF29E6E58A00B6A157 /* ArcGIS in Frameworks */,
 			);
@@ -106,25 +131,19 @@
 			isa = PBXGroup;
 			children = (
 				C7A0B58429FAD08C00F1E56F /* Info.plist */,
-				C70CB49E29E6E49D00B6A157 /* imaps_mobileApp.swift */,
-				C70CB4A029E6E49D00B6A157 /* ContentView.swift */,
 				C70CB4A229E6E49E00B6A157 /* Assets.xcassets */,
 				C70CB4A429E6E49E00B6A157 /* imaps_mobile.entitlements */,
 				C70CB4A529E6E49E00B6A157 /* Preview Content */,
-				C70CB4B329E6E82700B6A157 /* SearchView.swift */,
-				C7AE689229F9B74B00C616BB /* PropertyView.swift */,
-				C70CB4BD29E6F76800B6A157 /* PropertyInfoView.swift */,
-				C70CB4C429E6F7C200B6A157 /* PropertyInfoViews */,
-				C706EF2E29E8D84D005EEAE0 /* PropertyListView.swift */,
-				C70CB4B529E6E83200B6A157 /* LayersView.swift */,
-				C7AE689029F9B71100C616BB /* SubLayerView.swift */,
-				C738262429EB08FC0087431D /* LayerInfoView.swift */,
-				C70CB4B729E6E84000B6A157 /* BasemapView.swift */,
+				C70CB4A029E6E49D00B6A157 /* ContentView.swift */,
+				C70E73452BBF181D0042A932 /* Search */,
+				C70E73422BBF17AB0042A932 /* Property */,
+				C70E73432BBF17CF0042A932 /* Basemap */,
+				C70E73462BBF18300042A932 /* Layers */,
+				C70E73442BBF18010042A932 /* Map Buttons */,
 				C7AE688729F9B68A00C616BB /* Utility */,
-				C70CB4BF29E6F77500B6A157 /* WebView.swift */,
-				C7AE688529F9B67400C616BB /* SearchItemView.swift */,
-				C72D934429F574F6004815D9 /* SearchHistoryView.swift */,
+				C70CB49E29E6E49D00B6A157 /* imaps_mobileApp.swift */,
 				C735C23629E9DFB3006A3767 /* AppSecrets.swift.masque.swift */,
+				C7692F0C2BB47170000DB711 /* PrivacyInfo.xcprivacy */,
 			);
 			path = "imaps-mobile";
 			sourceTree = "<group>";
@@ -147,18 +166,76 @@
 				C70CB4CD29E6F80E00B6A157 /* BuildingView.swift */,
 				C70CB4CF29E6F81500B6A157 /* DeedView.swift */,
 				C70CB4D329E71A3C00B6A157 /* PhotoView.swift */,
-				C738262829ED800E0087431D /* PropertyLinksView.swift */,
+				C70CA3DA2BADE1E700866A34 /* ServicesView.swift */,
+				C70CA3DC2BADE25700866A34 /* ServicesViewModel.swift */,
+				C72688CD2BB3326D00EB0372 /* TaxInfoView.swift */,
+				C70CB4BF29E6F77500B6A157 /* WebView.swift */,
 			);
 			path = PropertyInfoViews;
+			sourceTree = "<group>";
+		};
+		C70E73422BBF17AB0042A932 /* Property */ = {
+			isa = PBXGroup;
+			children = (
+				C7AE689229F9B74B00C616BB /* PropertyView.swift */,
+				C70E733E2BBF10F70042A932 /* PropertyViewModel.swift */,
+				C70CB4BD29E6F76800B6A157 /* PropertyInfoView.swift */,
+				C7AE688E29F9B6E200C616BB /* PropertyInfoViewModel.swift */,
+				C706EF2E29E8D84D005EEAE0 /* PropertyListView.swift */,
+				C70CB4C429E6F7C200B6A157 /* PropertyInfoViews */,
+			);
+			path = Property;
+			sourceTree = "<group>";
+		};
+		C70E73432BBF17CF0042A932 /* Basemap */ = {
+			isa = PBXGroup;
+			children = (
+				C70CB4B729E6E84000B6A157 /* BasemapView.swift */,
+				C70CA3D42BAC9E6F00866A34 /* BasemapItemView.swift */,
+				C70E73382BBF10160042A932 /* BasemapViewModel.swift */,
+				C70E73362BBF069B0042A932 /* Boundary.swift */,
+			);
+			path = Basemap;
+			sourceTree = "<group>";
+		};
+		C70E73442BBF18010042A932 /* Map Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				C70E73302BBB2D060042A932 /* ButtonBarView.swift */,
+				C7692F2A2BBB27F8000DB711 /* LocationButtonView.swift */,
+			);
+			path = "Map Buttons";
+			sourceTree = "<group>";
+		};
+		C70E73452BBF181D0042A932 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				C70CB4B329E6E82700B6A157 /* SearchView.swift */,
+				C70E733A2BBF10A00042A932 /* SearchViewModel.swift */,
+				C7AE688A29F9B6C100C616BB /* SearchListViewModel.swift */,
+				C7AE688529F9B67400C616BB /* SearchItemView.swift */,
+				C72D934429F574F6004815D9 /* SearchHistoryView.swift */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
+		C70E73462BBF18300042A932 /* Layers */ = {
+			isa = PBXGroup;
+			children = (
+				C70CB4B529E6E83200B6A157 /* LayersView.swift */,
+				C7AE689029F9B71100C616BB /* SubLayerView.swift */,
+				C738262429EB08FC0087431D /* LayerInfoView.swift */,
+				C70E73402BBF15230042A932 /* LayersViewModel.swift */,
+			);
+			path = Layers;
 			sourceTree = "<group>";
 		};
 		C7AE688729F9B68A00C616BB /* Utility */ = {
 			isa = PBXGroup;
 			children = (
-				C7AE688829F9B6B300C616BB /* MapDataModel.swift */,
-				C7AE688A29F9B6C100C616BB /* SearchListViewModel.swift */,
+				C7AE688829F9B6B300C616BB /* MapViewModel.swift */,
+				C70E73342BBB3A540042A932 /* PanelViewModel.swift */,
 				C7AE688C29F9B6D200C616BB /* Utilities.swift */,
-				C7AE688E29F9B6E200C616BB /* PropertyInfoViewModel.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -182,6 +259,7 @@
 			packageProductDependencies = (
 				C70CB4AE29E6E58A00B6A157 /* ArcGIS */,
 				C70CB4B129E6E59700B6A157 /* ArcGISToolkit */,
+				C72A4B8E2BA8C89B00F994B9 /* SwiftUIIntrospect */,
 			);
 			productName = "imaps-mobile";
 			productReference = C70CB49B29E6E49D00B6A157 /* iMAPS Beta.app */;
@@ -195,7 +273,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1420;
-				LastUpgradeCheck = 1420;
+				LastUpgradeCheck = 1530;
 				TargetAttributes = {
 					C70CB49A29E6E49D00B6A157 = {
 						CreatedOnToolsVersion = 14.2;
@@ -214,6 +292,7 @@
 			packageReferences = (
 				C70CB4AD29E6E58A00B6A157 /* XCRemoteSwiftPackageReference "arcgis-maps-sdk-swift" */,
 				C70CB4B029E6E59700B6A157 /* XCRemoteSwiftPackageReference "arcgis-maps-sdk-swift-toolkit" */,
+				C72A4B8D2BA8C89B00F994B9 /* XCRemoteSwiftPackageReference "swiftui-introspect" */,
 			);
 			productRefGroup = C70CB49C29E6E49D00B6A157 /* Products */;
 			projectDirPath = "";
@@ -242,30 +321,41 @@
 			buildActionMask = 2147483647;
 			files = (
 				C70CB4D429E71A3C00B6A157 /* PhotoView.swift in Sources */,
+				C70E733B2BBF10A00042A932 /* SearchViewModel.swift in Sources */,
+				C70E73372BBF069B0042A932 /* Boundary.swift in Sources */,
 				C706EF2F29E8D84D005EEAE0 /* PropertyListView.swift in Sources */,
 				C7AE688B29F9B6C100C616BB /* SearchListViewModel.swift in Sources */,
+				C7692F2B2BBB27F8000DB711 /* LocationButtonView.swift in Sources */,
 				C7AE688F29F9B6E200C616BB /* PropertyInfoViewModel.swift in Sources */,
 				C70CB4A129E6E49D00B6A157 /* ContentView.swift in Sources */,
 				C70CB4B429E6E82700B6A157 /* SearchView.swift in Sources */,
+				C70E73312BBB2D060042A932 /* ButtonBarView.swift in Sources */,
 				C70CB4CE29E6F80E00B6A157 /* BuildingView.swift in Sources */,
 				C70CB4CC29E6F7FE00B6A157 /* SaleView.swift in Sources */,
 				C70CB4B629E6E83200B6A157 /* LayersView.swift in Sources */,
+				C70E73352BBB3A540042A932 /* PanelViewModel.swift in Sources */,
 				C70CB4C629E6F7D400B6A157 /* GeneralView.swift in Sources */,
 				C70CB4CA29E6F7F100B6A157 /* ValuationView.swift in Sources */,
 				C738262529EB08FC0087431D /* LayerInfoView.swift in Sources */,
 				C70CB49F29E6E49D00B6A157 /* imaps_mobileApp.swift in Sources */,
 				C70CB4B829E6E84000B6A157 /* BasemapView.swift in Sources */,
+				C70E733F2BBF10F70042A932 /* PropertyViewModel.swift in Sources */,
 				C7AE688D29F9B6D200C616BB /* Utilities.swift in Sources */,
 				C72D934529F574F6004815D9 /* SearchHistoryView.swift in Sources */,
 				C70CB4C829E6F7E300B6A157 /* OwnerView.swift in Sources */,
 				C70CB4BE29E6F76800B6A157 /* PropertyInfoView.swift in Sources */,
+				C70CA3D52BAC9E6F00866A34 /* BasemapItemView.swift in Sources */,
 				C70CB4D029E6F81500B6A157 /* DeedView.swift in Sources */,
+				C70E73392BBF10160042A932 /* BasemapViewModel.swift in Sources */,
 				C70CB4C029E6F77500B6A157 /* WebView.swift in Sources */,
 				C7AE689129F9B71100C616BB /* SubLayerView.swift in Sources */,
-				C7AE688929F9B6B300C616BB /* MapDataModel.swift in Sources */,
+				C70CA3DB2BADE1E700866A34 /* ServicesView.swift in Sources */,
+				C72688CE2BB3326D00EB0372 /* TaxInfoView.swift in Sources */,
+				C7AE688929F9B6B300C616BB /* MapViewModel.swift in Sources */,
 				C735C23729E9DFB3006A3767 /* AppSecrets.swift.masque.swift in Sources */,
-				C738262929ED800E0087431D /* PropertyLinksView.swift in Sources */,
 				C7AE688629F9B67400C616BB /* SearchItemView.swift in Sources */,
+				C70E73412BBF15230042A932 /* LayersViewModel.swift in Sources */,
+				C70CA3DD2BADE25700866A34 /* ServicesViewModel.swift in Sources */,
 				C7AE689329F9B74B00C616BB /* PropertyView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -306,9 +396,11 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -367,9 +459,11 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -395,19 +489,20 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "imaps-mobile/imaps_mobile.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 5;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"imaps-mobile/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = MRWDJLVR85;
+				DEVELOPMENT_TEAM = MRWDJLVR85;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "imaps-mobile/Info.plist";
-				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "our location is used to show your position on the map.";
+				INFOPLIST_KEY_CFBundleDisplayName = iMAPS;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.reference";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "your location is used to show your position on the map.";
 				INFOPLIST_KEY_NSLocationUsageDescription = "our location is used to show your position on the map.";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "our location is used to show your position on the map.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "your location is used to show your position on the map.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
@@ -417,17 +512,15 @@
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.1;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "raleighnc.gov.imaps-beta";
+				MARKETING_VERSION = 3.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.raleigh.iMapsMobile;
 				PRODUCT_NAME = "iMAPS Beta";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "raleigh development";
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -445,19 +538,20 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "imaps-mobile/imaps_mobile.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 5;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"imaps-mobile/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = MRWDJLVR85;
+				DEVELOPMENT_TEAM = MRWDJLVR85;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "imaps-mobile/Info.plist";
-				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "our location is used to show your position on the map.";
+				INFOPLIST_KEY_CFBundleDisplayName = iMAPS;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.reference";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "your location is used to show your position on the map.";
 				INFOPLIST_KEY_NSLocationUsageDescription = "our location is used to show your position on the map.";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "our location is used to show your position on the map.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "your location is used to show your position on the map.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
@@ -467,17 +561,15 @@
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.1;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "raleighnc.gov.imaps-beta";
+				MARKETING_VERSION = 3.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.raleigh.iMapsMobile;
 				PRODUCT_NAME = "iMAPS Beta";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "raleigh development";
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -528,6 +620,14 @@
 				kind = branch;
 			};
 		};
+		C72A4B8D2BA8C89B00F994B9 /* XCRemoteSwiftPackageReference "swiftui-introspect" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/siteline/swiftui-introspect";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.1.3;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -540,6 +640,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = C70CB4B029E6E59700B6A157 /* XCRemoteSwiftPackageReference "arcgis-maps-sdk-swift-toolkit" */;
 			productName = ArcGISToolkit;
+		};
+		C72A4B8E2BA8C89B00F994B9 /* SwiftUIIntrospect */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C72A4B8D2BA8C89B00F994B9 /* XCRemoteSwiftPackageReference "swiftui-introspect" */;
+			productName = SwiftUIIntrospect;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

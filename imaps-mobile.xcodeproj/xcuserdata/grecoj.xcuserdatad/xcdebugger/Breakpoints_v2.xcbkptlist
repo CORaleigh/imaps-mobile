@@ -7,189 +7,105 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "EB726E58-8A59-4160-A39D-ADFC79F6BD57"
+            uuid = "24C5AC68-A57D-498F-809A-A4D2586CFF6F"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "imaps-mobile/InfoView.swift"
+            filePath = "imaps-mobile/BasemapView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "23"
-            endingLineNumber = "23"
+            startingLineNumber = "105"
+            endingLineNumber = "105"
             landmarkName = "body"
             landmarkType = "24">
-            <Locations>
-               <Location
-                  uuid = "EB726E58-8A59-4160-A39D-ADFC79F6BD57 - 5a7f7a65af0137bc"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "iMAPS_Beta.InfoView.body.getter : some"
-                  moduleName = "iMAPS Beta"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/grecoj/github/imaps-mobile/imaps-mobile/InfoView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "26"
-                  endingLineNumber = "26"
-                  offsetFromSymbolStart = "460">
-               </Location>
-               <Location
-                  uuid = "EB726E58-8A59-4160-A39D-ADFC79F6BD57 - 757194795b57e489"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 () -&gt; SwiftUI.TupleView&lt;(SwiftUI.Text, iMAPS_Beta.PropertyLinksView, iMAPS_Beta.GeneralView, iMAPS_Beta.OwnerView, iMAPS_Beta.ValuationView, iMAPS_Beta.SaleView, iMAPS_Beta.DeedView, iMAPS_Beta.BuildingView, &lt;&lt;opaque return type of SwiftUI.View.onAppear(perform: Swift.Optional&lt;() -&gt; ()&gt;) -&gt; some&gt;&gt;.0)&gt; in iMAPS_Beta.InfoView.body.getter : some"
-                  moduleName = "iMAPS Beta"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/grecoj/github/imaps-mobile/imaps-mobile/InfoView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "23"
-                  endingLineNumber = "23"
-                  offsetFromSymbolStart = "1444">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "44E46F16-C13D-4C31-BF92-75845DE0C3B4"
+            uuid = "98C5699D-FDEB-4E05-BD7A-07270AF097BD"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "imaps-mobile/ContentViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "14"
-            endingLineNumber = "14"
-            landmarkName = "setLayerVisibility(map:layersLoaded:)"
-            landmarkType = "9">
-            <Locations>
-               <Location
-                  uuid = "44E46F16-C13D-4C31-BF92-75845DE0C3B4 - ad587e04b55a68e7"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "iMAPS_Beta.setLayerVisibility(map: ArcGIS.Map, layersLoaded: Swift.Bool) async -&gt; Swift.Bool"
-                  moduleName = "iMAPS Beta"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/grecoj/github/imaps-mobile/imaps-mobile/ContentViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "14"
-                  endingLineNumber = "14"
-                  offsetFromSymbolStart = "116">
-               </Location>
-               <Location
-                  uuid = "44E46F16-C13D-4C31-BF92-75845DE0C3B4 - 262418ec57777a3a"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(1) await resume partial function for iMAPS_Beta.setLayerVisibility(map: ArcGIS.Map, layersLoaded: Swift.Bool) async -&gt; Swift.Bool"
-                  moduleName = "iMAPS Beta"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/grecoj/github/imaps-mobile/imaps-mobile/ContentViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "14"
-                  endingLineNumber = "14"
-                  offsetFromSymbolStart = "36">
-               </Location>
-               <Location
-                  uuid = "44E46F16-C13D-4C31-BF92-75845DE0C3B4 - 9974fd7cbbf1a54e"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(2) suspend resume partial function for iMAPS_Beta.setLayerVisibility(map: ArcGIS.Map, layersLoaded: Swift.Bool) async -&gt; Swift.Bool"
-                  moduleName = "iMAPS Beta"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/grecoj/github/imaps-mobile/imaps-mobile/ContentViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "14"
-                  endingLineNumber = "14"
-                  offsetFromSymbolStart = "76">
-               </Location>
-               <Location
-                  uuid = "44E46F16-C13D-4C31-BF92-75845DE0C3B4 - 33e15aa83826eb3d"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(3) suspend resume partial function for iMAPS_Beta.setLayerVisibility(map: ArcGIS.Map, layersLoaded: Swift.Bool) async -&gt; Swift.Bool"
-                  moduleName = "iMAPS Beta"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/grecoj/github/imaps-mobile/imaps-mobile/ContentViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "14"
-                  endingLineNumber = "14"
-                  offsetFromSymbolStart = "76">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "5D3B471C-65B1-4E88-9987-7D096AF666E8"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "imaps-mobile/MapPopupView.swift"
+            filePath = "imaps-mobile/BasemapView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "21"
             endingLineNumber = "21"
             landmarkName = "body"
             landmarkType = "24">
-            <Locations>
-               <Location
-                  uuid = "5D3B471C-65B1-4E88-9987-7D096AF666E8 - 46277cae15eb4ad9"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "iMAPS_Beta.MapPopupView.body.getter : some"
-                  moduleName = "iMAPS Beta"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/grecoj/github/imaps-mobile/imaps-mobile/MapPopupView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "21"
-                  endingLineNumber = "21"
-                  offsetFromSymbolStart = "416">
-               </Location>
-               <Location
-                  uuid = "5D3B471C-65B1-4E88-9987-7D096AF666E8 - dbc4395feeafe547"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 () -&gt; SwiftUI.TupleView&lt;(Swift.Optional&lt;SwiftUI.HStack&lt;SwiftUI.TupleView&lt;(SwiftUI.Button&lt;SwiftUI.Image&gt;, SwiftUI.Text, SwiftUI.Button&lt;SwiftUI.Image&gt;)&gt;&gt;&gt;, Swift.Optional&lt;ArcGISToolkit.PopupView&gt;)&gt; in iMAPS_Beta.MapPopupView.body.getter : some"
-                  moduleName = "iMAPS Beta"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/grecoj/github/imaps-mobile/imaps-mobile/MapPopupView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "22"
-                  endingLineNumber = "22"
-                  offsetFromSymbolStart = "520">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "EF9E8F08-C83F-4788-A4E6-2096782E5CBC"
+            uuid = "E0EB9F83-3046-4A1C-95BA-9CDE0857FF78"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "imaps-mobile/PropertyInfoViews/ServicesView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "266"
+            endingLineNumber = "266">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "4509F7ED-1359-458E-9B1C-AD355AAA38B4"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "imaps-mobile/PropertyInfoViews/ServicesView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "272"
+            endingLineNumber = "272">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "235BD504-3DA0-48EC-B03A-3EF0BBF7DB37"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "imaps-mobile/PropertyInfoViews/ServicesView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "283"
+            endingLineNumber = "283">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "6ABD5735-6DD9-4033-AB18-B70C3951F1A3"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "imaps-mobile/MapPopupView.swift"
+            filePath = "imaps-mobile/PropertyInfoViews/ServicesView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "48"
-            endingLineNumber = "48"
+            startingLineNumber = "89"
+            endingLineNumber = "89"
+            landmarkName = "body"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "2EDA1CD4-5878-4D0A-B6DC-0DD975325175"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "imaps-mobile/Basemap/BasemapView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "43"
+            endingLineNumber = "43"
             landmarkName = "body"
             landmarkType = "24">
          </BreakpointContent>
