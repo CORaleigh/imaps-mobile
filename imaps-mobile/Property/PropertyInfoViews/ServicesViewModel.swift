@@ -50,10 +50,13 @@ func queryServices(for layer: FeatureLayer, propertyFeature: Feature) async thro
         params.geometry = buffered
         
         let queryResult = try? await (layer.featureTable! as? ServiceFeatureTable)!.queryFeatures(using: params, queryFeatureFields: .loadAll )
-        let queryResultFeatures = Array(queryResult!.features())
-        if !queryResultFeatures.isEmpty {
-            results = queryResultFeatures
+        if queryResult != nil {
+            let queryResultFeatures = Array(queryResult!.features())
+            if !queryResultFeatures.isEmpty {
+                results = queryResultFeatures
+            }
         }
+
     }
     return results
     

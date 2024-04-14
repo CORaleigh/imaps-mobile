@@ -37,11 +37,15 @@
 		C70E733F2BBF10F70042A932 /* PropertyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70E733E2BBF10F70042A932 /* PropertyViewModel.swift */; };
 		C70E73412BBF15230042A932 /* LayersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70E73402BBF15230042A932 /* LayersViewModel.swift */; };
 		C72688CE2BB3326D00EB0372 /* TaxInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72688CD2BB3326D00EB0372 /* TaxInfoView.swift */; };
-		C72A4B8F2BA8C89B00F994B9 /* SwiftUIIntrospect in Frameworks */ = {isa = PBXBuildFile; productRef = C72A4B8E2BA8C89B00F994B9 /* SwiftUIIntrospect */; };
 		C72D934529F574F6004815D9 /* SearchHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72D934429F574F6004815D9 /* SearchHistoryView.swift */; };
 		C735C23729E9DFB3006A3767 /* AppSecrets.swift.masque.swift in Sources */ = {isa = PBXBuildFile; fileRef = C735C23629E9DFB3006A3767 /* AppSecrets.swift.masque.swift */; };
 		C738262529EB08FC0087431D /* LayerInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C738262429EB08FC0087431D /* LayerInfoView.swift */; };
 		C7692F2B2BBB27F8000DB711 /* LocationButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7692F2A2BBB27F8000DB711 /* LocationButtonView.swift */; };
+		C78B7C2B2BC879AC0098A373 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = C7692F0C2BB47170000DB711 /* PrivacyInfo.xcprivacy */; };
+		C78B7C2E2BC8A5410098A373 /* PanelContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78B7C2D2BC8A5410098A373 /* PanelContentView.swift */; };
+		C78B7C302BC8A8E10098A373 /* PopupContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78B7C2F2BC8A8E00098A373 /* PopupContentView.swift */; };
+		C78B7C322BC8B2BA0098A373 /* PopupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78B7C312BC8B2BA0098A373 /* PopupViewModel.swift */; };
+		C78B7C342BC971270098A373 /* WebMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78B7C332BC971270098A373 /* WebMapView.swift */; };
 		C7AE688629F9B67400C616BB /* SearchItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7AE688529F9B67400C616BB /* SearchItemView.swift */; };
 		C7AE688929F9B6B300C616BB /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7AE688829F9B6B300C616BB /* MapViewModel.swift */; };
 		C7AE688B29F9B6C100C616BB /* SearchListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7AE688A29F9B6C100C616BB /* SearchListViewModel.swift */; };
@@ -87,6 +91,10 @@
 		C738262429EB08FC0087431D /* LayerInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayerInfoView.swift; sourceTree = "<group>"; };
 		C7692F0C2BB47170000DB711 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		C7692F2A2BBB27F8000DB711 /* LocationButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationButtonView.swift; sourceTree = "<group>"; };
+		C78B7C2D2BC8A5410098A373 /* PanelContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanelContentView.swift; sourceTree = "<group>"; };
+		C78B7C2F2BC8A8E00098A373 /* PopupContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupContentView.swift; sourceTree = "<group>"; };
+		C78B7C312BC8B2BA0098A373 /* PopupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupViewModel.swift; sourceTree = "<group>"; };
+		C78B7C332BC971270098A373 /* WebMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebMapView.swift; sourceTree = "<group>"; };
 		C7A0B58429FAD08C00F1E56F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		C7AE688529F9B67400C616BB /* SearchItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchItemView.swift; sourceTree = "<group>"; };
 		C7AE688829F9B6B300C616BB /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
@@ -102,7 +110,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C72A4B8F2BA8C89B00F994B9 /* SwiftUIIntrospect in Frameworks */,
 				C70CB4B229E6E59700B6A157 /* ArcGISToolkit in Frameworks */,
 				C70CB4AF29E6E58A00B6A157 /* ArcGIS in Frameworks */,
 			);
@@ -135,6 +142,9 @@
 				C70CB4A429E6E49E00B6A157 /* imaps_mobile.entitlements */,
 				C70CB4A529E6E49E00B6A157 /* Preview Content */,
 				C70CB4A029E6E49D00B6A157 /* ContentView.swift */,
+				C78B7C332BC971270098A373 /* WebMapView.swift */,
+				C78B7C2D2BC8A5410098A373 /* PanelContentView.swift */,
+				C78B7C2F2BC8A8E00098A373 /* PopupContentView.swift */,
 				C70E73452BBF181D0042A932 /* Search */,
 				C70E73422BBF17AB0042A932 /* Property */,
 				C70E73432BBF17CF0042A932 /* Basemap */,
@@ -236,6 +246,7 @@
 				C7AE688829F9B6B300C616BB /* MapViewModel.swift */,
 				C70E73342BBB3A540042A932 /* PanelViewModel.swift */,
 				C7AE688C29F9B6D200C616BB /* Utilities.swift */,
+				C78B7C312BC8B2BA0098A373 /* PopupViewModel.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -259,7 +270,6 @@
 			packageProductDependencies = (
 				C70CB4AE29E6E58A00B6A157 /* ArcGIS */,
 				C70CB4B129E6E59700B6A157 /* ArcGISToolkit */,
-				C72A4B8E2BA8C89B00F994B9 /* SwiftUIIntrospect */,
 			);
 			productName = "imaps-mobile";
 			productReference = C70CB49B29E6E49D00B6A157 /* iMAPS Beta.app */;
@@ -292,7 +302,6 @@
 			packageReferences = (
 				C70CB4AD29E6E58A00B6A157 /* XCRemoteSwiftPackageReference "arcgis-maps-sdk-swift" */,
 				C70CB4B029E6E59700B6A157 /* XCRemoteSwiftPackageReference "arcgis-maps-sdk-swift-toolkit" */,
-				C72A4B8D2BA8C89B00F994B9 /* XCRemoteSwiftPackageReference "swiftui-introspect" */,
 			);
 			productRefGroup = C70CB49C29E6E49D00B6A157 /* Products */;
 			projectDirPath = "";
@@ -308,6 +317,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C78B7C2B2BC879AC0098A373 /* PrivacyInfo.xcprivacy in Resources */,
 				C70CB4A729E6E49E00B6A157 /* Preview Assets.xcassets in Resources */,
 				C70CB4A329E6E49E00B6A157 /* Assets.xcassets in Resources */,
 			);
@@ -321,6 +331,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C70CB4D429E71A3C00B6A157 /* PhotoView.swift in Sources */,
+				C78B7C2E2BC8A5410098A373 /* PanelContentView.swift in Sources */,
 				C70E733B2BBF10A00042A932 /* SearchViewModel.swift in Sources */,
 				C70E73372BBF069B0042A932 /* Boundary.swift in Sources */,
 				C706EF2F29E8D84D005EEAE0 /* PropertyListView.swift in Sources */,
@@ -349,6 +360,9 @@
 				C70E73392BBF10160042A932 /* BasemapViewModel.swift in Sources */,
 				C70CB4C029E6F77500B6A157 /* WebView.swift in Sources */,
 				C7AE689129F9B71100C616BB /* SubLayerView.swift in Sources */,
+				C78B7C302BC8A8E10098A373 /* PopupContentView.swift in Sources */,
+				C78B7C342BC971270098A373 /* WebMapView.swift in Sources */,
+				C78B7C322BC8B2BA0098A373 /* PopupViewModel.swift in Sources */,
 				C70CA3DB2BADE1E700866A34 /* ServicesView.swift in Sources */,
 				C72688CE2BB3326D00EB0372 /* TaxInfoView.swift in Sources */,
 				C7AE688929F9B6B300C616BB /* MapViewModel.swift in Sources */,
@@ -490,7 +504,7 @@
 				CODE_SIGN_ENTITLEMENTS = "imaps-mobile/imaps_mobile.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 16;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"imaps-mobile/Preview Content\"";
 				DEVELOPMENT_TEAM = MRWDJLVR85;
@@ -539,7 +553,7 @@
 				CODE_SIGN_ENTITLEMENTS = "imaps-mobile/imaps_mobile.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 16;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"imaps-mobile/Preview Content\"";
 				DEVELOPMENT_TEAM = MRWDJLVR85;
@@ -620,14 +634,6 @@
 				kind = branch;
 			};
 		};
-		C72A4B8D2BA8C89B00F994B9 /* XCRemoteSwiftPackageReference "swiftui-introspect" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/siteline/swiftui-introspect";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.1.3;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -640,11 +646,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = C70CB4B029E6E59700B6A157 /* XCRemoteSwiftPackageReference "arcgis-maps-sdk-swift-toolkit" */;
 			productName = ArcGISToolkit;
-		};
-		C72A4B8E2BA8C89B00F994B9 /* SwiftUIIntrospect */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = C72A4B8D2BA8C89B00F994B9 /* XCRemoteSwiftPackageReference "swiftui-introspect" */;
-			productName = SwiftUIIntrospect;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

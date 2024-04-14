@@ -23,42 +23,39 @@ class PropertyInfoViewModel: ObservableObject {
         let result = try? await table.queryFeatures(using: params, queryFeatureFields: .loadAll)
         completion((result?.features())!)
     }
-    func getDeeds(for table: ServiceFeatureTable, feature: ArcGISFeature?, completion: @escaping ([Feature]) -> Void) async {
-        let relInfo = table.layerInfo?.relationshipInfos.filter { $0.name.contains("BOOK") }
-        let relatedParams  = RelatedQueryParameters(relationshipInfo: (relInfo?.first)! as RelationshipInfo)
-        let relatedResults = try? await table.queryRelatedFeatures(to: feature!, using: relatedParams, queryFeatureFields: .loadAll)
+    func getDeeds(for table: ServiceFeatureTable, feature: ArcGISFeature, relationshipInfo: RelationshipInfo, completion: @escaping ([Feature]) -> Void) async {
+        let relatedParams  = RelatedQueryParameters(relationshipInfo: relationshipInfo)
+        let relatedResults = try? await table.queryRelatedFeatures(to: feature, using: relatedParams, queryFeatureFields: .loadAll)
         relatedResults?.forEach({ result in
             if ((result.relatedTable?.tableName.contains("Books")) != nil) {
                 completion(Array(result.features()))
             }
         })
     }
-    func getPhotos(for table: ServiceFeatureTable, feature: ArcGISFeature?, completion: @escaping (AnySequence<Feature>) -> Void) async {
-        let relInfo = table.layerInfo?.relationshipInfos.filter { $0.name.contains("PHOTOS") }
-        let relatedParams  = RelatedQueryParameters(relationshipInfo: (relInfo?.first)! as RelationshipInfo)
+    func getPhotos(for table: ServiceFeatureTable, feature: ArcGISFeature, relationshipInfo: RelationshipInfo, completion: @escaping (AnySequence<Feature>) -> Void) async {
+        let relatedParams  = RelatedQueryParameters(relationshipInfo: relationshipInfo)
         relatedParams.addOrderByField(OrderBy(fieldName: "DATECREATED", sortOrder: .descending))
-        let relatedResults = try? await table.queryRelatedFeatures(to: feature!, using: relatedParams, queryFeatureFields: .loadAll)
+        let relatedResults = try? await table.queryRelatedFeatures(to: feature, using: relatedParams, queryFeatureFields: .loadAll)
         relatedResults?.forEach({ result in
             if ((result.relatedTable?.tableName.contains("Photos")) != nil) {
                 completion(result.features())
             }
         })
     }
-    func getProperty(id: Int, table: ArcGISFeatureTable, completion: @escaping (Feature?) -> Void) async {
+    func getProperty(id: Int, table: ArcGISFeatureTable, relationshipInfo: RelationshipInfo, completion: @escaping (Feature?) -> Void) async {
         let params = QueryParameters()
         params.addObjectID(id)
-        await queryProperty(for: table, params: params) { features in
+        await queryProperty(for: table, params: params, relationshipInfo: relationshipInfo) { features in
             let feature = features.first(where: {$0.geometry != nil})
             completion(feature)
         }
     }
     
-    func queryProperty(for table: ArcGISFeatureTable, params: QueryParameters, completion: @escaping (AnySequence<Feature>) -> Void) async {
+    func queryProperty(for table: ArcGISFeatureTable, params: QueryParameters, relationshipInfo: RelationshipInfo, completion: @escaping (AnySequence<Feature>) -> Void) async {
         let result = try? await table.queryFeatures(using: params)
         result?.features().forEach({ feature in
             Task {
-                let relInfo = table.layerInfo?.relationshipInfos.filter { $0.name.contains("PROPERTY") }
-                let relatedParams  = RelatedQueryParameters(relationshipInfo: (relInfo?.first)! as RelationshipInfo)
+                let relatedParams  = RelatedQueryParameters(relationshipInfo: relationshipInfo)
                 let relatedResults = try? await table.queryRelatedFeatures(to: feature as! ArcGISFeature, using: relatedParams)
                 
                 relatedResults?.forEach({ result in

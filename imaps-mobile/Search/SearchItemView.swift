@@ -1,20 +1,28 @@
 import SwiftUI
-
+import ArcGIS
 struct SearchItemView: View {
-    @EnvironmentObject var mapViewModel: MapViewModel
-
+    @ObservedObject var mapViewModel: MapViewModel
+    @ObservedObject var panelVM: PanelViewModel
+    
     @State var text: String
     @State var group: SearchGroup
     var body: some View {
         NavigationLink(text) {
-            PropertyView(viewModel: ViewModel(text: text), group: group, source: .search)
-                .environmentObject(self.mapViewModel)
+            PropertyView(viewModel: ViewModel(text: text), group: group, source: .search,
+                         mapViewModel: self.mapViewModel, panelVM: self.panelVM
+            )
         }
     }
 }
-//
-//struct SearchItemView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        SearchItemView()
-//    }
-//}
+
+struct SearchItemView_Previews: PreviewProvider {
+    static var previews: some View {
+        SearchItemView(mapViewModel: MapViewModel(
+            map: Map (
+                item: PortalItem(portal: .arcGISOnline(connection: .anonymous), id: PortalItem.ID("95092428774c4b1fb6a3b6f5fed9fbc4")!)
+            )
+        ), panelVM: PanelViewModel(isPresented: false), text: "222 W HARGETT ST", group: SearchGroup(field: "SITE_ADDRESS", alias: "ADDRESS", features: [SearchItem(feature: SearchFeature(attributes: Attributes(siteAddress: "SITE_ADDRESS", fullStreetName: "FULL_STREET_NAME", owner: "OWNER", reid: "REID", pin: "PIN")))]))
+    }
+}
+
+

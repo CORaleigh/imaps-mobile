@@ -9,12 +9,16 @@ import SwiftUI
 import ArcGIS
 @main
 struct imaps_mobileApp: App {
+    @StateObject var networkMonitor = NetworkMonitor()
+
     init() {
         license()
     }
     var body: some SwiftUI.Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(networkMonitor)
+
         }
     }
 }

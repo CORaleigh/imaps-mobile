@@ -2,9 +2,10 @@ import SwiftUI
 import ArcGIS
 
 struct PropertyListView: View, Equatable {
-    @EnvironmentObject var panelVM: PanelViewModel
+    @ObservedObject var mapViewModel: MapViewModel
+    @ObservedObject var panelVM: PanelViewModel
     
-    @State var features: [Feature]
+    @ObservedObject var propertyVM: PropertyViewModel
     @State var fromSearch: Bool
     static func == (lhs: PropertyListView, rhs: PropertyListView) -> Bool {
         return true
@@ -12,15 +13,10 @@ struct PropertyListView: View, Equatable {
     
     var body: some View {
         List {
-            ForEach(0..<features.count, id:\.self) { i in
-                let feature: Feature = features[i]
+            ForEach(0..<propertyVM.features.count, id:\.self) { i in
+                let feature: PropertyFeature = propertyVM.features[i]
                 VStack {
-                    NavigationLink(destination: {PropertyInfoView(feature: FeatureViewModel(feature: feature), fromSearch: fromSearch, fromList: false)}, label: {
-                        VStack (alignment: .leading) {
-                            Text(feature.attributes["SITE_ADDRESS"] as! String)
-                            Text(feature.attributes["OWNER"] as! String)
-                        }
-                    }).isDetailLink(false)
+                    PropertyListItemView(feature: feature, mapViewModel: mapViewModel, panelVM: panelVM)
                 }
             }
         }
@@ -37,6 +33,18 @@ struct PropertyListView: View, Equatable {
                 })
             }
         }
+        .onReceive(panelVM.$selectedPinNum) { selectedPinNum in
+            propertyVM.features.forEach { feature in
+                feature.isPresented = false
+            }
+            mapViewModel.graphics.removeAllGraphics()
+
+        }
+        .onReceive(propertyVM.$features) { features in
+            propertyVM.features.forEach { feature in
+                feature.isPresented = false
+            }
+        }
     }
     
     
@@ -49,3 +57,28 @@ struct PropertyListView: View, Equatable {
 //        PropertyListView()
 //    }
 //}
+
+
+struct PropertyListItemView: View {
+    @StateObject var feature: PropertyFeature
+    let mapViewModel: MapViewModel
+    let panelVM: PanelViewModel
+    var body: some View {
+        Button {
+            feature.isPresented = true
+        }
+        label: {
+            VStack (alignment: .leading) {
+                let address = (feature.feature.attributes["SITE_ADDRESS"] as? String ?? "") + " " + (feature.feature.attributes["STMISC"] as? String ?? "")
+                Text(address)
+                Text(feature.feature.attributes["OWNER"] as! String)
+            }
+        }
+        .navigationDestination(isPresented: $feature.isPresented) {
+            PropertyInfoView(mapViewModel: mapViewModel, panelVM: panelVM, feature: FeatureViewModel(feature: feature.feature))
+            //                    NavigationLink(destination: {PropertyInfoView(mapViewModel: mapViewModel, panelVM: panelVM, feature:
+            //                    }).isDetailLink(false)
+        }
+        .buttonStyle(.plain)
+    }
+}

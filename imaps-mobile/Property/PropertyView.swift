@@ -3,46 +3,32 @@ import ArcGIS
 
 
 struct PropertyView: View, Equatable {
-    @EnvironmentObject var mapViewModel : MapViewModel
-    @EnvironmentObject var panelVM: PanelViewModel
-    
     @ObservedObject var viewModel: ViewModel = ViewModel(text: "")
-    
-    @StateObject private var propertyVM: PropertyViewModel = PropertyViewModel(feature: nil, features: [])
-    
     @State var group: SearchGroup
     @State var source: PropertySource
+    @ObservedObject var mapViewModel : MapViewModel
+    @ObservedObject var panelVM: PanelViewModel
+    @StateObject private var propertyVM: PropertyViewModel = PropertyViewModel(feature: nil, features: [])
     
     static func == (lhs: PropertyView, rhs: PropertyView) -> Bool {
         return lhs.viewModel.text == rhs.viewModel.text
     }
     var body: some View {
         ZStack{
-            Color.clear.ignoresSafeArea()
             if (self.propertyVM.features.count == 1) {
-                NavigationStack {
-                    
-                    ScrollView {
-                        PropertyInfoView(feature: FeatureViewModel(feature:self.propertyVM.feature!), fromSearch: true, fromList: false)
-                            .environmentObject(mapViewModel)
-                            .environmentObject(panelVM)
-                        
+                ScrollView {
+                    if self.propertyVM.feature != nil {
+                        PropertyInfoView(mapViewModel: mapViewModel, panelVM: panelVM, feature:FeatureViewModel(feature:self.propertyVM.feature!))
                     }
-                    
-                    
                 }
-                
             }
             
             if (self.propertyVM.features.count > 1) {
-                NavigationStack {
-                    PropertyListView(features: self.propertyVM.features, fromSearch: true)
-                        .environmentObject(panelVM)
-                    
-                }
+                PropertyListView(mapViewModel: mapViewModel, panelVM: self.panelVM, propertyVM: self.propertyVM, fromSearch: true)
                 
             }
         }
+
         .onReceive(viewModel.$text) { text in
             Task {
                 guard let table: ServiceFeatureTable =  mapViewModel.getCondoTable(map: mapViewModel.map) else { return }
@@ -55,15 +41,15 @@ struct PropertyView: View, Equatable {
                             
                             guard let f = data.first(where: {$0.attributes["OBJECTID"] as? Int64 != nil}) else { return }
                             self.propertyVM.feature  = f
-                            
+                            self.panelVM.selectedPinNum = f.attributes["PIN_NUM"] as? String ?? ""
                             data.forEach {
                                 feature in
-                                self.propertyVM.features.append(feature)
+                                self.propertyVM.features.append(PropertyFeature(feature: feature))
                             }
                         } else {
                             data.forEach {
                                 feature in
-                                self.propertyVM.features.append(feature)
+                                self.propertyVM.features.append(PropertyFeature(feature: feature))
                             }
                         }
                         
@@ -88,10 +74,15 @@ struct PropertyView: View, Equatable {
 }
 
 
-//struct PropertyView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        PropertyView(group: SearchGroup(field: "SITE_ADDRESS", alias: "Site Address", features: []), source: .search)
-//
-//    }
-//}
+struct PropertyView_Previews: PreviewProvider {
+    static var previews: some View {
+        PropertyView(viewModel: ViewModel(text: ""),  group: SearchGroup(field: "SITE_ADDRESS", alias: "Site Address", features: []), source: .search,mapViewModel: MapViewModel(
+            map: Map (
+                item: PortalItem(portal: .arcGISOnline(connection: .anonymous), id: PortalItem.ID("95092428774c4b1fb6a3b6f5fed9fbc4")!)
+            )
+        ), panelVM: PanelViewModel(isPresented: false))
+        
+    }
+}
+
 

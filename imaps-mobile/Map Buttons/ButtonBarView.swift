@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct ButtonBarView: View {
-    @EnvironmentObject var panelVM: PanelViewModel
+    @StateObject var panelVM: PanelViewModel
     var body: some View {
         VStack (spacing: 0) {
             Button {
@@ -85,5 +85,5 @@ struct ButtonBarView: View {
 }
 
 #Preview {
-    ButtonBarView()
+    ButtonBarView(panelVM: PanelViewModel(isPresented: false))
 }

@@ -2,8 +2,8 @@ import SwiftUI
 import ArcGIS
 
 struct BasemapView: View, Equatable {
-    @EnvironmentObject var mapViewModel: MapViewModel
-    @EnvironmentObject var panelVM: PanelViewModel
+    @ObservedObject var mapViewModel: MapViewModel
+    @ObservedObject var panelVM: PanelViewModel
     @ObservedObject  var basemapVM: BasemapViewModel
     @State var basemaps: [PortalItem] = [];
     @State var selectedItem: BasemapType?
@@ -42,11 +42,14 @@ struct BasemapView: View, Equatable {
                                                 }).first
                                                 if (tiled?.spatialReference?.wkid != mapViewModel.map.spatialReference?.wkid) {
                                                     if (raster?.item != nil) {
+                                                        
                                                         let newRaster = RasterLayer(item: (raster?.item)!)
-                                                        //raster?.maxScale = 1000000
-                                                        raster?.minScale = nil
+                                                        newRaster.maxScale = nil
+                                                        newRaster.minScale = nil
                                                         let newBasemap = Basemap(baseLayer: newRaster.clone())
-                                                        newBasemap.addReferenceLayer(reference!.clone())
+                                                        if reference != nil {
+                                                            newBasemap.addReferenceLayer(reference!.clone())
+                                                        }
                                                         newBasemap.name = basemap.title
                                                         mapViewModel.map.basemap = newBasemap
                                                         UserDefaults.standard.set(newBasemap.toJSON(), forKey: "basemap")
@@ -86,6 +89,9 @@ struct BasemapView: View, Equatable {
                 .pickerStyle(.segmented)
                 
                 .onAppear {
+                    
+                    UIScrollView.appearance().backgroundColor = UIColor(Color("Background"))
+                    
                     let boundary = Boundary().boundary
                     self.basemapVM.objectWillChange.send()
                     
@@ -140,11 +146,8 @@ struct BasemapView: View, Equatable {
                         
                     }
                 }
+                
             }
-            .background(Color("Background"))
-            
-            .navigationTitle("Basemaps")
-            .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem (placement: .navigationBarTrailing){
                     Button(action: {
@@ -154,14 +157,20 @@ struct BasemapView: View, Equatable {
                     })
                 }
             }
+            .navigationTitle("Basemaps")
+            .navigationBarTitleDisplayMode(.inline)
             
         }
     }
     
 }
 
-//struct BasemapView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        BasemapView()
-//    }
-//}
+struct BasemapView_Previews: PreviewProvider {
+    static var previews: some View {
+        BasemapView(mapViewModel: MapViewModel(
+            map: Map (
+                item: PortalItem(portal: .arcGISOnline(connection: .anonymous), id: PortalItem.ID("95092428774c4b1fb6a3b6f5fed9fbc4")!)
+            )
+        ), panelVM: PanelViewModel(isPresented: false), basemapVM: BasemapViewModel(selected: .Maps, center: Point(latitude: 0, longitude: 0)))
+    }
+}

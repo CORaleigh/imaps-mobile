@@ -15,3 +15,11 @@ struct BasemapItemView: View {
             .cornerRadius(15)
     }
 }
+
+
+struct BasemapItemView_Previews: PreviewProvider {
+    static var previews: some View {
+        BasemapItemView(basemap: PortalItem(portal: .arcGISOnline(connection: .anonymous), id: PortalItem.ID("02d50d24991747538e218e0a5806e9b3")!))
+        
+    }
+}

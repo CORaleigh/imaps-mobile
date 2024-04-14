@@ -2,54 +2,53 @@ import SwiftUI
 import ArcGIS
 
 struct ServicesView: View, Equatable {
-    @EnvironmentObject var mapViewModel: MapViewModel
-    @EnvironmentObject var propertyInfoViewModel : PropertyInfoViewModel
-    @ObservedObject var feature: FeatureViewModel
+    @ObservedObject var mapViewModel: MapViewModel
+    @ObservedObject var propertyInfoViewModel : PropertyInfoViewModel
     @State  var layers: [FeatureLayer]
     @State var selectedCategory: Int = 0
     @State var layersReturned: Int = 0
     @ObservedObject var viewModel: ServicesViewModel = ServicesViewModel(services:
-                                                                    [
-                                                                        ServiceCategory(title: "Election", services: [
-                                                                            Service(layerName: "Precincts", title: "Voting Precinct", fields: ["PRECINCT"], text: [""], expression: "{0}", capitalize: true),
-                                                                            Service(layerName: "US House of Representatives Districts", title: "US House of Representatives", fields: ["DISTRICT", "NAME"], text: [""], expression: "Distict {0}\n{1}", capitalize: true),
-                                                                            Service(layerName: "NC Senate Districts", title: "NC Senate", fields: ["DISTRICT", "NAME"], text: [""], expression: "Distict {0}\n{1}", capitalize: true),
-                                                                            Service(layerName: "School Board Districts", title: "School Board",  fields: ["DISTRICT", "NAME"], text: [""], expression: "Distict {0}\n{1}", capitalize: true),
-                                                                            Service(layerName: "Board of Commissioners Districts", title: "Board of Commissioners", fields: ["DISTRICT", "COMM_NAME"], text: [""], expression: "Distict {0}\n{1}", capitalize: true),
-                                                                            Service(layerName: "District Court Judicial Districts", title: "District Court", fields: ["DISTRICT"], text: [""], expression: "District {0}", capitalize: true),
-                                                                            Service(layerName: "Raleigh City Council", title: "Raleigh City Council", fields: ["COUNCIL_DIST", "COUNCIL_PERSON"], text: [""], expression: "Distict {0}\n{1}", capitalize: true),
-                                                                            Service(layerName: "Cary Town Council", title: "Cary Town Council", fields: ["NAME", "REPNAME"], text: [""], expression: "District {0}\n{1}", capitalize: true),
-                                                                            
-                                                                        ]),
-                                                                        ServiceCategory(title: "Planning", services: [
-                                                                            Service(layerName: "Corporate Limits", title: "City Limit", fields: ["LONGNAME"], text: [""], expression: "{0}", capitalize: true),
-                                                                            Service(layerName: "Planning Jurisdictions", title: "Planning Jurisdiction", fields: ["JURISDICTION"], text: [""], expression: "{0}", capitalize: true),
-                                                                            Service(layerName: "Subdivisions", title: "Subdivision", fields: ["NAME"], text: [""], expression: "{0}", capitalize: true),
-                                                                            Service(layerName: "Raleigh Zoning", title: "Zoning", fields: ["ZONING"], text: [""], expression: "{0}", capitalize: false),
-                                                                            Service(layerName: "Future Landuse", title: "Future Land Use", fields: ["Land_Use"], text: [""], expression: "{0}", capitalize: true),
-                                                                            Service(layerName: "Cary Zoning", title: "Zoning", fields: ["ZONECLASS"], text: [""], expression: "{0}", capitalize: false),
-                                                                            Service(layerName: "Angier Zoning", title: "Zoning", fields: ["CLASS"], text: [""], expression: "{0}", capitalize: false),
-                                                                            Service(layerName: "Apex Zoning", title: "Zoning", fields: ["DISTRICT"], text: [""], expression: "{0}", capitalize: false),
-                                                                            Service(layerName: "County Zoning", title: "Zoning", fields: ["CLASS"], text: [""], expression: "{0}", capitalize: false),
-                                                                            Service(layerName: "Fuquay-Varina Zoning", title: "Zoning", fields: ["CLASS"], text: [""], expression: "{0}", capitalize: false),
-                                                                            Service(layerName: "Garner Zoning", title: "Zoning", fields: ["ZONING_NAME", "CLASS"], text: [""], expression: "{0} ({1})", capitalize: false),
-                                                                            Service(layerName: "Holly Springs Zoning", title: "Zoning", fields: ["CLASS"], text: [""], expression: "{0}", capitalize: false),
-                                                                            Service(layerName: "Knightdale Zoning", title: "Zoning", fields: ["ZONEDESC", "ZONECLASS"], text: [""], expression: "{0} ({1})", capitalize: false),
-                                                                            Service(layerName: "Morrisville Zoning", title: "Zoning", fields: ["CLASS"], text: [""], expression: "{0}", capitalize: false),
-                                                                            Service(layerName: "Rolesville Zoning", title: "Zoning", fields: ["CLASS"], text: [""], expression: "{0}", capitalize: false),
-                                                                            Service(layerName: "Wake Forest Zoning", title: "Zoning", fields: ["ZoneDefine", "ZoneLabel"], text: [""], expression: "{0} ({1})", capitalize: false),
-                                                                            Service(layerName: "Wendell Zoning", title: "Zoning", fields: ["CLASS"], text: [""], expression: "{0}", capitalize: false),
-                                                                            Service(layerName: "Zebulon Zoning", title: "Zoning", fields: ["CLASS"], text: [""], expression: "{0}", capitalize: false)
-                                                                        ]),
-                                                                        ServiceCategory(title: "Solid Waste", services: [
-                                                                            Service(layerName: "Raleigh Solid Waste Collection Routes", title: "Solid Waste Collection", fields: ["SERVICEDAY", "SER_WEEK"], text: [""], expression: "Service Day {0}\nService Week {1}", capitalize: true)
-                                                                        ]),
-                                                                        ServiceCategory(title: "Environmental", services: [
-                                                                            Service(layerName: "Soils", title: "Soils", fields: ["DESCRIPTION", "MAPUNITSYMBOL"], text: [""], expression: "{0} ({1})", capitalize: false),
-                                                                            Service(layerName: "Flood Hazard Areas (Floodplains)", title: "Flood Hazard Area", fields: ["ZONE_SUBTY"], text: [""], expression: "{0}", capitalize: false)
-                                                                        ])
-                                                                        
-                                                                    ]
+                                                                            [
+                                                                                ServiceCategory(title: "Election", services: [
+                                                                                    Service(layerName: "Precincts", title: "Voting Precinct", fields: ["PRECINCT"], text: [""], expression: "{0}", capitalize: true),
+                                                                                    Service(layerName: "US House of Representatives Districts", title: "US House of Representatives", fields: ["DISTRICT", "NAME"], text: [""], expression: "Distict {0}\n{1}", capitalize: true),
+                                                                                    Service(layerName: "NC Senate Districts", title: "NC Senate", fields: ["DISTRICT", "NAME"], text: [""], expression: "Distict {0}\n{1}", capitalize: true),
+                                                                                    Service(layerName: "School Board Districts", title: "School Board",  fields: ["DISTRICT", "NAME"], text: [""], expression: "Distict {0}\n{1}", capitalize: true),
+                                                                                    Service(layerName: "Board of Commissioners Districts", title: "Board of Commissioners", fields: ["DISTRICT", "COMM_NAME"], text: [""], expression: "Distict {0}\n{1}", capitalize: true),
+                                                                                    Service(layerName: "District Court Judicial Districts", title: "District Court", fields: ["DISTRICT"], text: [""], expression: "District {0}", capitalize: true),
+                                                                                    Service(layerName: "Raleigh City Council", title: "Raleigh City Council", fields: ["COUNCIL_DIST", "COUNCIL_PERSON"], text: [""], expression: "Distict {0}\n{1}", capitalize: true),
+                                                                                    Service(layerName: "Cary Town Council", title: "Cary Town Council", fields: ["NAME", "REPNAME"], text: [""], expression: "District {0}\n{1}", capitalize: true),
+                                                                                    
+                                                                                ]),
+                                                                                ServiceCategory(title: "Planning", services: [
+                                                                                    Service(layerName: "Corporate Limits", title: "City Limit", fields: ["LONGNAME"], text: [""], expression: "{0}", capitalize: true),
+                                                                                    Service(layerName: "Planning Jurisdictions", title: "Planning Jurisdiction", fields: ["JURISDICTION"], text: [""], expression: "{0}", capitalize: true),
+                                                                                    Service(layerName: "Subdivisions", title: "Subdivision", fields: ["NAME"], text: [""], expression: "{0}", capitalize: true),
+                                                                                    Service(layerName: "Raleigh Zoning", title: "Zoning", fields: ["ZONING"], text: [""], expression: "{0}", capitalize: false),
+                                                                                    Service(layerName: "Future Landuse", title: "Future Land Use", fields: ["Land_Use"], text: [""], expression: "{0}", capitalize: true),
+                                                                                    Service(layerName: "Cary Zoning", title: "Zoning", fields: ["ZONECLASS"], text: [""], expression: "{0}", capitalize: false),
+                                                                                    Service(layerName: "Angier Zoning", title: "Zoning", fields: ["CLASS"], text: [""], expression: "{0}", capitalize: false),
+                                                                                    Service(layerName: "Apex Zoning", title: "Zoning", fields: ["DISTRICT"], text: [""], expression: "{0}", capitalize: false),
+                                                                                    Service(layerName: "County Zoning", title: "Zoning", fields: ["CLASS"], text: [""], expression: "{0}", capitalize: false),
+                                                                                    Service(layerName: "Fuquay-Varina Zoning", title: "Zoning", fields: ["CLASS"], text: [""], expression: "{0}", capitalize: false),
+                                                                                    Service(layerName: "Garner Zoning", title: "Zoning", fields: ["ZONING_NAME", "CLASS"], text: [""], expression: "{0} ({1})", capitalize: false),
+                                                                                    Service(layerName: "Holly Springs Zoning", title: "Zoning", fields: ["CLASS"], text: [""], expression: "{0}", capitalize: false),
+                                                                                    Service(layerName: "Knightdale Zoning", title: "Zoning", fields: ["ZONEDESC", "ZONECLASS"], text: [""], expression: "{0} ({1})", capitalize: false),
+                                                                                    Service(layerName: "Morrisville Zoning", title: "Zoning", fields: ["CLASS"], text: [""], expression: "{0}", capitalize: false),
+                                                                                    Service(layerName: "Rolesville Zoning", title: "Zoning", fields: ["CLASS"], text: [""], expression: "{0}", capitalize: false),
+                                                                                    Service(layerName: "Wake Forest Zoning", title: "Zoning", fields: ["ZoneDefine", "ZoneLabel"], text: [""], expression: "{0} ({1})", capitalize: false),
+                                                                                    Service(layerName: "Wendell Zoning", title: "Zoning", fields: ["CLASS"], text: [""], expression: "{0}", capitalize: false),
+                                                                                    Service(layerName: "Zebulon Zoning", title: "Zoning", fields: ["CLASS"], text: [""], expression: "{0}", capitalize: false)
+                                                                                ]),
+                                                                                ServiceCategory(title: "Solid Waste", services: [
+                                                                                    Service(layerName: "Raleigh Solid Waste Collection Routes", title: "Solid Waste Collection", fields: ["SERVICEDAY", "SER_WEEK"], text: [""], expression: "Service Day {0}\nService Week {1}", capitalize: true)
+                                                                                ]),
+                                                                                ServiceCategory(title: "Environmental", services: [
+                                                                                    Service(layerName: "Soils", title: "Soils", fields: ["DESCRIPTION", "MAPUNITSYMBOL"], text: [""], expression: "{0} ({1})", capitalize: false),
+                                                                                    Service(layerName: "Flood Hazard Areas (Floodplains)", title: "Flood Hazard Area", fields: ["ZONE_SUBTY"], text: [""], expression: "{0}", capitalize: false)
+                                                                                ])
+                                                                                
+                                                                            ]
     )
     
     
@@ -60,7 +59,7 @@ struct ServicesView: View, Equatable {
         VStack  (alignment: .leading){
             HStack (alignment: .center) {
                 Text("Category").font(.subheadline)
-                    .frame(maxWidth: .infinity)
+                    .frame(maxWidth: 100)
                 Picker("Category", selection: $selectedCategory) {
                     ForEach(0..<viewModel.services.count, id:\.self) { i in
                         Text(viewModel.services[i].title).tag(i)
@@ -95,6 +94,8 @@ struct ServicesView: View, Equatable {
                                     
                                 }
                             }
+                        } else {
+                            ProgressView().controlSize(.large).frame(maxWidth: .infinity, alignment: .center)
                         }
                         
                     }.frame(maxWidth: .infinity, alignment: .leading)

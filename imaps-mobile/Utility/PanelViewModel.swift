@@ -4,8 +4,8 @@ import ArcGISToolkit
 @MainActor
 class PanelViewModel: ObservableObject {
     @Published var isPresented: Bool
-    @Published var selectedDetent: FloatingPanelDetent = .full
-    @Published var size: CGSize = CGSize(width: 0, height: 0)
+    @Published var selectedFloatingPanelDetent: FloatingPanelDetent = .full
+    @Published var selectedDetent: PresentationDetent = .medium
     @Published var selectedPanel: SelectedPanel = SelectedPanel.search
     @Published var selectedPinNum: String = ""
     init(isPresented: Bool) {

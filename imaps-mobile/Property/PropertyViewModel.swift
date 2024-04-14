@@ -7,11 +7,25 @@ class ViewModel: ObservableObject {
         self.text = text
     }
 }
+class PropertyFeature: ObservableObject, Identifiable, Hashable {
+    let id = UUID()
+    @Published var feature: Feature
+    @Published var isPresented: Bool = false
+    static func == (lhs: PropertyFeature, rhs: PropertyFeature) -> Bool {
+        return lhs.id == rhs.id
+    }
+    init(feature: Feature) {
+        self.feature = feature
+    }
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+}
 class PropertyViewModel: ObservableObject {
     @Published var feature: Feature?
-    @Published var features: [Feature]
+    @Published var features: [PropertyFeature]
     @Published var text: String = ""
-    init(feature: Feature?, features: [Feature]) {
+    init(feature: Feature?, features: [PropertyFeature]) {
         self.feature = feature
         self.features = features
     }
@@ -22,8 +36,8 @@ class PropertyViewModel: ObservableObject {
 }
 
 class FeatureViewModel: ObservableObject {
-    @Published var feature: Feature?
-    init(feature: Feature?) {
+    @Published var feature: Feature
+    init(feature: Feature) {
         self.feature = feature
     }
 }

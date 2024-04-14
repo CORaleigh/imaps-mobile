@@ -1,16 +1,21 @@
 
 import SwiftUI
 import ArcGIS
+
 class MapViewModel: ObservableObject {
-    @Published var map: Map
-    @Published var table: ServiceFeatureTable? = nil
-    @Published var proxy: MapViewProxy? = nil
-    @Published var graphics: GraphicsOverlay
     @Published var viewpoint: Viewpoint? = nil
+    @Published var longPressScreenPoint: CGPoint? = nil
+    @Published var failedToStart = false
+    @Published var locationEnabled = false
     
-    init(map: Map, graphics: GraphicsOverlay, viewpoint: Viewpoint) {
+    var map: Map
+    var proxy: MapViewProxy? = nil
+    var graphics: GraphicsOverlay = GraphicsOverlay(graphics: [])
+    let locationDisplay = LocationDisplay(dataSource: SystemLocationDataSource())
+    var attributionBarHeight: CGFloat = 0
+    
+    init(map: Map) {
         self.map = map
-        self.graphics = graphics
         Task {
             try? await map.load()
             for table in self.map.tables {
@@ -18,6 +23,7 @@ class MapViewModel: ObservableObject {
             }
             await setLayerVisibility(map: map)
         }
+        self.viewpoint = setViewpoint()
     }
     func getCondoTable (map: Map) -> ServiceFeatureTable? {
         let table = map.tables.first{$0.displayName.uppercased().contains("CONDO")} as? ServiceFeatureTable
@@ -25,7 +31,7 @@ class MapViewModel: ObservableObject {
     }
     func setLayerVisibility (map: Map) async -> Void {
         try? await map.load()
-        let visibleLayers: Array? = UserDefaults.standard.array(forKey: "visibleLayers") ?? []
+        let visibleLayers: Array = UserDefaults.standard.array(forKey: "visibleLayers") ?? []
         map.operationalLayers.forEach { layer in
             if ((layer as? GroupLayer) != nil) {
                 layer.isVisible = true
@@ -39,15 +45,15 @@ class MapViewModel: ObservableObject {
                                     if ((sublayer3 as? GroupLayer) != nil) {
                                         sublayer3.isVisible = true
                                     } else if ((sublayer3.name != "Property")) {
-                                        sublayer3.isVisible = visibleLayers!.contains{ $0 as? String == sublayer3.name}
+                                        sublayer3.isVisible = visibleLayers.contains{ $0 as? String == sublayer3.name}
                                     }
                                 }
                             } else if ((sublayer2.name != "Property")) {
-                                sublayer2.isVisible = visibleLayers!.contains{ $0 as? String == sublayer2.name}
+                                sublayer2.isVisible = visibleLayers.contains{ $0 as? String == sublayer2.name}
                             }
                         }
                     } else if ((sublayer.name != "Property")) {
-                        sublayer.isVisible = visibleLayers!.contains{ $0 as? String == sublayer.name}
+                        sublayer.isVisible = visibleLayers.contains{ $0 as? String == sublayer.name}
                     }
                 }
             } else if ((layer.name != "Property")) {
@@ -57,11 +63,26 @@ class MapViewModel: ObservableObject {
     }
     func propertySelected(map: Map, property: Feature) {
         Task {
-            await self.proxy!.setViewpointGeometry((property.geometry)!, padding: 100)
-            self.graphics.removeAllGraphics()
+            guard let geometry = property.geometry  else { return }
+            if self.proxy != nil {
+                await self.proxy?.setViewpointGeometry(geometry, padding: 100)
+                self.graphics.removeAllGraphics()
+                
+                self.graphics.addGraphic(Graphic(geometry: property.geometry, attributes: property.attributes, symbol: SimpleFillSymbol(style: SimpleFillSymbol.Style.noFill, outline: SimpleLineSymbol(style: SimpleLineSymbol.Style.solid, color: UIColor.red, width: 2))))
+            }
             
-            self.graphics.addGraphic(Graphic(geometry: property.geometry, attributes: property.attributes, symbol: SimpleFillSymbol(style: SimpleFillSymbol.Style.noFill, outline: SimpleLineSymbol(style: SimpleLineSymbol.Style.solid, color: UIColor.red, width: 2))))
         }
         
     }
+    func setViewpoint () -> Viewpoint {
+        var viewpoint = Viewpoint(center: Point(latitude: 35.7796, longitude: -78.6382), scale: 500_000)
+        let center: String? = UserDefaults.standard.string(forKey: "center")
+        let scale: Double = UserDefaults.standard.double(forKey: "scale")
+        if (center != nil) {
+            viewpoint = Viewpoint(center: try! Geometry.fromJSON(center!) as! Point,
+                                  scale: scale)
+        }
+        return viewpoint
+    }
+    
 }

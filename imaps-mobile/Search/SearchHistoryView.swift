@@ -1,40 +1,46 @@
 import SwiftUI
 import ArcGIS
 struct SearchHistoryView: View {
-    @EnvironmentObject var mapViewModel: MapViewModel
-    @EnvironmentObject var panelVM: PanelViewModel
-
-    @State var history: SearchHistory
+    @ObservedObject var mapViewModel: MapViewModel
+    @ObservedObject var panelVM: PanelViewModel
+    @State var searchHistory: SearchHistoryModel
     var body: some View {
         ZStack {
             VStack (alignment: .leading) {
-
+                
                 Text("Recent").font(.headline)
                 Divider()
                     .frame(height: 1)
                 ScrollView {
-                    VStack (alignment: .leading) {
-                        ForEach(history.historyItems.reversed(), id:\.self) { item in
-                            let viewModel: ViewModel = ViewModel(text: item.value)
-                            
-                            NavigationLink(destination: {
-                                PropertyView(viewModel: viewModel, group: SearchGroup(field: item.field, alias: item.field, features: []), source: .history)
-                                    .environmentObject(mapViewModel)
-                                    .environmentObject(panelVM)
-                            }, label: {
-                                HStack {
-                                    Image(systemName: "magnifyingglass")
-                                    Text(item.value)
-                                }
-                            })
-                            .foregroundColor(Color.primary)
-                            .buttonStyle(FlatLinkStyle())
-                            Divider()
+                        VStack (alignment: .leading) {
+                            ForEach(searchHistory.history.historyItems.reversed(), id:\.self) { item in
+                                let viewModel: ViewModel = ViewModel(text: item.value)
+                                
+                                NavigationLink(destination: {
+                                    PropertyView(viewModel: viewModel, group: SearchGroup(field: item.field, alias: item.field, features: []), source: .history, mapViewModel: mapViewModel, panelVM: panelVM)
+                                }, label: {
+                                    HStack {
+                                        Image(systemName: "magnifyingglass")
+                                        Text(item.value)
+                                        
+                                        Spacer()
+                                            .background(Color("Background"))
+                                        
+                                    }
+                                    .background(.clear)
+                                    
+                                })
+                                
+                                .foregroundColor(Color.primary)
+                                .buttonStyle(.plain)
+                                
+                                Divider()
+                            }
+                            Spacer()
                         }
-                        Spacer()
-                    }
-                    
+
                 }
+                
             }        .padding()
         }
     }
@@ -48,6 +54,12 @@ struct FlatLinkStyle: ButtonStyle {
 
 struct SearchHistoryView_Previews: PreviewProvider {
     static var previews: some View {
-        SearchHistoryView(history: SearchHistory(historyItems: []))
+        SearchHistoryView(
+            mapViewModel: MapViewModel(
+                map: Map (
+                    item: PortalItem(portal: .arcGISOnline(connection: .anonymous), id: PortalItem.ID("95092428774c4b1fb6a3b6f5fed9fbc4")!)
+                )
+            ), panelVM: PanelViewModel(isPresented: false),
+            searchHistory: SearchHistoryModel(history: SearchHistory(historyItems: [])))
     }
 }

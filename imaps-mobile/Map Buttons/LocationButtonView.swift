@@ -51,7 +51,7 @@ struct LocationButtonView: View {
                 )
         }
         .shadow(color: .gray, radius: 2, x: 0, y: 2)
-        .buttonStyle(.plain)  
+        .buttonStyle(.plain)
             
         }
     }

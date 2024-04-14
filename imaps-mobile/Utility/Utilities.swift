@@ -1,4 +1,5 @@
 import Foundation
+import Network
 import ArcGISToolkit
 
 extension Formatter {
@@ -39,6 +40,15 @@ struct HistoryItem: Codable, Hashable {
         hasher.combine(value)
     }
 }
+
+
+class SearchHistoryModel: ObservableObject {
+    @Published var history: SearchHistory
+    init(history: SearchHistory) {
+        self.history = history
+    }
+}
+
 struct SearchHistory: Encodable, Decodable {
     
     var historyItems: [HistoryItem]
@@ -80,4 +90,26 @@ func updateStorageHistory(field: String, value: String) -> SearchHistory {
         return SearchHistory(historyItems: [HistoryItem(field: field, value: value)])
     }
 }
+
+
+
+class NetworkMonitor: ObservableObject {
+    private let networkMonitor = NWPathMonitor()
+    private let workerQueue = DispatchQueue(label: "Monitor")
+    var isConnected = false
+    
+    init() {
+        networkMonitor.pathUpdateHandler = { path in
+            self.isConnected = path.status == .satisfied
+            Task {
+                await MainActor.run {
+                    self.objectWillChange.send()
+                }
+            }
+        }
+        networkMonitor.start(queue: workerQueue)
+    }
+}
+
+
 

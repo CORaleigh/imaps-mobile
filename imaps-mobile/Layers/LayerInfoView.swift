@@ -3,7 +3,7 @@ import ArcGIS
 
 
 struct LayerInfoView: View {
-    @EnvironmentObject var panelVM: PanelViewModel
+    @ObservedObject var panelVM: PanelViewModel
     
     @State var layer: Layer
     @State private var swatches: [LegendSwatch] = []
@@ -12,6 +12,7 @@ struct LayerInfoView: View {
     
     var body: some View {
         ScrollView {
+            
             VStack {
                 Text("Opacity")
                 Slider(value: $layer.opacity, in: 0...1, step: 0.1) {
@@ -30,6 +31,7 @@ struct LayerInfoView: View {
                 }
             }
         }
+        .background(Color("Background"))
         .task {
             let infos: [LegendInfo] = try! await layer.legendInfos
             infos.forEach { info in
