@@ -1,6 +1,6 @@
 import SwiftUI
 import ArcGIS
-
+@MainActor
 struct ServicesView: View, Equatable {
     @ObservedObject var mapViewModel: MapViewModel
     @ObservedObject var propertyInfoViewModel : PropertyInfoViewModel

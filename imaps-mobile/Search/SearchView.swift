@@ -34,7 +34,7 @@ struct SearchView: View, Equatable {
                     .background(Color("Background"))
                     .scrollContentBackground(.hidden)
                     .frame(height: searchText.count > 0 ? nil : 5)
-                    .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always))
+                    .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: "Search by address, owner, PIN or REID")
                     
                     .onChange(of: searchText) { value in
                         Task {
@@ -60,7 +60,6 @@ struct SearchView: View, Equatable {
                             self.panelVM.selectedPinNum = ""
                             self.mapViewModel.graphics.removeAllGraphics()
                             searchHistory.history = getSearchHistory()
-                            self.searchText = ""
                         }
                     }
 

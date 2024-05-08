@@ -83,13 +83,13 @@
          contextName = "closure #3 in closure #1 in closure #1 in closure #1 in ServicesView.getServices(layers:feature:category:viewModel:):ServicesView.swift">
       </ContextState>
       <ContextState
-         contextName = "closure #1 in MapPopupView.body.getter:MapPopupView.swift">
+         contextName = "closure #2 in closure #1 in closure #1 in LayersView.body.getter:LayersView.swift">
       </ContextState>
       <ContextState
          contextName = "closure #3 in closure #1 in closure #1 in BasemapView.body.getter:BasemapView.swift">
       </ContextState>
       <ContextState
-         contextName = "closure #2 in closure #1 in closure #1 in LayersView.body.getter:LayersView.swift">
+         contextName = "closure #1 in MapPopupView.body.getter:MapPopupView.swift">
       </ContextState>
       <ContextState
          contextName = "closure #1 in closure #1 in closure #2 in PropertyInfoView.body.getter:PropertyInfoView.swift">
@@ -245,6 +245,9 @@
          contextName = "closure #1 in closure #1 in closure #1 in closure #1 in closure #2 in PropertyInfoView.body.getter:PropertyInfoView.swift">
       </ContextState>
       <ContextState
+         contextName = "closure #4 in closure #1 in LayersView.body.getter:LayersView.swift">
+      </ContextState>
+      <ContextState
          contextName = "closure #4 in LayerInfoView.body.getter:LayerInfoView.swift">
       </ContextState>
       <ContextState
@@ -254,6 +257,9 @@
                value = "shared">
             </PersistentString>
          </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in closure #3 in Services.body.getter:Services.swift">
       </ContextState>
       <ContextState
          contextName = "closure #1 in imaps_mobileApp.body.getter:imaps_mobileApp.swift">
@@ -317,19 +323,30 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "TextPopupElementView.body.getter:Services.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "textElement.text">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "setLocationYPosition(isPortrait:):ContentView.swift">
       </ContextState>
       <ContextState
          contextName = "closure #1 in closure #3 in closure #2 in ServicesView.body.getter:ServicesView.swift">
       </ContextState>
       <ContextState
-         contextName = "InfoView.feature.getter:InfoView.swift">
+         contextName = "queryRelatedCondos(for:relationshipInfo:address:completion:):PropertyViewModel.swift">
       </ContextState>
       <ContextState
          contextName = "closure #1 in closure #1 in closure #1 in closure #2 in closure #1 in ServicesView.body.getter:ServicesView.swift">
       </ContextState>
       <ContextState
          contextName = "MapPopupView.body.getter:MapPopupView.swift">
+      </ContextState>
+      <ContextState
+         contextName = "InfoView.feature.getter:InfoView.swift">
       </ContextState>
       <ContextState
          contextName = "closure #1 in closure #1 in PropertyView.body.getter:PropertyView.swift">
@@ -346,7 +363,7 @@
          contextName = "GLOBAL">
          <PersistentStrings>
             <PersistentString
-               value = "layerVM.expandedLayers">
+               value = "controller.view">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -480,6 +497,9 @@
                value = "attributes[&quot;DEED_PAGE&quot;]">
             </PersistentString>
          </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in closure #1 in closure #1 in WebMapView.body.getter:WebMapView.swift">
       </ContextState>
       <ContextState
          contextName = "closure #1 in GeoMetalView.makeUIView(context:):GeoCommonView.swift">

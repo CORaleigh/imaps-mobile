@@ -2,7 +2,7 @@ import Foundation
 @MainActor
 class SearchListViewModel: ObservableObject {
     @Published var groups: [SearchGroup] = [
-        SearchGroup(field: "SITE_ADDRESS", alias: "Site Address", features: []),
+        SearchGroup(field: "ADDRESS", alias: "Address", features: []),
         SearchGroup(field: "OWNER", alias: "Owner", features: []),
         SearchGroup(field: "PIN_NUM", alias: "PIN", features: []),
         SearchGroup(field: "REID", alias: "REID", features: []),

@@ -86,7 +86,7 @@ struct WebMapView: View {
                     ButtonBarView(panelVM: panelVM)
                 }
                 .overlay(alignment: UIDevice.current.userInterfaceIdiom == .pad  ? .bottomTrailing : self.isPortrait == true ? .topLeading : .bottomTrailing) {
-                    LocationButtonView(locationEnabled: self.mapViewModel.locationEnabled, failedToStart: self.mapViewModel.failedToStart,
+                    LocationButtonView(locationEnabled: self.mapViewModel.locationEnabled, failedToStart: self.mapViewModel.failedToStart, showAlert: false,
                                        locationDisplay: self.mapViewModel.locationDisplay
                     )
                     .padding(.vertical, UIDevice.current.userInterfaceIdiom == .pad  ? 30 : self.isPortrait ? 10 : 30).padding(.horizontal, 10)
@@ -102,7 +102,10 @@ struct WebMapView: View {
                     else {
                         mapViewModel.viewpoint = Viewpoint(latitude: 35.7796, longitude: -78.6382, scale: 500_000)
                     }
-                    basemapVM.center = (mapViewModel.viewpoint?.targetGeometry.extent.center)!
+                    if mapViewModel.viewpoint != nil {
+                        basemapVM.center = (mapViewModel.viewpoint?.targetGeometry.extent.center)!
+                    }
+
                 }
                 .onChange(of: geo.size) { _ in
                     self.isPortrait = geo.size.height > geo.size.width

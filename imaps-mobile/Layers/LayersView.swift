@@ -24,7 +24,7 @@ struct LayersView: View, Equatable {
             .scrollContentBackground(.hidden)
             .navigationTitle("Layers")
             .navigationBarTitleDisplayMode(.inline)
-            .searchable(text: $layerVM.searchText, placement: .navigationBarDrawer(displayMode: .always))
+            .searchable(text: $layerVM.searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: "Search by layer name")
 
             .toolbar {
                 ToolbarItem (placement: .navigationBarTrailing){

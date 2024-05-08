@@ -29,35 +29,32 @@ class MapViewModel: ObservableObject {
         let table = map.tables.first{$0.displayName.uppercased().contains("CONDO")} as? ServiceFeatureTable
         return table
     }
+    func getAddressTable (map: Map) -> ServiceFeatureTable? {
+        let table = map.tables.first{$0.displayName.uppercased().contains("ADDRESS")} as? ServiceFeatureTable
+        return table
+    }
+
     func setLayerVisibility (map: Map) async -> Void {
         try? await map.load()
-        let visibleLayers: Array = UserDefaults.standard.array(forKey: "visibleLayers") ?? []
-        map.operationalLayers.forEach { layer in
-            if ((layer as? GroupLayer) != nil) {
-                layer.isVisible = true
-                layer.subLayerContents.forEach { sublayer in
-                    if ((sublayer as? GroupLayer) != nil) {
-                        sublayer.isVisible = true
-                        sublayer.subLayerContents.forEach { sublayer2 in
-                            if ((sublayer2 as? GroupLayer) != nil) {
-                                sublayer2.isVisible = true
-                                sublayer2.subLayerContents.forEach { sublayer3 in
-                                    if ((sublayer3 as? GroupLayer) != nil) {
-                                        sublayer3.isVisible = true
-                                    } else if ((sublayer3.name != "Property")) {
-                                        sublayer3.isVisible = visibleLayers.contains{ $0 as? String == sublayer3.name}
-                                    }
-                                }
-                            } else if ((sublayer2.name != "Property")) {
-                                sublayer2.isVisible = visibleLayers.contains{ $0 as? String == sublayer2.name}
-                            }
-                        }
-                    } else if ((sublayer.name != "Property")) {
-                        sublayer.isVisible = visibleLayers.contains{ $0 as? String == sublayer.name}
-                    }
+        let visibleLayers = UserDefaults.standard.array(forKey: "visibleLayers") as? [String] ?? []
+        
+        func setVisibility(_ layer: Layer) {
+            layer.isVisible = true
+            
+            if let groupLayer = layer as? GroupLayer {
+                for sublayer in groupLayer.layers {
+                    setVisibility(sublayer)
                 }
-            } else if ((layer.name != "Property")) {
-                layer.isVisible = false;
+            } else if layer.name != "Property" {
+                layer.isVisible = visibleLayers.contains(layer.name)
+            }
+        }
+
+        for layer in map.operationalLayers {
+            if layer.name == "Property" {
+                layer.isVisible = true
+            } else {
+                setVisibility(layer)
             }
         }
     }

@@ -19,7 +19,7 @@ struct ContentView: View {
         ZStack (alignment: .topTrailing) {
             if #available(iOS 16.4, *), UIDevice.current.userInterfaceIdiom == .phone {
                 WebMapView(mapViewModel: mapViewModel, popupVM: popupVM, panelVM: panelVM, basemapVM: basemapVM)
-                
+                    
                     .sheet(isPresented: self.$panelVM.isPresented) {
                         PanelContentView(mapViewModel: self.mapViewModel, panelVM: self.panelVM, basemapVM: self.basemapVM)
                             .presentationDetents([.medium, .large, .bar], selection: self.$panelVM.selectedDetent)
@@ -33,6 +33,7 @@ struct ContentView: View {
                             .presentationBackgroundInteraction(.enabled)
                             .presentationContentInteraction(.scrolls)
                     }
+            
             } else {
                 WebMapView(mapViewModel: mapViewModel, popupVM: popupVM, panelVM: panelVM, basemapVM: basemapVM)
                     .floatingPanel(
@@ -85,6 +86,7 @@ struct ContentView: View {
                 self.panelVM.isPresented = false
             }
         }
+
         .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardWillShowNotification)) { notification in
             self.isKeyboardVisible = true
             self.panelVM.selectedFloatingPanelDetent = .full
@@ -116,6 +118,26 @@ struct ContentView: View {
             "Network connection seems to be offline.",
             isPresented: .constant(networkMonitor.isConnected == false)
         ) {}
+        
+ 
+            .onOpenURL{ url in
+                Task {
+                    
+                    
+                    try await Task.sleep(nanoseconds: 500_000_000)
+                    switch url.host {
+                    case "pin":
+                        if url.query != nil {
+                            try await self.mapViewModel.map.load()
+                            self.panelVM.selectedPinNum = url.query ?? ""
+                            self.panelVM.isPresented = true
+                            
+                        }
+                    default:
+                        break
+                    }
+                }
+            }
     }
 }
 extension PresentationDetent {
@@ -133,3 +155,4 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
     }
 }
+

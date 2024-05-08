@@ -70,8 +70,9 @@ struct PropertyListItemView: View {
         label: {
             VStack (alignment: .leading) {
                 let address = (feature.feature.attributes["SITE_ADDRESS"] as? String ?? "") + " " + (feature.feature.attributes["STMISC"] as? String ?? "")
+                let owner = (feature.feature.attributes["OWNER"] as? String ?? "")
                 Text(address)
-                Text(feature.feature.attributes["OWNER"] as! String)
+                Text(owner)
             }
         }
         .navigationDestination(isPresented: $feature.isPresented) {

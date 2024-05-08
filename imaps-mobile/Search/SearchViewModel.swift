@@ -13,6 +13,11 @@ class Search: ObservableObject {
         components.scheme = "https"
         components.host = "maps.raleighnc.gov"
         components.path = "/arcgis/rest/services/Property/Property/FeatureServer/1/query"
+
+        if field == "ADDRESS" {
+            components.path = "/arcgis/rest/services/Property/Property/FeatureServer/4/query"
+
+        }
         components.queryItems = [
             URLQueryItem(name: "f", value: "json"),
             URLQueryItem(name: "where", value: "\(field) LIKE '\(searchTerm)%'"),
@@ -47,7 +52,7 @@ struct Attributes: Codable {
     let reid: String?
     let pin: String?
     enum CodingKeys: String, CodingKey {
-        case siteAddress = "SITE_ADDRESS"
+        case siteAddress = "ADDRESS"
         case fullStreetName = "FULL_STREET_NAME"
         case owner = "OWNER"
         case reid = "REID"

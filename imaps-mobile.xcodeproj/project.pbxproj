@@ -53,6 +53,10 @@
 		C7AE688F29F9B6E200C616BB /* PropertyInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7AE688E29F9B6E200C616BB /* PropertyInfoViewModel.swift */; };
 		C7AE689129F9B71100C616BB /* SubLayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7AE689029F9B71100C616BB /* SubLayerView.swift */; };
 		C7AE689329F9B74B00C616BB /* PropertyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7AE689229F9B74B00C616BB /* PropertyView.swift */; };
+		C7C4C9A12BD006200059E900 /* imaps.png in Resources */ = {isa = PBXBuildFile; fileRef = C7C4C9A02BD006200059E900 /* imaps.png */; };
+		C7CEB37D2BE3CD140098DC1B /* Services.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CEB37C2BE3CD140098DC1B /* Services.swift */; };
+		C7CEB37F2BE3CD220098DC1B /* ServiceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CEB37E2BE3CD220098DC1B /* ServiceViewModel.swift */; };
+		C7CEB3832BE4048D0098DC1B /* HTMLTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CEB3822BE4048D0098DC1B /* HTMLTextView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -103,6 +107,10 @@
 		C7AE688E29F9B6E200C616BB /* PropertyInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyInfoViewModel.swift; sourceTree = "<group>"; };
 		C7AE689029F9B71100C616BB /* SubLayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubLayerView.swift; sourceTree = "<group>"; };
 		C7AE689229F9B74B00C616BB /* PropertyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyView.swift; sourceTree = "<group>"; };
+		C7C4C9A02BD006200059E900 /* imaps.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = imaps.png; sourceTree = "<group>"; };
+		C7CEB37C2BE3CD140098DC1B /* Services.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Services.swift; sourceTree = "<group>"; };
+		C7CEB37E2BE3CD220098DC1B /* ServiceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceViewModel.swift; sourceTree = "<group>"; };
+		C7CEB3822BE4048D0098DC1B /* HTMLTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTMLTextView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,6 +145,7 @@
 		C70CB49D29E6E49D00B6A157 /* imaps-mobile */ = {
 			isa = PBXGroup;
 			children = (
+				C7C4C9A02BD006200059E900 /* imaps.png */,
 				C7A0B58429FAD08C00F1E56F /* Info.plist */,
 				C70CB4A229E6E49E00B6A157 /* Assets.xcassets */,
 				C70CB4A429E6E49E00B6A157 /* imaps_mobile.entitlements */,
@@ -178,8 +187,11 @@
 				C70CB4D329E71A3C00B6A157 /* PhotoView.swift */,
 				C70CA3DA2BADE1E700866A34 /* ServicesView.swift */,
 				C70CA3DC2BADE25700866A34 /* ServicesViewModel.swift */,
+				C7CEB3822BE4048D0098DC1B /* HTMLTextView.swift */,
 				C72688CD2BB3326D00EB0372 /* TaxInfoView.swift */,
 				C70CB4BF29E6F77500B6A157 /* WebView.swift */,
+				C7CEB37C2BE3CD140098DC1B /* Services.swift */,
+				C7CEB37E2BE3CD220098DC1B /* ServiceViewModel.swift */,
 			);
 			path = PropertyInfoViews;
 			sourceTree = "<group>";
@@ -319,6 +331,7 @@
 			files = (
 				C78B7C2B2BC879AC0098A373 /* PrivacyInfo.xcprivacy in Resources */,
 				C70CB4A729E6E49E00B6A157 /* Preview Assets.xcassets in Resources */,
+				C7C4C9A12BD006200059E900 /* imaps.png in Resources */,
 				C70CB4A329E6E49E00B6A157 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -342,7 +355,9 @@
 				C70CB4B429E6E82700B6A157 /* SearchView.swift in Sources */,
 				C70E73312BBB2D060042A932 /* ButtonBarView.swift in Sources */,
 				C70CB4CE29E6F80E00B6A157 /* BuildingView.swift in Sources */,
+				C7CEB37F2BE3CD220098DC1B /* ServiceViewModel.swift in Sources */,
 				C70CB4CC29E6F7FE00B6A157 /* SaleView.swift in Sources */,
+				C7CEB3832BE4048D0098DC1B /* HTMLTextView.swift in Sources */,
 				C70CB4B629E6E83200B6A157 /* LayersView.swift in Sources */,
 				C70E73352BBB3A540042A932 /* PanelViewModel.swift in Sources */,
 				C70CB4C629E6F7D400B6A157 /* GeneralView.swift in Sources */,
@@ -361,6 +376,7 @@
 				C70CB4C029E6F77500B6A157 /* WebView.swift in Sources */,
 				C7AE689129F9B71100C616BB /* SubLayerView.swift in Sources */,
 				C78B7C302BC8A8E10098A373 /* PopupContentView.swift in Sources */,
+				C7CEB37D2BE3CD140098DC1B /* Services.swift in Sources */,
 				C78B7C342BC971270098A373 /* WebMapView.swift in Sources */,
 				C78B7C322BC8B2BA0098A373 /* PopupViewModel.swift in Sources */,
 				C70CA3DB2BADE1E700866A34 /* ServicesView.swift in Sources */,
@@ -504,7 +520,7 @@
 				CODE_SIGN_ENTITLEMENTS = "imaps-mobile/imaps_mobile.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 16;
+				CURRENT_PROJECT_VERSION = 20;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"imaps-mobile/Preview Content\"";
 				DEVELOPMENT_TEAM = MRWDJLVR85;
@@ -553,7 +569,7 @@
 				CODE_SIGN_ENTITLEMENTS = "imaps-mobile/imaps_mobile.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 16;
+				CURRENT_PROJECT_VERSION = 20;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"imaps-mobile/Preview Content\"";
 				DEVELOPMENT_TEAM = MRWDJLVR85;

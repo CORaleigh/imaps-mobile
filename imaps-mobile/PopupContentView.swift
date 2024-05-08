@@ -36,7 +36,7 @@ struct PopupContentView: View {
                 }
                 if popupVM.popup != nil {
                     PopupView(popup: popupVM.popup!, isPresented: $popupVM.isPresented).showCloseButton(false)
-                        .padding(.all)
+                        .padding()
                 }
                 
                 

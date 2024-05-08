@@ -2,6 +2,7 @@ import Foundation
 import SwiftUI
 import ArcGIS
 
+@MainActor
 class PropertyInfoViewModel: ObservableObject {
     @Published var deed: [String: Any]?
     @Published var photos: [[String: Any]]

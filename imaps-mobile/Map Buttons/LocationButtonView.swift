@@ -5,6 +5,7 @@ import CoreLocation
 struct LocationButtonView: View {
     @State var locationEnabled: Bool
     @State  var failedToStart: Bool
+    @State var showAlert: Bool
     let locationDisplay: LocationDisplay
     
     var body: some View {
@@ -17,6 +18,9 @@ struct LocationButtonView: View {
                         locationManager.requestWhenInUseAuthorization()
                     }
                     
+                    if locationManager.authorizationStatus == .restricted || locationManager.authorizationStatus == .denied {
+                        showAlert = true
+                    }
                     do {
                         if (locationEnabled) {
                             try await locationDisplay.dataSource.start()
@@ -54,9 +58,18 @@ struct LocationButtonView: View {
         .buttonStyle(.plain)
             
         }
+        .alert(isPresented: $showAlert, content: {
+            Alert(title: Text("Location Services Not Enabled"),
+            message: Text("To view your device's current position, location services need to be turned on"),
+                  primaryButton: .default(Text("Turn On In Settings"), action: {
+                UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
+            }),
+                  secondaryButton: .default(Text("Keep Location Services Off"))
+            )
+        })
     }
 }
 
 #Preview {
-    LocationButtonView(locationEnabled: false, failedToStart: false, locationDisplay: LocationDisplay(dataSource: SystemLocationDataSource()))
+    LocationButtonView(locationEnabled: false, failedToStart: false, showAlert: false, locationDisplay: LocationDisplay(dataSource: SystemLocationDataSource()))
 }

@@ -31,31 +31,45 @@ struct PropertyView: View, Equatable {
 
         .onReceive(viewModel.$text) { text in
             Task {
-                guard let table: ServiceFeatureTable =  mapViewModel.getCondoTable(map: mapViewModel.map) else { return }
-                await queryFeatures(for: table, field: group.field, value: viewModel.text, completion: { data in
-                    Task {
-                        let count = data.count
-                        self.propertyVM.features = []
-                        self.propertyVM.objectWillChange.send()
-                        if (count == 1) {
-                            
-                            guard let f = data.first(where: {$0.attributes["OBJECTID"] as? Int64 != nil}) else { return }
-                            self.propertyVM.feature  = f
-                            self.panelVM.selectedPinNum = f.attributes["PIN_NUM"] as? String ?? ""
-                            data.forEach {
-                                feature in
-                                self.propertyVM.features.append(PropertyFeature(feature: feature))
-                            }
-                        } else {
-                            data.forEach {
-                                feature in
-                                self.propertyVM.features.append(PropertyFeature(feature: feature))
-                            }
-                        }
-                        
-                        propertyVM.updateView()
+                var data: [Feature] = []
+                guard let condoTable: ServiceFeatureTable =  mapViewModel.getCondoTable(map: mapViewModel.map) else { return }
+                if group.field == "ADDRESS" {
+                    guard let addressTable: ServiceFeatureTable =  mapViewModel.getAddressTable(map: mapViewModel.map) else { return }
+                    guard let info = addressTable.layerInfo?.relationshipInfos.first else { return }
+
+                    await queryRelatedCondos(for: addressTable, relationshipInfo: info, address: viewModel.text) { result in
+                        data = result
                     }
-                })
+                    
+                } else {
+                    
+                    await queryFeatures(for: condoTable, field: group.field, value: viewModel.text, completion: { result in
+                        data = result
+                        })
+                    }
+                
+                Task {
+                    let count = data.count
+                    self.propertyVM.features = []
+                    self.propertyVM.objectWillChange.send()
+                    if (count == 1) {
+                        
+                        guard let f = data.first(where: {$0.attributes["OBJECTID"] as? Int64 != nil}) else { return }
+                        self.propertyVM.feature  = f
+                        self.panelVM.selectedPinNum = f.attributes["PIN_NUM"] as? String ?? ""
+                        data.forEach {
+                            feature in
+                            self.propertyVM.features.append(PropertyFeature(feature: feature))
+                        }
+                    } else {
+                        data.forEach {
+                            feature in
+                            self.propertyVM.features.append(PropertyFeature(feature: feature))
+                        }
+                    }
+                    
+                    propertyVM.updateView()
+                }
                 if self.source == .search {
                     let encoder = JSONEncoder()
                     if (self.source == .search) {

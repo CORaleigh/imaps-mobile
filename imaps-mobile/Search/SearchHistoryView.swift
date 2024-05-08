@@ -24,15 +24,16 @@ struct SearchHistoryView: View {
                                         Text(item.value)
                                         
                                         Spacer()
-                                            .background(Color("Background"))
                                         
                                     }
-                                    .background(.clear)
+                                    .background(Color("Background").opacity(0.01))
                                     
                                 })
                                 
                                 .foregroundColor(Color.primary)
                                 .buttonStyle(.plain)
+                                .frame(maxWidth: .infinity)
+
                                 
                                 Divider()
                             }
