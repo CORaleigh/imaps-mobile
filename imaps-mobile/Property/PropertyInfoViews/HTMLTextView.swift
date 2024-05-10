@@ -48,6 +48,8 @@ struct HTMLTextView: UIViewRepresentable {
                                 padding:0px;
                                 background: var(--body-bg);
                                 color: var(--body-color);
+                                text-align: center;
+                                font-size: 16px;
                             }
                             img {
                                 max-width: 100%;

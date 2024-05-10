@@ -51,8 +51,7 @@ struct WebMapView: View {
                     self.popupVM.popup = identifyResult.first(where: {$0.layerContent.name != "Property"})?.popups.first
                     self.popupVM.isPresented = self.popupVM.popup != nil
                 }
-                .task (id: mapViewModel.longPressScreenPoint) {
-                    
+                .task(id: mapViewModel.longPressScreenPoint) {
                     guard let longPressScreenPoint = mapViewModel.longPressScreenPoint else { return }
                     do {
                         let identifyResult = try await proxy.identifyLayers(
@@ -60,8 +59,8 @@ struct WebMapView: View {
                             tolerance: 10,
                             returnPopupsOnly: false
                         )
-                        guard let result = identifyResult.first(where: {$0.layerContent.name == "Property"}) else { return }
-                        
+                        guard let result = identifyResult.first(where: { $0.layerContent.name == "Property" }) else { return }
+
                         if result.geoElements.count > 0 {
                             self.panelVM.selectedPinNum = result.geoElements.first?.attributes["PIN_NUM"] as! String
                             let encoder = JSONEncoder()
@@ -73,15 +72,13 @@ struct WebMapView: View {
                             self.panelVM.selectedPanel = .search
                             self.panelVM.isPresented = true
                         }
-//                        if UIDevice.current.userInterfaceIdiom != .pad {
-//                            self.popupVM.isPresented = false
-//                        }
-                        
+
                     } catch {
-                        
+                        print("Error identifying layers: \(error)")
+                        // Handle the error as needed
                     }
-                    
                 }
+
                 .overlay(alignment: .topTrailing) {
                     ButtonBarView(panelVM: panelVM)
                 }
@@ -97,13 +94,19 @@ struct WebMapView: View {
                     let center: String? = UserDefaults.standard.string(forKey: "center")
                     let scale: Double = UserDefaults.standard.double(forKey: "scale")
                     if (center != nil) {
-                        mapViewModel.viewpoint = try? Viewpoint(center:  Geometry.fromJSON(center!) as! Point, scale: scale)
+                        do {
+                            if let center = center {
+                                mapViewModel.viewpoint = try Viewpoint(center:  Geometry.fromJSON(center) as! Point, scale: scale)
+                            }
+                        } catch {
+                            print("Error initializing Viewpoint: \(error)")
+                        }
                     }
                     else {
                         mapViewModel.viewpoint = Viewpoint(latitude: 35.7796, longitude: -78.6382, scale: 500_000)
                     }
-                    if mapViewModel.viewpoint != nil {
-                        basemapVM.center = (mapViewModel.viewpoint?.targetGeometry.extent.center)!
+                    if let viewpoint = mapViewModel.viewpoint {
+                        basemapVM.center = viewpoint.targetGeometry.extent.center
                     }
 
                 }
@@ -116,9 +119,5 @@ struct WebMapView: View {
 }
 
 #Preview {
-    WebMapView(mapViewModel: MapViewModel(
-        map: Map (
-            item: PortalItem(portal: .arcGISOnline(connection: .anonymous), id: PortalItem.ID("95092428774c4b1fb6a3b6f5fed9fbc4")!)
-        )
-    ), popupVM: PopupViewModel(isPresented: false), panelVM: PanelViewModel(isPresented: false), basemapVM: BasemapViewModel(selected: .Maps, center: Point(latitude: 0, longitude: 0)))
+    WebMapView(mapViewModel: MapViewModel(), popupVM: PopupViewModel(isPresented: false), panelVM: PanelViewModel(isPresented: false), basemapVM: BasemapViewModel(selected: .Maps, center: Point(latitude: 0, longitude: 0)))
 }

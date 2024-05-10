@@ -9,36 +9,34 @@ struct PopupContentView: View {
         NavigationStack {
             VStack {
                 if (popupVM.identifyResultCount > 1) {
-                    HStack{
+                    HStack {
                         Button {
-                            if (popupVM.identifyResultIndex == 0) {
-                                popupVM.identifyResultIndex = popupVM.identifyResultCount - 1
-                            } else {
-                                popupVM.identifyResultIndex -= 1
+                            popupVM.identifyResultIndex = (popupVM.identifyResultIndex == 0) ? (popupVM.identifyResultCount - 1) : (popupVM.identifyResultIndex - 1)
+                            if let popup = popupVM.identifyResults?[popupVM.identifyResultIndex].popups.first {
+                                popupVM.popup = popup
                             }
-                            self.popupVM.popup = popupVM.identifyResults![popupVM.identifyResultIndex].popups.first
                         } label: {
                             Image(systemName: "chevron.left.circle.fill")
                         }
-                        Text(String(popupVM.identifyResultIndex+1)+" of "+String(popupVM.identifyResultCount))
+
+                        Text("\(popupVM.identifyResultIndex + 1) of \(popupVM.identifyResultCount)")
+
                         Button {
-                            if (popupVM.identifyResultIndex == popupVM.identifyResultCount - 1) {
-                                popupVM.identifyResultIndex = 0
-                            } else {
-                                popupVM.identifyResultIndex += 1
+                            popupVM.identifyResultIndex = (popupVM.identifyResultIndex == popupVM.identifyResultCount - 1) ? 0 : (popupVM.identifyResultIndex + 1)
+                            if let popup = popupVM.identifyResults?[popupVM.identifyResultIndex].popups.first {
+                                popupVM.popup = popup
                             }
-                            
-                            self.popupVM.popup = popupVM.identifyResults?[popupVM.identifyResultIndex].popups.first
                         } label: {
                             Image(systemName: "chevron.right.circle.fill")
                         }
                     }
                 }
-                if popupVM.popup != nil {
-                    PopupView(popup: popupVM.popup!, isPresented: $popupVM.isPresented).showCloseButton(false)
+                if let popup = popupVM.popup {
+                    PopupView(popup: popup, isPresented: $popupVM.isPresented)
+                        .showCloseButton(false)
                         .padding()
                 }
-                
+
                 
             }.padding(.all)
                 .toolbar {

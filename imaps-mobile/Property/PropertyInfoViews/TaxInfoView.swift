@@ -18,15 +18,13 @@ struct TaxInfoView: View {
                 .navigationDestination(isPresented: $isActive) {
                     let city = (attributes["CITY_DECODE"] as? String) ?? ""
                     
-                    if city.contains("DURHAM COUNTY") {
-                        WebView(request: URLRequest(url: URL(string: "https://taxcama.dconc.gov/camapwa/PropertySummary.aspx?REID=\(attributes["REID"] ?? "")")!))
-                            .navigationTitle("Tax Info")
-                    } else {
-                        WebView(request: URLRequest(url: URL(string: "https://services.wake.gov/realestate/Account.asp?id=\(attributes["REID"] ?? "")")!))
-                            .navigationTitle("Tax Info")
+                    if let reid = attributes["REID"] as? String {
+                        if let url = URL(string: getUrlString(city: city, reid: reid)) {
+                            WebView(request: URLRequest(url: url))
+                                .navigationTitle("Tax Info")
+                        }
                     }
                 }
-            
         }
         .padding(.horizontal, 10)
         .buttonStyle(.borderedProminent)
@@ -35,4 +33,13 @@ struct TaxInfoView: View {
             self.isActive = false
         }
     }
+}
+
+
+func getUrlString(city: String, reid: String) -> String {
+    var urlString = "https://services.wake.gov/realestate/Account.asp?id=\(reid)"
+    if city.contains("DURHAM COUNTY") {
+        urlString = "https://taxcama.dconc.gov/camapwa/PropertySummary.aspx?REID=\(reid)"
+    }
+    return urlString
 }

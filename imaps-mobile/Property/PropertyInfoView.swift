@@ -31,22 +31,37 @@ struct PropertyInfoView: View, Equatable {
                     ValuationView(attributes: feature.feature.attributes)
                     SaleView(attributes: feature.feature.attributes)
                     DeedView(panelVM: panelVM, attributes: feature.feature.attributes, deed: propertyInfoVM.deed ?? [:])
-                        .onReceive(feature.$feature) { feature in
-                            Task {
-                                let table: ServiceFeatureTable =  mapViewModel.getCondoTable(map: mapViewModel.map)!
-                                guard let relInfo = table.layerInfo?.relationshipInfos.filter({ $0.name.contains("BOOK") }).first else { return }
-                                await propertyInfoVM.getDeeds(for: table , feature: feature as! ArcGISFeature, relationshipInfo: relInfo, completion: { result in
-                                    if !result.isEmpty {
-                                        let d = result.first
-                                        DispatchQueue.main.async {
-                                            self.propertyInfoVM.deed = d!.attributes
+                        .onReceive(feature.$feature) { (feature: Feature?) in
+                            guard let feature = feature else { return }
+
+                            // Check if feature can be converted to ArcGISFeature
+                            if let arcgisFeature = feature as? ArcGISFeature {
+                                Task {
+                                    guard let table = mapViewModel.getCondoTable(map: mapViewModel.map) else { return }
+                                    guard let relInfo = table.layerInfo?.relationshipInfos.first(where: { $0.name.contains("BOOK") }) else { return }
+
+                                    do {
+                                        _ = try await propertyInfoVM.getDeeds(for: table, feature: arcgisFeature, relationshipInfo: relInfo) { result in
+                                            DispatchQueue.main.async {
+                                                if let d = result.first {
+                                                    self.propertyInfoVM.deed = d.attributes
+                                                }
+                                            }
                                         }
+                                    } catch {
+                                        print("Error performing search: \(error)")
+                                        // Handle or propagate the error if needed
                                     }
-                                    
-                                })
+                                }
+                            } else {
+                                print("Failed to convert Feature to ArcGISFeature")
+                                // Handle the failure to convert if needed
                             }
-                            
                         }
+
+
+
+
                     BuildingView(attributes:feature.feature.attributes)
                     TaxInfoView(panelVM: self.panelVM, attributes: feature.feature.attributes)
 
@@ -73,18 +88,27 @@ struct PropertyInfoView: View, Equatable {
                     PhotoView(photos: propertyInfoVM.photos)
                         .onReceive(feature.$feature) { feature in
                             Task {
-                                guard let table: ServiceFeatureTable =  mapViewModel.getCondoTable(map: mapViewModel.map) else { return }
-                                guard let relInfo = table.layerInfo?.relationshipInfos.filter({ $0.name.contains("PHOTO") }).first else { return }
-                                await propertyInfoVM.getPhotos(for: table , feature: feature as! ArcGISFeature, relationshipInfo: relInfo, completion: { results in
-                                    //photos = []
-                                    for result in results {
-                                        DispatchQueue.main.async {
-                                            propertyInfoVM.photos.append(result.attributes)
+                                guard let table = mapViewModel.getCondoTable(map: mapViewModel.map) else { return }
+                                guard let relInfo = table.layerInfo?.relationshipInfos.first(where: { $0.name.contains("PHOTO") }) else { return }
+
+                                if let arcGISFeature = feature as? ArcGISFeature {
+                                    do {
+                                        await propertyInfoVM.getPhotos(for: table, feature: arcGISFeature, relationshipInfo: relInfo) { results in
+                                            for result in results {
+                                                DispatchQueue.main.async {
+                                                    propertyInfoVM.photos.append(result.attributes)
+                                                }
+                                            }
                                         }
                                     }
-                                })
+                                } else {
+                                    print("Feature is not of type ArcGISFeature")
+                                    // Handle or propagate the error as needed
+                                }
                             }
                         }
+
+
                 }
                 
             }
@@ -116,11 +140,17 @@ struct PropertyInfoView: View, Equatable {
         .navigationTitle("Property")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
-            ToolbarItem (placement: .topBarTrailing) {
-                ShareLink(item: URL(string: "https://maps.raleighnc.gov/imaps-mobile?address=\(feature.feature.attributes["SITE_ADDRESS"] ?? "")&pin=\(feature.feature.attributes["PIN_NUM"] ?? "")")!, subject: Text("View \(feature.feature.attributes["SITE_ADDRESS"] ?? "") in iMAPS"), message: Text("View \(feature.feature.attributes["SITE_ADDRESS"] ?? "") in iMAPS"), preview: SharePreview("View \(feature.feature.attributes["SITE_ADDRESS"] ?? "") in iMAPS", image: Image("imaps"))) {
+            if let siteAddress = feature.feature.attributes["SITE_ADDRESS"] as? String,
+                let pinNum = feature.feature.attributes["PIN_NUM"] as? String,
+                let url = URL(string: "https://maps.raleighnc.gov/imaps-mobile?address=\(siteAddress)&pin=\(pinNum)") {
+                let subject = Text("View \(siteAddress) in iMAPS")
+                let message = Text("View \(siteAddress) in iMAPS")
+                
+                ToolbarItem(placement: .topBarTrailing) {
+                    ShareLink(item: url, subject: subject, message: message, preview: SharePreview("View \(siteAddress) in iMAPS", image: Image("imaps"))) {
                         Image(systemName: "square.and.arrow.up")
                     }
-                
+                }
             }
             ToolbarItem (placement: .topBarTrailing){
 

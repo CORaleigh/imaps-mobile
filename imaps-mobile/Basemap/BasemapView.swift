@@ -26,50 +26,46 @@ struct BasemapView: View, Equatable {
                                 BasemapItemView(basemap: basemap)
                                     .onTapGesture {
                                         Task {
-                                            if (basemapVM.selected == .Images) {
-                                                
-                                                let map: Map = Map(
-                                                    item: PortalItem(portal: .arcGISOnline(connection: .anonymous), id: basemap.id!)
-                                                )
-                                                try await map.load()
-                                                
-                                                let reference = map.basemap?.referenceLayers.first
-                                                let raster = map.basemap?.baseLayers.filter({ layer in
-                                                    return (layer as? RasterLayer) != nil
-                                                }).first
-                                                let tiled = map.basemap?.baseLayers.filter({ layer in
-                                                    return (layer as? ImageTiledLayer) != nil
-                                                }).first
-                                                if (tiled?.spatialReference?.wkid != mapViewModel.map.spatialReference?.wkid) {
-                                                    if (raster?.item != nil) {
-                                                        
-                                                        let newRaster = RasterLayer(item: (raster?.item)!)
-                                                        newRaster.maxScale = nil
-                                                        newRaster.minScale = nil
-                                                        let newBasemap = Basemap(baseLayer: newRaster.clone())
-                                                        if reference != nil {
-                                                            newBasemap.addReferenceLayer(reference!.clone())
-                                                        }
-                                                        newBasemap.name = basemap.title
-                                                        mapViewModel.map.basemap = newBasemap
-                                                        UserDefaults.standard.set(newBasemap.toJSON(), forKey: "basemap")
-                                                        
-                                                        
+                                            if let basemapID = basemap.id {
+                                                if basemapVM.selected == .Images {
+                                                    let map: Map = Map(
+                                                        item: PortalItem(portal: .arcGISOnline(connection: .anonymous), id: basemapID)
+                                                    )
+                                                    try await map.load()
+                                                    
+                                                    guard let tiled = map.basemap?.baseLayers.compactMap({ $0 as? ImageTiledLayer }).first,
+                                                          let mapSR = map.spatialReference,
+                                                          let tiledSR = tiled.spatialReference,
+                                                          tiledSR.wkid != mapSR.wkid,
+                                                          let raster = map.basemap?.baseLayers.compactMap({ $0 as? RasterLayer }).first,
+                                                          let rasterItem = raster.item else {
+                                                        mapViewModel.map.basemap = Basemap(item: basemap)
+                                                        UserDefaults.standard.set(basemap.toJSON(), forKey: "basemap")
+                                                        basemapVM.updateView()
+                                                        return
                                                     }
+                                                    
+                                                    let newRaster = RasterLayer(item: rasterItem)
+                                                    newRaster.maxScale = nil
+                                                    newRaster.minScale = nil
+                                                    let newBasemap = Basemap(baseLayer: newRaster.clone())
+                                                    if let reference = map.basemap?.referenceLayers.first {
+                                                        newBasemap.addReferenceLayer(reference.clone())
+                                                    }
+                                                    newBasemap.name = basemap.title
+                                                    mapViewModel.map.basemap = newBasemap
+                                                    UserDefaults.standard.set(newBasemap.toJSON(), forKey: "basemap")
                                                 } else {
                                                     mapViewModel.map.basemap = Basemap(item: basemap)
                                                     UserDefaults.standard.set(basemap.toJSON(), forKey: "basemap")
-                                                    
                                                 }
-                                                
+                                                basemapVM.updateView()
                                             } else {
-                                                mapViewModel.map.basemap = Basemap(item: basemap)
-                                                UserDefaults.standard.set(basemap.toJSON(), forKey: "basemap")
-                                                
+                                                print("Basemap ID is nil.")
                                             }
-                                            basemapVM.updateView()
                                         }
                                     }
+
                                 
                                 if (basemap.title == mapViewModel.map.basemap?.item?.title || basemap.title == mapViewModel.map.basemap?.name || (mapViewModel.map.basemap?.item?.title == nil && basemap.title == "Basemap")) {
                                     
@@ -123,17 +119,17 @@ struct BasemapView: View, Equatable {
                                         
                                         Task {
                                             do {
-                                                await getMaps(for: group?.id.rawValue) {
-                                                    maps in
-                                                    
-                                                    if (basemapVM.selected == .Images) {
-                                                        basemaps = maps.results.sorted{$0.title > $1.title}
-                                                    } else {
-                                                        basemaps = maps.results.sorted{$0.title < $1.title}
+                                                if let groupId = group?.id.rawValue {
+                                                    await getMaps(for: groupId) { maps in
+                                                        if (basemapVM.selected == .Images) {
+                                                            basemaps = maps.results.sorted { $0.title > $1.title }
+                                                        } else {
+                                                            basemaps = maps.results.sorted { $0.title < $1.title }
+                                                        }
                                                     }
-                                                    
                                                 }
-                                                
+
+
                                             }
                                             
                                         }
@@ -167,10 +163,6 @@ struct BasemapView: View, Equatable {
 
 struct BasemapView_Previews: PreviewProvider {
     static var previews: some View {
-        BasemapView(mapViewModel: MapViewModel(
-            map: Map (
-                item: PortalItem(portal: .arcGISOnline(connection: .anonymous), id: PortalItem.ID("95092428774c4b1fb6a3b6f5fed9fbc4")!)
-            )
-        ), panelVM: PanelViewModel(isPresented: false), basemapVM: BasemapViewModel(selected: .Maps, center: Point(latitude: 0, longitude: 0)))
+        BasemapView(mapViewModel: MapViewModel(), panelVM: PanelViewModel(isPresented: false), basemapVM: BasemapViewModel(selected: .Maps, center: Point(latitude: 0, longitude: 0)))
     }
 }

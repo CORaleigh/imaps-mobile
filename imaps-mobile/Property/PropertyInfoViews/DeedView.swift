@@ -40,15 +40,12 @@ struct DeedView: View {
                 .padding(.all, 1)
                 
                 GridRow {
-                    if (attributes["DEED_DATE"] != nil) {
-                        if (type(of: attributes["DEED_DATE"]) == String.self) {
-                            Text(attributes["DEED_DATE"] as! String).fixedSize(horizontal: false, vertical: true)
-                        } else if (type(of: attributes["DEED_DATE"]) == Date.self) {
-                            Text(formatDate(date:attributes["DEED_DATE"] as! Date)).fixedSize(horizontal: false, vertical: true)
-                        }
-                        
+                    if let deedDate = attributes["DEED_DATE"] {
+                        Text(deedDate is String ? deedDate as! String : formatDate(date: deedDate as! Date))
+                            .fixedSize(horizontal: false, vertical: true)
                     }
                 }
+
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.all, 1)
                 
@@ -84,8 +81,13 @@ struct DeedView: View {
                                 .frame(maxWidth: .infinity)
                             }
                             .navigationDestination(isPresented: $isDeedActive) {
-                                WebView(request: URLRequest(url: URL(string: "https://rodcrpi.wakegov.com/booksweb/pdfview.aspx?docid=\(deed?["DEED_DOC_NUM"] ?? "")&RecordDate=")!))
-                                    .navigationTitle("Deed")
+                                if let docId = deed?["DEED_DOC_NUM"] {
+                                    let urlString = "https://rodcrpi.wakegov.com/booksweb/pdfview.aspx?docid=\(docId)&RecordDate="
+                                    if let url = URL(string: urlString) {
+                                        WebView(request: URLRequest(url: url))
+                                            .navigationTitle("Deed")
+                                    }
+                                }
                             }
                             .buttonStyle(.borderedProminent)
                             .controlSize(.large)
@@ -104,8 +106,13 @@ struct DeedView: View {
                                 
                             }
                             .navigationDestination(isPresented: $isPlatActive) {
-                                WebView(request: URLRequest(url: URL(string: "https://rodcrpi.wakegov.com/booksweb/pdfview.aspx?docid=\(deed?["BOM_DOC_NUM"] ?? "")&RecordDate=")!))
-                                    .navigationTitle("Plat")
+                                if let docId = deed?["BOM_DOC_NUM"] {
+                                    let urlString = "https://rodcrpi.wakegov.com/booksweb/pdfview.aspx?docid=\(docId)&RecordDate="
+                                    if let url = URL(string: urlString) {
+                                        WebView(request: URLRequest(url: url))
+                                            .navigationTitle("Plat")
+                                    }
+                                }
                             }
                             .buttonStyle(.borderedProminent)
                             .controlSize(.large)

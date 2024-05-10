@@ -148,12 +148,21 @@ class ServiceViewModel: ObservableObject {
 //    }
     
     func getPopups(selectedCategory: Category, property: Feature?) async throws {
-            self.popupGroups.removeAll()
-        var groups = try await getPopupsForLayers(layers: selectedCategory.layers, geometry: (property?.geometry)!)
-            self.popupGroups = groups
-            
-            
+        self.popupGroups.removeAll()
         
+        guard let propertyGeometry = property?.geometry else {
+            // Handle the case where property is nil or its geometry is nil
+            return
+        }
+        
+        do {
+            let groups = try await getPopupsForLayers(layers: selectedCategory.layers, geometry: propertyGeometry)
+            self.popupGroups = groups
+        } catch {
+            // Handle the error thrown by getPopupsForLayers
+            print("Error getting popups:", error)
+            throw error // Re-throw the error if needed
+        }
     }
 
 }

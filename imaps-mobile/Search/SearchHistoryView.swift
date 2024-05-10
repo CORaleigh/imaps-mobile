@@ -56,11 +56,7 @@ struct FlatLinkStyle: ButtonStyle {
 struct SearchHistoryView_Previews: PreviewProvider {
     static var previews: some View {
         SearchHistoryView(
-            mapViewModel: MapViewModel(
-                map: Map (
-                    item: PortalItem(portal: .arcGISOnline(connection: .anonymous), id: PortalItem.ID("95092428774c4b1fb6a3b6f5fed9fbc4")!)
-                )
-            ), panelVM: PanelViewModel(isPresented: false),
+            mapViewModel: MapViewModel(), panelVM: PanelViewModel(isPresented: false),
             searchHistory: SearchHistoryModel(history: SearchHistory(historyItems: [])))
     }
 }

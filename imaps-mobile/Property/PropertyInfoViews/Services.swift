@@ -130,9 +130,19 @@ struct FieldsPopupElementView: View {
             if (field.isVisible) {
                 Grid {
                     GridRow {
+                        let value = fieldElement.formattedValues[fieldIndex]
                         Text(fieldElement.labels[fieldIndex])
-                        Text(fieldElement.formattedValues[fieldIndex])
+                        if value.starts(with: "http") {
+                            if let url = URL(string: value) {
+                                Link("View", destination: url)
+                            } else {
+                                Text("Invalid URL")
+                            }
+                        } else {
+                            Text(value)
+                        }
                     }
+
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.all)
                 }
@@ -157,6 +167,7 @@ struct MediaPopupElementView: View {
                     AsyncImage(url: sourceURL,
                                content: { image in
                         image.resizable().aspectRatio(contentMode: .fit)
+                            .frame(width: UIScreen.main.bounds.width * 0.5)
                                 }, placeholder: {
                                     ProgressView()
                                     

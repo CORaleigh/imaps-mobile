@@ -14,17 +14,48 @@ class MapViewModel: ObservableObject {
     let locationDisplay = LocationDisplay(dataSource: SystemLocationDataSource())
     var attributionBarHeight: CGFloat = 0
     
-    init(map: Map) {
-        self.map = map
+    
+    init() {
+        guard let portalItemID = PortalItem.ID("95092428774c4b1fb6a3b6f5fed9fbc4") else {
+            // Handle the case when the portal item ID is nil
+            print("Invalid portal item ID")
+            map = Map()
+            return
+        }
+        
+        let portalItem = PortalItem(portal: .arcGISOnline(connection: .anonymous), id: portalItemID)
+        map = Map(item: portalItem)
+        
         Task {
-            try? await map.load()
-            for table in self.map.tables {
-                try await table.load()
+            do {
+ 
+                    try await map.load()
+                    for table in map.tables {
+                        try await table.load()
+                    }
+                    await setLayerVisibility(map: map)
+               
+            } catch {
+                // Handle the error
+                print("Error loading map:", error)
             }
-            await setLayerVisibility(map: map)
         }
         self.viewpoint = setViewpoint()
+
     }
+
+    
+//    init(map: Map) {
+//        self.map = map
+//        Task {
+//            try? await map.load()
+//            for table in self.map.tables {
+//                try await table.load()
+//            }
+//            await setLayerVisibility(map: map)
+//        }
+//        self.viewpoint = setViewpoint()
+//    }
     func getCondoTable (map: Map) -> ServiceFeatureTable? {
         let table = map.tables.first{$0.displayName.uppercased().contains("CONDO")} as? ServiceFeatureTable
         return table
@@ -71,14 +102,15 @@ class MapViewModel: ObservableObject {
         }
         
     }
-    func setViewpoint () -> Viewpoint {
+    func setViewpoint() -> Viewpoint {
         var viewpoint = Viewpoint(center: Point(latitude: 35.7796, longitude: -78.6382), scale: 500_000)
-        let center: String? = UserDefaults.standard.string(forKey: "center")
-        let scale: Double = UserDefaults.standard.double(forKey: "scale")
-        if (center != nil) {
-            viewpoint = Viewpoint(center: try! Geometry.fromJSON(center!) as! Point,
-                                  scale: scale)
+        
+        if let centerJSON = UserDefaults.standard.string(forKey: "center"),
+           let centerGeometry = try? Geometry.fromJSON(centerJSON) as? Point,
+           let scale = UserDefaults.standard.value(forKey: "scale") as? Double {
+            viewpoint = Viewpoint(center: centerGeometry, scale: scale)
         }
+        
         return viewpoint
     }
     

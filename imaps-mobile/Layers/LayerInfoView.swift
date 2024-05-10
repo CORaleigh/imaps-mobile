@@ -33,12 +33,23 @@ struct LayerInfoView: View {
         }
         .background(Color("Background"))
         .task {
-            let infos: [LegendInfo] = try! await layer.legendInfos
-            infos.forEach { info in
-                Task {
-                    guard let swatch = try? await info.symbol?.makeSwatch(scale: 1.0) else { return }
-                    self.swatches.append(LegendSwatch(label: info.name, swatch: swatch))
+            do {
+                let infos: [LegendInfo] = try await layer.legendInfos
+                for info in infos {
+                    do {
+                        if let symbol = try await info.symbol?.makeSwatch(scale: 1.0) {
+                            self.swatches.append(LegendSwatch(label: info.name, swatch: symbol))
+                        } else {
+                            // Handle the case where symbol is nil
+                        }
+                    } catch {
+                        // Handle error occurred during symbol swatch creation
+                        print("Error creating symbol swatch: \(error)")
+                    }
                 }
+            } catch {
+                // Handle error occurred during fetching legendInfos
+                print("Error fetching legend infos: \(error)")
             }
         }
         .toolbar {

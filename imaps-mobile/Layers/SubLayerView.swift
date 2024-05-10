@@ -11,18 +11,20 @@ struct SubLayerView: View {
         if ((layer as? GroupLayer) != nil) {
             if layerVM.searchText.count == 0 || layer.subLayerContents.filter({$0.name.lowercased().contains(layerVM.searchText.lowercased()) }).count > 0 {
                 DisclosureGroup(layer.name, isExpanded: $isExpanded) {
-                    ForEach(layer.subLayerContents.reversed(), id:\.self.name) {
-                        sublayer in
-                        if ((layer as? GroupLayer) != nil) {
+                    ForEach(layer.subLayerContents.reversed(), id: \.self.name) { sublayer in
+                        if layer is GroupLayer {
                             SubLayerView(layer: sublayer as! Layer, layerVM: layerVM, panelVM: self.panelVM)
                         } else {
-                            
-                            Toggle(isOn: Binding<Bool>(get: {sublayer.isVisible}, set: {sublayer.isVisible = $0;})) {
+                            Toggle(isOn: Binding<Bool>(
+                                get: { sublayer.isVisible },
+                                set: { sublayer.isVisible = $0 }
+                            )) {
                                 Text(sublayer.name)
                             }
                         }
                     }
                 }
+
                 .onChange(of: isExpanded) { newValue in
                     if newValue {
                         // Perform actions or display views when expanded

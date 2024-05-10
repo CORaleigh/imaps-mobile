@@ -79,12 +79,11 @@ func queryRelatedCondos(for addressTable: ServiceFeatureTable, relationshipInfo:
         relatedParams.whereClause = "1=1"
         guard let result = try? await addressTable.queryRelatedFeatures(to: feature as! ArcGISFeature, using: relatedParams, queryFeatureFields: .loadAll) else { return }
         if !result.isEmpty {
-            completion(Array((result.first?.features())!))
+            if let firstFeatures = result.first?.features() {
+                completion(Array(firstFeatures))
+            }
         }
     }
-    
-    
 
-    
 }
 

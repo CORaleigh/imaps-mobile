@@ -37,24 +37,9 @@ struct SearchView: View, Equatable {
                     .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: "Search by address, owner, PIN or REID")
                     
                     .onChange(of: searchText) { value in
-                        Task {
-                            if !value.isEmpty && value.count > 3 {
-                                try await Task.sleep(nanoseconds: 250_000_000)
-                                guard !Task.isCancelled else {
-                                    return
-                                }
-                                await searchListVM.search(text: value.uppercased())
-                                searchListVM.updateView()
-                            } else {
-                                for group in searchListVM.groups {
-                                    group.features.removeAll()
-                                    
-                                }
-                                searchListVM.updateView()
-                            }
-                        }
-                        
+                        searchListVM.handleSearchTextChange(value)
                     }
+
                     .onChange(of: propertySelected) { selected in
                         if selected == false {
                             self.panelVM.selectedPinNum = ""
@@ -105,11 +90,7 @@ struct SearchView: View, Equatable {
 
 struct SearchView_Previews: PreviewProvider {
     static var previews: some View {
-        SearchView(mapViewModel: MapViewModel(
-            map: Map (
-                item: PortalItem(portal: .arcGISOnline(connection: .anonymous), id: PortalItem.ID("95092428774c4b1fb6a3b6f5fed9fbc4")!)
-            )
-        ), panelVM: PanelViewModel(isPresented: false))
+        SearchView(mapViewModel: MapViewModel(), panelVM: PanelViewModel(isPresented: false))
         
     }
 }

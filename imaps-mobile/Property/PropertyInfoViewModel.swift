@@ -22,9 +22,11 @@ class PropertyInfoViewModel: ObservableObject {
         params.whereClause = "\(field) = '\(value)'"
         params.addOrderByField(OrderBy(fieldName: "SITE_ADDRESS", sortOrder: .ascending))
         let result = try? await table.queryFeatures(using: params, queryFeatureFields: .loadAll)
-        completion((result?.features())!)
+        if let features = result?.features() {
+            completion(AnySequence(features))
+        }
     }
-    func getDeeds(for table: ServiceFeatureTable, feature: ArcGISFeature, relationshipInfo: RelationshipInfo, completion: @escaping ([Feature]) -> Void) async {
+    func getDeeds(for table: ServiceFeatureTable, feature: ArcGISFeature, relationshipInfo: RelationshipInfo, completion: @escaping ([Feature]) -> Void) async throws{
         let relatedParams  = RelatedQueryParameters(relationshipInfo: relationshipInfo)
         let relatedResults = try? await table.queryRelatedFeatures(to: feature, using: relatedParams, queryFeatureFields: .loadAll)
         relatedResults?.forEach({ result in
@@ -53,18 +55,28 @@ class PropertyInfoViewModel: ObservableObject {
     }
     
     func queryProperty(for table: ArcGISFeatureTable, params: QueryParameters, relationshipInfo: RelationshipInfo, completion: @escaping (AnySequence<Feature>) -> Void) async {
-        let result = try? await table.queryFeatures(using: params)
-        result?.features().forEach({ feature in
-            Task {
-                let relatedParams  = RelatedQueryParameters(relationshipInfo: relationshipInfo)
-                let relatedResults = try? await table.queryRelatedFeatures(to: feature as! ArcGISFeature, using: relatedParams)
-                
-                relatedResults?.forEach({ result in
-                    if ((result.relatedTable?.tableName.contains("Property")) != nil) {
-                        completion(result.features())
+        guard let result = try? await table.queryFeatures(using: params) else {
+            // Handle the error if needed
+            return
+        }
+
+        var relatedFeatures: [Feature] = []
+        for feature in result.features() {
+            do {
+                let relatedParams = RelatedQueryParameters(relationshipInfo: relationshipInfo)
+                let relatedResults = try await table.queryRelatedFeatures(to: feature as! ArcGISFeature, using: relatedParams)
+                for relatedResult in relatedResults {
+                    if relatedResult.relatedTable?.tableName.contains("Property") == true {
+                        relatedFeatures.append(contentsOf: relatedResult.features())
                     }
-                })
+                }
+            } catch {
+                print("Error querying related features:", error)
+                // Handle or propagate the error as needed
             }
-        })
+        }
+
+        completion(AnySequence(relatedFeatures))
     }
+
 }

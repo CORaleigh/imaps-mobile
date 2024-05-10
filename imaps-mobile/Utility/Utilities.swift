@@ -70,24 +70,38 @@ func getSearchHistory() -> SearchHistory {
 }
 
 func updateStorageHistory(field: String, value: String) -> SearchHistory {
-    if let json = UserDefaults.standard.value(forKey: "searchHistory") as? Data {
-        let decoder = JSONDecoder()
-        if var jsonDecoded = try? decoder.decode(SearchHistory.self, from: json) as SearchHistory {
-            if (jsonDecoded.historyItems.count == 10) {
+    // Ensure the field and value are not empty
+    guard !field.isEmpty && !value.isEmpty else {
+        return SearchHistory(historyItems: [])
+    }
+
+    do {
+        if let json = UserDefaults.standard.value(forKey: "searchHistory") as? Data {
+            let decoder = JSONDecoder()
+            var jsonDecoded = try decoder.decode(SearchHistory.self, from: json)
+            
+            // Remove oldest history item if the count exceeds 10
+            if jsonDecoded.historyItems.count == 10 {
                 jsonDecoded.historyItems.removeFirst()
             }
-            let index = jsonDecoded.historyItems.firstIndex(where: {$0.field == field && $0.value == value})
-            if index != nil {
-                jsonDecoded.historyItems.remove(at: index!)
+            
+            // Remove existing history item if found
+            if let index = jsonDecoded.historyItems.firstIndex(where: { $0.field == field && $0.value == value }) {
+                jsonDecoded.historyItems.remove(at: index)
             }
+            
+            // Append new history item
             jsonDecoded.historyItems.append(HistoryItem(field: field, value: value))
-            // jsonDecoded.historyItems = []
+            
             return jsonDecoded
         } else {
+            // Initialize new search history if no existing history found
             return SearchHistory(historyItems: [HistoryItem(field: field, value: value)])
         }
-    } else {
-        return SearchHistory(historyItems: [HistoryItem(field: field, value: value)])
+    } catch {
+        // Handle decoding errors
+        print("Error decoding search history:", error)
+        return SearchHistory(historyItems: [])
     }
 }
 

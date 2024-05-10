@@ -7,12 +7,18 @@ public var boundaryString: String {
 
 struct Boundary {
     let boundary: Polygon
+
     init() {
-        self.boundary = createPolygon()!
+        if let polygon = createPolygon() {
+            self.boundary = polygon
+        } else {
+            // Handle the case where createPolygon() returns nil
+            // You can provide a default value or handle the error accordingly
+            fatalError("Failed to create polygon.")
+        }
     }
-    
-    
 }
+
 func createPolygon() -> Polygon? {
     do {
         return try Polygon.fromJSON(boundaryString)

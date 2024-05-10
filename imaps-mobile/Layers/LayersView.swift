@@ -96,11 +96,7 @@ struct LayersView: View, Equatable {
 
 struct LayersView_Previews: PreviewProvider {
     static var previews: some View {
-        LayersView(mapViewModel: MapViewModel(
-            map: Map (
-                item: PortalItem(portal: .arcGISOnline(connection: .anonymous), id: PortalItem.ID("95092428774c4b1fb6a3b6f5fed9fbc4")!)
-            )
-        ), panelVM: PanelViewModel(isPresented: false))
+        LayersView(mapViewModel: MapViewModel(), panelVM: PanelViewModel(isPresented: false))
     }
 }
 

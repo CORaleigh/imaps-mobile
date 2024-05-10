@@ -28,6 +28,38 @@ class SearchListViewModel: ObservableObject {
     func updateView(){
         self.objectWillChange.send()
     }
+    func handleSearchTextChange(_ value: String) {
+        Task {
+            if !value.isEmpty && value.count > 3 {
+                try? await performSearch(text: value.uppercased())
+            } else {
+                for group in groups {
+                    group.features.removeAll()
+                    
+                }
+            }
+            objectWillChange.send()
+        }
+    }
+    
+    func performSearch(text: String) async throws {
+        do {
+            try await Task.sleep(nanoseconds: 250_000_000)
+            guard !Task.isCancelled else {
+                return
+            }
+            await search(text: text)
+        } catch {
+            // Handle the error appropriately
+            print("Error performing search: \(error)")
+            // Handle or propagate the error if needed
+            throw error // Re-throw the error if necessary
+        }
+    }
+ 
+
+
+
 }
 
 class SearchItem: ObservableObject, Identifiable, Hashable  {

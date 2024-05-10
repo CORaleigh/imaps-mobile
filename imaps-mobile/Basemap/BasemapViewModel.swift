@@ -29,7 +29,7 @@ func getGroups(for query: String, completion: @escaping (PortalQueryResultSet<Po
     }
 }
 
-func getMaps(for id: String!, completion: @escaping (PortalQueryResultSet<PortalItem>)  -> Void) async {
+func getMaps(for id: String, completion: @escaping (PortalQueryResultSet<PortalItem>)  -> Void) async {
     do {
         let portal: Portal = .arcGISOnline(connection: .anonymous)
         var params = PortalQueryParameters(query: "type: Web Map AND group: "+id)

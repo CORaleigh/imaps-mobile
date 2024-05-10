@@ -15,13 +15,12 @@ struct PropertyView: View, Equatable {
     }
     var body: some View {
         ZStack{
-            if (self.propertyVM.features.count == 1) {
+            if let feature = propertyVM.feature {
                 ScrollView {
-                    if self.propertyVM.feature != nil {
-                        PropertyInfoView(mapViewModel: mapViewModel, panelVM: panelVM, feature:FeatureViewModel(feature:self.propertyVM.feature!))
-                    }
+                    PropertyInfoView(mapViewModel: mapViewModel, panelVM: panelVM, feature: FeatureViewModel(feature: feature))
                 }
             }
+
             
             if (self.propertyVM.features.count > 1) {
                 PropertyListView(mapViewModel: mapViewModel, panelVM: self.panelVM, propertyVM: self.propertyVM, fromSearch: true)
@@ -90,11 +89,7 @@ struct PropertyView: View, Equatable {
 
 struct PropertyView_Previews: PreviewProvider {
     static var previews: some View {
-        PropertyView(viewModel: ViewModel(text: ""),  group: SearchGroup(field: "SITE_ADDRESS", alias: "Site Address", features: []), source: .search,mapViewModel: MapViewModel(
-            map: Map (
-                item: PortalItem(portal: .arcGISOnline(connection: .anonymous), id: PortalItem.ID("95092428774c4b1fb6a3b6f5fed9fbc4")!)
-            )
-        ), panelVM: PanelViewModel(isPresented: false))
+        PropertyView(viewModel: ViewModel(text: ""),  group: SearchGroup(field: "SITE_ADDRESS", alias: "Site Address", features: []), source: .search,mapViewModel: MapViewModel(), panelVM: PanelViewModel(isPresented: false))
         
     }
 }

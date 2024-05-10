@@ -58,15 +58,21 @@ struct LocationButtonView: View {
         .buttonStyle(.plain)
             
         }
-        .alert(isPresented: $showAlert, content: {
-            Alert(title: Text("Location Services Not Enabled"),
-            message: Text("To view your device's current position, location services need to be turned on"),
-                  primaryButton: .default(Text("Turn On In Settings"), action: {
-                UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
-            }),
-                  secondaryButton: .default(Text("Keep Location Services Off"))
+        .alert(isPresented: $showAlert) {
+            Alert(
+                title: Text("Location Services Not Enabled"),
+                message: Text("To view your device's current position, location services need to be turned on"),
+                primaryButton: .default(Text("Turn On In Settings")) {
+                    if let settingsURL = URL(string: UIApplication.openSettingsURLString) {
+                        UIApplication.shared.open(settingsURL)
+                    } else {
+                        print("Error: Unable to open settings URL.")
+                    }
+                },
+                secondaryButton: .default(Text("Keep Location Services Off"))
             )
-        })
+        }
+
     }
 }
 

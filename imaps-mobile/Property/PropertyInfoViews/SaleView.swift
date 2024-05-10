@@ -10,11 +10,12 @@ struct SaleView: View {
             Grid() {
                 GridRow {
                     Text("Date Sold")
-                    if (attributes?["SALE_DATE"] != nil) {
-                        Text(formatDate(date:attributes?["SALE_DATE"] as! Date))
+                    if let saleDate = attributes?["SALE_DATE"] as? Date {
+                        Text(formatDate(date: saleDate))
                             .fixedSize(horizontal: false, vertical: true)
                     }
                 }
+
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.all, 1)
                 

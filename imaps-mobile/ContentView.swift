@@ -9,11 +9,7 @@ struct ContentView: View {
     @StateObject var popupVM = PopupViewModel(isPresented: false)
     @State var basemapVM = BasemapViewModel(selected: .Maps, center: Point(x:0,y:0))
     @State private var isKeyboardVisible = false
-    @StateObject  var mapViewModel = MapViewModel(
-        map: Map (
-            item: PortalItem(portal: .arcGISOnline(connection: .anonymous), id: PortalItem.ID("95092428774c4b1fb6a3b6f5fed9fbc4")!)
-        )
-    )
+    @StateObject  var mapViewModel = MapViewModel()
     
     var body: some View {
         ZStack (alignment: .topTrailing) {

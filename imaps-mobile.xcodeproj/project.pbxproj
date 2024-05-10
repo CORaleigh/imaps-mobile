@@ -9,8 +9,6 @@
 /* Begin PBXBuildFile section */
 		C706EF2F29E8D84D005EEAE0 /* PropertyListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C706EF2E29E8D84D005EEAE0 /* PropertyListView.swift */; };
 		C70CA3D52BAC9E6F00866A34 /* BasemapItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70CA3D42BAC9E6F00866A34 /* BasemapItemView.swift */; };
-		C70CA3DB2BADE1E700866A34 /* ServicesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70CA3DA2BADE1E700866A34 /* ServicesView.swift */; };
-		C70CA3DD2BADE25700866A34 /* ServicesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70CA3DC2BADE25700866A34 /* ServicesViewModel.swift */; };
 		C70CB49F29E6E49D00B6A157 /* imaps_mobileApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70CB49E29E6E49D00B6A157 /* imaps_mobileApp.swift */; };
 		C70CB4A129E6E49D00B6A157 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70CB4A029E6E49D00B6A157 /* ContentView.swift */; };
 		C70CB4A329E6E49E00B6A157 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C70CB4A229E6E49E00B6A157 /* Assets.xcassets */; };
@@ -62,8 +60,6 @@
 /* Begin PBXFileReference section */
 		C706EF2E29E8D84D005EEAE0 /* PropertyListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyListView.swift; sourceTree = "<group>"; };
 		C70CA3D42BAC9E6F00866A34 /* BasemapItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasemapItemView.swift; sourceTree = "<group>"; };
-		C70CA3DA2BADE1E700866A34 /* ServicesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicesView.swift; sourceTree = "<group>"; };
-		C70CA3DC2BADE25700866A34 /* ServicesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicesViewModel.swift; sourceTree = "<group>"; };
 		C70CB49B29E6E49D00B6A157 /* iMAPS Beta.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "iMAPS Beta.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C70CB49E29E6E49D00B6A157 /* imaps_mobileApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = imaps_mobileApp.swift; sourceTree = "<group>"; };
 		C70CB4A029E6E49D00B6A157 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -185,8 +181,6 @@
 				C70CB4CD29E6F80E00B6A157 /* BuildingView.swift */,
 				C70CB4CF29E6F81500B6A157 /* DeedView.swift */,
 				C70CB4D329E71A3C00B6A157 /* PhotoView.swift */,
-				C70CA3DA2BADE1E700866A34 /* ServicesView.swift */,
-				C70CA3DC2BADE25700866A34 /* ServicesViewModel.swift */,
 				C7CEB3822BE4048D0098DC1B /* HTMLTextView.swift */,
 				C72688CD2BB3326D00EB0372 /* TaxInfoView.swift */,
 				C70CB4BF29E6F77500B6A157 /* WebView.swift */,
@@ -379,13 +373,11 @@
 				C7CEB37D2BE3CD140098DC1B /* Services.swift in Sources */,
 				C78B7C342BC971270098A373 /* WebMapView.swift in Sources */,
 				C78B7C322BC8B2BA0098A373 /* PopupViewModel.swift in Sources */,
-				C70CA3DB2BADE1E700866A34 /* ServicesView.swift in Sources */,
 				C72688CE2BB3326D00EB0372 /* TaxInfoView.swift in Sources */,
 				C7AE688929F9B6B300C616BB /* MapViewModel.swift in Sources */,
 				C735C23729E9DFB3006A3767 /* AppSecrets.swift.masque.swift in Sources */,
 				C7AE688629F9B67400C616BB /* SearchItemView.swift in Sources */,
 				C70E73412BBF15230042A932 /* LayersViewModel.swift in Sources */,
-				C70CA3DD2BADE25700866A34 /* ServicesViewModel.swift in Sources */,
 				C7AE689329F9B74B00C616BB /* PropertyView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -520,7 +512,7 @@
 				CODE_SIGN_ENTITLEMENTS = "imaps-mobile/imaps_mobile.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 20;
+				CURRENT_PROJECT_VERSION = 21;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"imaps-mobile/Preview Content\"";
 				DEVELOPMENT_TEAM = MRWDJLVR85;
@@ -569,7 +561,7 @@
 				CODE_SIGN_ENTITLEMENTS = "imaps-mobile/imaps_mobile.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 20;
+				CURRENT_PROJECT_VERSION = 21;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"imaps-mobile/Preview Content\"";
 				DEVELOPMENT_TEAM = MRWDJLVR85;

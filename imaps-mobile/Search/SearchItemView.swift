@@ -17,11 +17,7 @@ struct SearchItemView: View {
 
 struct SearchItemView_Previews: PreviewProvider {
     static var previews: some View {
-        SearchItemView(mapViewModel: MapViewModel(
-            map: Map (
-                item: PortalItem(portal: .arcGISOnline(connection: .anonymous), id: PortalItem.ID("95092428774c4b1fb6a3b6f5fed9fbc4")!)
-            )
-        ), panelVM: PanelViewModel(isPresented: false), text: "222 W HARGETT ST", group: SearchGroup(field: "SITE_ADDRESS", alias: "ADDRESS", features: [SearchItem(feature: SearchFeature(attributes: Attributes(siteAddress: "SITE_ADDRESS", fullStreetName: "FULL_STREET_NAME", owner: "OWNER", reid: "REID", pin: "PIN")))]))
+        SearchItemView(mapViewModel: MapViewModel(), panelVM: PanelViewModel(isPresented: false), text: "222 W HARGETT ST", group: SearchGroup(field: "SITE_ADDRESS", alias: "ADDRESS", features: [SearchItem(feature: SearchFeature(attributes: Attributes(siteAddress: "SITE_ADDRESS", fullStreetName: "FULL_STREET_NAME", owner: "OWNER", reid: "REID", pin: "PIN")))]))
     }
 }
 
