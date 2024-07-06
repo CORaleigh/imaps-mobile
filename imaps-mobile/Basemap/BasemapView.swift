@@ -32,7 +32,8 @@ struct BasemapView: View, Equatable {
                                                         item: PortalItem(portal: .arcGISOnline(connection: .anonymous), id: basemapID)
                                                     )
                                                     try await map.load()
-                                                    
+                            
+                                                   
                                                     guard let tiled = map.basemap?.baseLayers.compactMap({ $0 as? ImageTiledLayer }).first,
                                                           let mapSR = map.spatialReference,
                                                           let tiledSR = tiled.spatialReference,

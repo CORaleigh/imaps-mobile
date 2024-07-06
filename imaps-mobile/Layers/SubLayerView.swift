@@ -1,11 +1,15 @@
 import SwiftUI
 import ArcGIS
 
-struct SubLayerView: View {
+struct SubLayerView: View, Equatable {
     var layer: Layer
     @ObservedObject var layerVM: LayerViewModel
     @ObservedObject var panelVM: PanelViewModel
     @State private var isExpanded = false
+    
+    static func == (lhs: SubLayerView, rhs: SubLayerView) -> Bool {
+        return lhs.layer.id == rhs.layer.id && lhs.layer.isVisible == rhs.layer.isVisible
+    }
     
     var body: some View {
         if ((layer as? GroupLayer) != nil) {
@@ -33,7 +37,6 @@ struct SubLayerView: View {
                         layerVM.expandedLayers = layerVM.expandedLayers.filter{$0 != layer.name}
                         
                     }
-                    print(layerVM.expandedLayers.count)
                 }
                 .onReceive(layerVM.$expandedLayers) { expandedLayers in
                     isExpanded = expandedLayers.contains(where: {$0 == layer.name})
@@ -48,6 +51,7 @@ struct SubLayerView: View {
                     
                     Toggle(isOn: Binding<Bool>(get: {layer.isVisible}, set: {
                         var visibleLayers: Array = UserDefaults.standard.array(forKey: "visibleLayers") ?? []
+                        print(layer.loadStatus)
                         layer.isVisible = $0
                         if (layer.isVisible) {
                             visibleLayers.append(layer.name)
@@ -60,15 +64,15 @@ struct SubLayerView: View {
                             }
                         }
                         UserDefaults.standard.set(visibleLayers, forKey: "visibleLayers")
+                        layerVM.objectWillChange.send() // Trigger view update
+
                     })) {
                         Text(layer.name)
                         
                     }
                 })
                 
-                .onAppear() {
-                    layerVM.objectWillChange.send()
-                }
+             
             }
         }
         

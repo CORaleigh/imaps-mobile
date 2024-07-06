@@ -91,11 +91,11 @@ class ServiceViewModel: ObservableObject {
     
     func getPopupsForLayers(layers: [Layer?], geometry: Geometry) async throws -> [PopupGroup] {
         var groups: [PopupGroup] = []
-        var tasks: [Task<[PopupGroup], Error>] = []
+        var tasks: [Task<[PopupGroup], Never>] = []
 
         for layer in layers {
             if let layer = layer {
-                let task = Task<[PopupGroup], Error> {
+                let task = Task<[PopupGroup], Never> {
                     do {
                         let popupGroup = try await self.getPopupsForLayer(layer: layer, selectedGeometry: geometry)
                         return [popupGroup].compactMap { $0 }
@@ -110,45 +110,17 @@ class ServiceViewModel: ObservableObject {
         }
 
         for task in tasks {
-            do {
-                let result = try await task.value
-                groups.append(contentsOf: result)
-            } catch {
-                // Handle error if any task fails
-                print("Error: \(error)")
-            }
+            let result = await task.value
+            groups.append(contentsOf: result)
         }
 
         return groups
     }
 
-    
-//    func getPopupsForLayers(layers: [Layer?], geometry: Geometry) async throws -> [PopupGroup] {
-//        var groups: [PopupGroup] = []
-//        for layer in layers {
-//            // Safely unwrap optionals
-//                Task {
-//                    do {
-//                        // Await the asynchronous function
-//                        if layer != nil {
-//                            let popupGroup = try await self.getPopupsForLayer(layer: layer!, selectedGeometry: geometry)
-//                            if ((popupGroup) != nil) {
-//                                groups.append(popupGroup!)
-//                            }
-//                            
-//                        }
-//                        
-//                    } catch {
-//                        // Handle errors from asynchronous function
-//                        print("Error: \(error)")
-//                    }
-//                }
-//        }
-//        return groups
-//    }
+
     
     func getPopups(selectedCategory: Category, property: Feature?) async throws {
-        self.popupGroups.removeAll()
+        popupGroups.removeAll()
         
         guard let propertyGeometry = property?.geometry else {
             // Handle the case where property is nil or its geometry is nil
@@ -156,8 +128,7 @@ class ServiceViewModel: ObservableObject {
         }
         
         do {
-            let groups = try await getPopupsForLayers(layers: selectedCategory.layers, geometry: propertyGeometry)
-            self.popupGroups = groups
+            popupGroups =  try await getPopupsForLayers(layers: selectedCategory.layers, geometry: propertyGeometry)
         } catch {
             // Handle the error thrown by getPopupsForLayers
             print("Error getting popups:", error)

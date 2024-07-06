@@ -25,76 +25,78 @@ struct Services: View, Equatable {
         self.propertyInfoViewModel = propertyInfoViewModel
     }
     var body: some View {
-        VStack  (alignment: .leading){
-            HStack (alignment: .center) {
-                Text("Category").font(.subheadline)
-                    .frame(maxWidth: 100)
-                Picker("Category", selection: $selectedCategory) {
-                    ForEach(0..<serviceViewModel.categories.count, id:\.self) { i in
-                        Text(serviceViewModel.categories[i].title).tag(i)
+        VStack {
+            VStack  (alignment: .leading){
+                HStack (alignment: .center) {
+                    Text("Category").font(.subheadline)
+                        .frame(maxWidth: 120)
+                    Picker("Category", selection: $selectedCategory) {
+                        ForEach(0..<serviceViewModel.categories.count, id:\.self) { i in
+                            Text(serviceViewModel.categories[i].title).tag(i)
+                        }
                     }
+                    .pickerStyle(.automatic)
+                    .frame(maxWidth: .infinity)
+                    .padding(.all)
                 }
-                .pickerStyle(.automatic)
-                .frame(maxWidth: .infinity)
+                .background(Color(UIColor.tertiarySystemBackground))
+                .border(Color(UIColor.tertiarySystemBackground), width: 5)
+                .cornerRadius(20)
                 .padding(.all)
-            }
-            .background(Color(UIColor.tertiarySystemBackground))
-            .border(Color(UIColor.tertiarySystemBackground), width: 5)
-            .cornerRadius(20)
-            .padding(.all)
-            
-        }.frame(maxWidth: .infinity, alignment: .leading)
-        ScrollView {
-
-            if (searching) {
-                GeometryReader { geometry in
-                    VStack {
-                        ProgressView().controlSize(.large)
-                            .progressViewStyle(CircularProgressViewStyle())
-                    }
-                    .frame(width: geometry.size.width, height: geometry.size.height*10)
-                }
-            } else {
-                if (serviceViewModel.popupGroups.isEmpty) {
-                    HStack {
-                        Spacer()
-                        
-                        Text("No information available")
-                        Spacer()
-                    }.padding(.all)
-                }
-                ForEach(serviceViewModel.popupGroups) { group in
-                    VStack {
-                        Spacer()
-
-                        Text(group.title).font(.title2)
-                        ForEach(group.popupElements.indices, id: \.self) { elementIndex in
-                            let element = group.popupElements[elementIndex]
+                
+            }.frame(maxWidth: .infinity, alignment: .leading)
+            VStack {
+                ZStack {
+                    if (searching) {
+                        GeometryReader { geometry in
                             VStack {
-                                if let fieldElement = element as? FieldsPopupElement {
-                                    FieldsPopupElementView(fieldElement: fieldElement)
-                                } else {
-                                    if let mediaElement = element as? MediaPopupElement {
-                                        MediaPopupElementView(mediaElement: mediaElement)
-                                            
-                                    } else {
-                                        if let textElement = element as? TextPopupElement {
-                                            TextPopupElementView(textElement: textElement)
-
+                                ProgressView().controlSize(.large)
+                                    .progressViewStyle(CircularProgressViewStyle())
+                            }
+                            .frame(width: geometry.size.width, height: geometry.size.height)
+                        }
+                    } else {
+                        if (serviceViewModel.popupGroups.isEmpty) {
+                            HStack {
+                                Spacer()
+                                
+                                Text("No information available")
+                                Spacer()
+                            }.padding(.all)
+                        }
+                        ScrollView {
+                            VStack {
+                                ForEach(serviceViewModel.popupGroups) { group in
+                                    VStack {
+                                        Text(group.title).font(.title2).padding(0)
+                                        ForEach(group.popupElements.indices, id: \.self) { elementIndex in
+                                            let element = group.popupElements[elementIndex]
+                                            VStack {
+                                                if let fieldElement = element as? FieldsPopupElement {
+                                                    FieldsPopupElementView(fieldElement: fieldElement)
+                                                } else {
+                                                    if let mediaElement = element as? MediaPopupElement {
+                                                        MediaPopupElementView(mediaElement: mediaElement)
+                                                        
+                                                    } else {
+                                                        if let textElement = element as? TextPopupElement {
+                                                            TextPopupElementView(textElement: textElement)
+                                                            
+                                                        }
+                                                    }
+                                                    
+                                                }
+                                            }
                                         }
+                                        Divider()
                                     }
-
                                 }
                             }
                         }
-                        Divider()
                     }
                 }
-
-            }
-
-            
-        }.background(Color("Background"))
+            }.background(Color("Background"))
+        }
             .onChange(of: selectedCategory, perform: { index in
                 Task {
                     searching = true
@@ -144,7 +146,7 @@ struct FieldsPopupElementView: View {
                     }
 
                     .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.all)
+                    .padding(5)
                 }
             }
 //            HStack {
@@ -167,11 +169,11 @@ struct MediaPopupElementView: View {
                     AsyncImage(url: sourceURL,
                                content: { image in
                         image.resizable().aspectRatio(contentMode: .fit)
-                            .frame(width: UIScreen.main.bounds.width * 0.5)
+                            .frame(width: 200)
                                 }, placeholder: {
                                     ProgressView()
                                     
-                                }).padding()
+                                }).padding(.all)
                 }
             }
         }
@@ -192,7 +194,7 @@ struct TextPopupElementView: View {
                 HTMLTextView(html: textElement.text, height: $webViewHeight)
                     .frame(height: webViewHeight)
                     .frame(maxWidth: .infinity, alignment: .center)
-                    .padding(.all)
+                    .padding(0)
 //                if webViewHeight == .zero {
 //                    // Show `ProgressView` until `HTMLTextView` has set the height.
 //                    ProgressView()

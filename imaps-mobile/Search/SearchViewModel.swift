@@ -2,6 +2,9 @@ import Foundation
 enum NetworkError: Error {
     case badURL
     case badID
+    case invalidURL
+    case badResponse
+    case invalidData
 }
 
 class Search: ObservableObject {

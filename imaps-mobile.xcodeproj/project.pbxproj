@@ -55,6 +55,7 @@
 		C7CEB37D2BE3CD140098DC1B /* Services.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CEB37C2BE3CD140098DC1B /* Services.swift */; };
 		C7CEB37F2BE3CD220098DC1B /* ServiceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CEB37E2BE3CD220098DC1B /* ServiceViewModel.swift */; };
 		C7CEB3832BE4048D0098DC1B /* HTMLTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CEB3822BE4048D0098DC1B /* HTMLTextView.swift */; };
+		C7D41C5D2BFE2627001EBE50 /* PopupListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D41C5C2BFE2627001EBE50 /* PopupListView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -107,6 +108,7 @@
 		C7CEB37C2BE3CD140098DC1B /* Services.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Services.swift; sourceTree = "<group>"; };
 		C7CEB37E2BE3CD220098DC1B /* ServiceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceViewModel.swift; sourceTree = "<group>"; };
 		C7CEB3822BE4048D0098DC1B /* HTMLTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTMLTextView.swift; sourceTree = "<group>"; };
+		C7D41C5C2BFE2627001EBE50 /* PopupListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupListView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,12 +151,12 @@
 				C70CB4A029E6E49D00B6A157 /* ContentView.swift */,
 				C78B7C332BC971270098A373 /* WebMapView.swift */,
 				C78B7C2D2BC8A5410098A373 /* PanelContentView.swift */,
-				C78B7C2F2BC8A8E00098A373 /* PopupContentView.swift */,
 				C70E73452BBF181D0042A932 /* Search */,
 				C70E73422BBF17AB0042A932 /* Property */,
 				C70E73432BBF17CF0042A932 /* Basemap */,
 				C70E73462BBF18300042A932 /* Layers */,
 				C70E73442BBF18010042A932 /* Map Buttons */,
+				C7D41C5E2BFE59C6001EBE50 /* Popups */,
 				C7AE688729F9B68A00C616BB /* Utility */,
 				C70CB49E29E6E49D00B6A157 /* imaps_mobileApp.swift */,
 				C735C23629E9DFB3006A3767 /* AppSecrets.swift.masque.swift */,
@@ -252,9 +254,18 @@
 				C7AE688829F9B6B300C616BB /* MapViewModel.swift */,
 				C70E73342BBB3A540042A932 /* PanelViewModel.swift */,
 				C7AE688C29F9B6D200C616BB /* Utilities.swift */,
-				C78B7C312BC8B2BA0098A373 /* PopupViewModel.swift */,
 			);
 			path = Utility;
+			sourceTree = "<group>";
+		};
+		C7D41C5E2BFE59C6001EBE50 /* Popups */ = {
+			isa = PBXGroup;
+			children = (
+				C78B7C2F2BC8A8E00098A373 /* PopupContentView.swift */,
+				C7D41C5C2BFE2627001EBE50 /* PopupListView.swift */,
+				C78B7C312BC8B2BA0098A373 /* PopupViewModel.swift */,
+			);
+			path = Popups;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -289,7 +300,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1420;
-				LastUpgradeCheck = 1530;
+				LastUpgradeCheck = 1540;
 				TargetAttributes = {
 					C70CB49A29E6E49D00B6A157 = {
 						CreatedOnToolsVersion = 14.2;
@@ -368,6 +379,7 @@
 				C70CB4D029E6F81500B6A157 /* DeedView.swift in Sources */,
 				C70E73392BBF10160042A932 /* BasemapViewModel.swift in Sources */,
 				C70CB4C029E6F77500B6A157 /* WebView.swift in Sources */,
+				C7D41C5D2BFE2627001EBE50 /* PopupListView.swift in Sources */,
 				C7AE689129F9B71100C616BB /* SubLayerView.swift in Sources */,
 				C78B7C302BC8A8E10098A373 /* PopupContentView.swift in Sources */,
 				C7CEB37D2BE3CD140098DC1B /* Services.swift in Sources */,
@@ -512,7 +524,7 @@
 				CODE_SIGN_ENTITLEMENTS = "imaps-mobile/imaps_mobile.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 21;
+				CURRENT_PROJECT_VERSION = 29;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"imaps-mobile/Preview Content\"";
 				DEVELOPMENT_TEAM = MRWDJLVR85;
@@ -561,7 +573,7 @@
 				CODE_SIGN_ENTITLEMENTS = "imaps-mobile/imaps_mobile.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 21;
+				CURRENT_PROJECT_VERSION = 29;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"imaps-mobile/Preview Content\"";
 				DEVELOPMENT_TEAM = MRWDJLVR85;

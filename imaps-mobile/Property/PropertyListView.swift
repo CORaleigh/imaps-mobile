@@ -71,8 +71,12 @@ struct PropertyListItemView: View {
             VStack (alignment: .leading) {
                 let address = (feature.feature.attributes["SITE_ADDRESS"] as? String ?? "") + " " + (feature.feature.attributes["STMISC"] as? String ?? "")
                 let owner = (feature.feature.attributes["OWNER"] as? String ?? "")
+                let pin = (feature.feature.attributes["PIN_NUM"] as? String ?? "")
+                let ext = (feature.feature.attributes["PIN_EXT"] as? String ?? "") == "000" ? "" : (feature.feature.attributes["PIN_EXT"] as? String ?? "")
+
                 Text(address)
                 Text(owner)
+                Text("\(pin) \(ext)")
             }
         }
         .navigationDestination(isPresented: $feature.isPresented) {

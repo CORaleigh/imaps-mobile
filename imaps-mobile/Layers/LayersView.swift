@@ -16,7 +16,7 @@ struct LayersView: View, Equatable {
         NavigationStack {
             List {
                 ForEach(0..<mapViewModel.map.operationalLayers.count, id:\.self) { i in
-                    let layer = mapViewModel.map.operationalLayers[i]
+                    let layer = mapViewModel.map.operationalLayers.reversed()[i]
                     SubLayerView(layer: layer, layerVM: layerVM, panelVM: panelVM)
                 }
             }
@@ -103,25 +103,14 @@ struct LayersView_Previews: PreviewProvider {
 @MainActor func expandAllLayers(mapViewModel: MapViewModel, layerVM: LayerViewModel) {
     layerVM.objectWillChange.send()
 
-    layerVM.expandedLayers.removeAll()
-    mapViewModel.map.operationalLayers.forEach { layer in
-        if ((layer as? GroupLayer) != nil) {
-            layerVM.expandedLayers.append(layer.name)
-            layer.subLayerContents.forEach { sublayer in
-                if ((sublayer as? GroupLayer) != nil) {
-                    layerVM.expandedLayers.append(sublayer.name)
-                    sublayer.subLayerContents.forEach { sublayer2 in
-                        if ((sublayer2 as? GroupLayer) != nil) {
-                            layerVM.expandedLayers.append(sublayer2.name)
-                            sublayer2.subLayerContents.forEach { sublayer3 in
-                                if ((sublayer3 as? GroupLayer) != nil) {
-                                    layerVM.expandedLayers.append(sublayer3.name)
-                                }
-                            }
-                        }
-                    }
-                }
-            }
+    layerVM.expandedLayers = expandLayers(mapViewModel.map.operationalLayers)
+}
+
+func expandLayers(_ layers: [LayerContent]) -> [String] {
+    return layers.flatMap { layerContent -> [String] in
+        if let groupLayer = layerContent as? GroupLayer {
+            return [groupLayer.name] + expandLayers(groupLayer.subLayerContents)
         }
+        return []
     }
 }

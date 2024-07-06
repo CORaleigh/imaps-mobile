@@ -39,17 +39,47 @@ struct WebMapView: View {
                 .task(id: self.popupVM.identifyScreenPoint) {
                     guard let identifyScreenPoint = self.popupVM.identifyScreenPoint,
                           
-                            let identifyResult = try? await proxy.identifyLayers(
+                            var identifyResult = try? await proxy.identifyLayers(
                                 screenPoint: identifyScreenPoint,
                                 tolerance: 10,
-                                returnPopupsOnly: true
+                                returnPopupsOnly: false,
+                                maximumResultsPerLayer: 50
                             )
                     else { return }
-                    self.popupVM.identifyResults = identifyResult.filter{result in result.layerContent.name != "Property"}
+                    self.popupVM.popupCount = 0
+                    self.popupVM.identifyResults = []
+                    identifyResult = identifyResult.filter{result in result.layerContent.name != "Property" && result.layerContent.name != "Raleigh Sewer"}
+                    identifyResult.forEach { result in
+                        if (result.sublayerResults.count > 0) {
+                            result.sublayerResults.forEach { sublayerResult in
+                                self.popupVM.popupCount += sublayerResult.popups.count
+
+                                self.popupVM.identifyResults.append(sublayerResult)
+                            }
+                        } else {
+                            self.popupVM.popupCount += result.popups.count
+                            self.popupVM.identifyResults.append(result)
+
+                        }
+                    }
+                    self.popupVM.popup = nil
                     
-                    self.popupVM.identifyResultCount = identifyResult.filter{result in result.layerContent.name != "Property"}.count
-                    self.popupVM.popup = identifyResult.first(where: {$0.layerContent.name != "Property"})?.popups.first
-                    self.popupVM.isPresented = self.popupVM.popup != nil
+                    if self.popupVM.popupCount == 1 {
+                        if let result = identifyResult.first(where: {$0.layerContent.name != "Property" && $0.layerContent.name != "Raleigh Sewer" && $0.popups.count > 0}),
+                           let popup = result.popups.first,
+                           let geoElement = result.geoElements.first,
+                           let layer = result.layerContent as? FeatureLayer {
+                            self.popupVM.popup = popup
+                            self.popupVM.geoElement = geoElement
+                            self.popupVM.layer = layer
+                            self.popupVM.layerName = result.layerContent.name
+                            
+                        }
+//                        self.popupVM.popup = identifyResult.first(where: {$0.layerContent.name != "Property" && $0.layerContent.name != "Raleigh Sewer" && $0.popups.count > 0})?.popups.first
+                        
+                    }
+
+                    self.popupVM.isPresented = popupVM.popupCount > 0//self.popupVM.identifyResultCount > 0
                 }
                 .task(id: mapViewModel.longPressScreenPoint) {
                     guard let longPressScreenPoint = mapViewModel.longPressScreenPoint else { return }

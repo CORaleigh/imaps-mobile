@@ -7,6 +7,8 @@ class MapViewModel: ObservableObject {
     @Published var longPressScreenPoint: CGPoint? = nil
     @Published var failedToStart = false
     @Published var locationEnabled = false
+    @Published var showAlert = false
+    @Published var alertMessage = ""
     
     var map: Map
     var proxy: MapViewProxy? = nil
@@ -28,12 +30,14 @@ class MapViewModel: ObservableObject {
         
         Task {
             do {
- 
-                    try await map.load()
-                    for table in map.tables {
-                        try await table.load()
-                    }
-                    await setLayerVisibility(map: map)
+                try? await checkAlert()
+
+                try await map.load()
+                for table in map.tables {
+                    try await table.load()
+                }
+                await setLayerVisibility(map: map)
+        
                
             } catch {
                 // Handle the error
@@ -71,7 +75,6 @@ class MapViewModel: ObservableObject {
         
         func setVisibility(_ layer: Layer) {
             layer.isVisible = true
-            
             if let groupLayer = layer as? GroupLayer {
                 for sublayer in groupLayer.layers {
                     setVisibility(sublayer)
@@ -79,29 +82,78 @@ class MapViewModel: ObservableObject {
             } else if layer.name != "Property" {
                 layer.isVisible = visibleLayers.contains(layer.name)
             }
+            if let mapImageLayer = layer as? ArcGISMapImageLayer {
+                if mapImageLayer.name == "Raleigh Stormwater" {
+                    let clonedLayer = mapImageLayer.clone()
+                    mapImageLayer.resetSublayers()
+                    mapImageLayer.mapImageSublayers.enumerated().forEach {index, sublayer in
+                        sublayer.popupsAreEnabled = clonedLayer.mapImageSublayers[index].popupsAreEnabled
+                        sublayer.popupDefinition = clonedLayer.mapImageSublayers[index].popupDefinition
+
+                    }
+                }
+            }
+            
         }
+        
+    
 
         for layer in map.operationalLayers {
+
             if layer.name == "Property" {
                 layer.isVisible = true
             } else {
                 setVisibility(layer)
             }
+
         }
     }
+    
+
     func propertySelected(map: Map, property: Feature) {
         Task {
-            guard let geometry = property.geometry  else { return }
-            if self.proxy != nil {
-                await self.proxy?.setViewpointGeometry(geometry, padding: 100)
-                self.graphics.removeAllGraphics()
-                
-                self.graphics.addGraphic(Graphic(geometry: property.geometry, attributes: property.attributes, symbol: SimpleFillSymbol(style: SimpleFillSymbol.Style.noFill, outline: SimpleLineSymbol(style: SimpleLineSymbol.Style.solid, color: UIColor.red, width: 2))))
+            guard let geometry = property.geometry else {
+                print("Error: Property geometry is nil")
+                return
             }
-            
+            if let proxy = self.proxy {
+                await proxy.setViewpointGeometry(geometry, padding: 100)
+
+                DispatchQueue.main.async {
+                    // Debugging statements
+                    print("Graphics count before removing: \(self.graphics.graphics.count)")
+
+                    // Remove all graphics
+                    self.graphics.removeAllGraphics()
+
+                    print("Graphics count after removing: \(self.graphics.graphics.count)")
+
+                    // Add new graphic
+                    let symbol = SimpleFillSymbol(
+                        style: .noFill,
+                        outline: SimpleLineSymbol(
+                            style: .solid,
+                            color: UIColor.red,
+                            width: 2
+                        )
+                    )
+                    let graphic = Graphic(
+                        geometry: geometry,
+                        attributes: property.attributes,
+                        symbol: symbol
+                    )
+                    self.graphics.addGraphic(graphic)
+
+                    // Debugging statements
+                    print("Graphics count after adding: \(self.graphics.graphics.count)")
+                }
+            } else {
+                print("Error: Proxy is nil")
+            }
         }
-        
     }
+
+
     func setViewpoint() -> Viewpoint {
         var viewpoint = Viewpoint(center: Point(latitude: 35.7796, longitude: -78.6382), scale: 500_000)
         
@@ -114,4 +166,38 @@ class MapViewModel: ObservableObject {
         return viewpoint
     }
     
+    
+    func checkAlert() async throws {
+        
+        guard let url = URL(string: "https://maps.raleighnc.gov/imaps-mobile/alert.json") else {
+            throw NetworkError.invalidURL
+        }
+        URLCache.shared.removeAllCachedResponses()
+
+        let (data, response) = try await URLSession.shared.data(from: url)
+        print(data)
+        
+        guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
+            throw NetworkError.badResponse
+        }
+        
+        guard let alertResponse = try? JSONDecoder().decode(AlertResponse.self, from: data) else {
+            throw NetworkError.invalidData
+        }
+        DispatchQueue.main.async { [self] in
+            if alertResponse.enabled == true {
+                showAlert = true
+                alertMessage = alertResponse.message
+            }
+        }
+    }
+
+    struct AlertResponse: Decodable {
+        let enabled: Bool
+        let message: String
+        enum CodingKeys: String, CodingKey {
+            case enabled
+            case message
+        }
+    }
 }

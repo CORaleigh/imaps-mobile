@@ -38,6 +38,9 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "closure #2 in closure #6 in closure #1 in closure #1 in WebMapView.body.getter:WebMapView.swift">
+      </ContextState>
+      <ContextState
          contextName = "closure #1 in closure #1 in closure #2 in closure #1 in ServicesView.body.getter:ServicesView.swift">
       </ContextState>
       <ContextState
@@ -61,6 +64,9 @@
       </ContextState>
       <ContextState
          contextName = "PropertyView.body.getter:PropertyView.swift">
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in closure #1 in closure #1 in PopupContentView.body.getter:PopupContentView.swift">
       </ContextState>
       <ContextState
          contextName = "static PropertyView.== infix(_:_:):PropertyView.swift">
@@ -144,6 +150,9 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "closure #6 in closure #1 in closure #1 in WebMapView.body.getter:WebMapView.swift">
+      </ContextState>
+      <ContextState
          contextName = "closure #1 in closure #2 in PropertyInfoView.body.getter:PropertyInfoView.swift">
          <PersistentStrings>
             <PersistentString
@@ -202,6 +211,9 @@
                value = "shared.map.loadStatus">
             </PersistentString>
          </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in closure #1 in closure #1 in closure #1 in closure #1 in closure #1 in PopupListView.body.getter:PopupListView.swift">
       </ContextState>
       <ContextState
          contextName = "closure #1 in closure #1 in closure #1 in LayersView.body.getter:LayersView.swift">
@@ -331,6 +343,9 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "closure #1 in closure #1 in closure #1 in closure #2 in closure #1 in closure #1 in closure #1 in closure #1 in BasemapView.body.getter:BasemapView.swift">
+      </ContextState>
+      <ContextState
          contextName = "closure #1 in closure #1 in closure #1 in closure #1 in closure #1 in LayersView.body.getter:LayersView.swift">
          <PersistentStrings>
             <PersistentString
@@ -345,6 +360,9 @@
                value = "textElement.text">
             </PersistentString>
          </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in closure #2 in SubLayerView.body.getter:SubLayerView.swift">
       </ContextState>
       <ContextState
          contextName = "setLocationYPosition(isPortrait:):ContentView.swift">
@@ -379,7 +397,15 @@
          contextName = "GLOBAL">
          <PersistentStrings>
             <PersistentString
-               value = "controller.view">
+               value = "raster.maxScale">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in closure #1 in PopupContentView.body.getter:PopupContentView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "popupVM.identifyResults[popupVM.identifyResultIndex].sublayerResults.first">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -460,12 +486,23 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "closure #2 in LayerInfoView.body.getter:LayerInfoView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "layer">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "ContentView.setLayerVisibility():ContentView.swift">
          <PersistentStrings>
             <PersistentString
                value = "shared.map.loadStatus">
             </PersistentString>
          </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #3 in closure #1 in closure #1 in closure #3 in closure #2 in ServicesView.body.getter:ServicesView.swift">
       </ContextState>
       <ContextState
          contextName = "closure #1 in closure #1 in search(for:params:newValue:):SearchView.swift">
@@ -477,9 +514,6 @@
                value = "type(of: urlString)">
             </PersistentString>
          </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "closure #3 in closure #1 in closure #1 in closure #3 in closure #2 in ServicesView.body.getter:ServicesView.swift">
       </ContextState>
       <ContextState
          contextName = "queryServices(for:propertyFeature:completion:):ServicesModel.swift">
@@ -496,6 +530,17 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "setVisibility #1 (_:) in MapViewModel.setLayerVisibility(map:):MapViewModel.swift">
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in PopupContentView.zoomToPopupFeature():PopupContentView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "geoElement.geometry">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "closure #6 in closure #1 in closure #1 in ContentView.body.getter:ContentView.swift">
          <PersistentStrings>
             <PersistentString
@@ -505,6 +550,9 @@
                value = "lastPinNum">
             </PersistentString>
          </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #2 in closure #1 in PopupContentView.body.getter:PopupContentView.swift">
       </ContextState>
       <ContextState
          contextName = "closure #3 in closure #1 in closure #1 in DeedView.body.getter:DeedView.swift">

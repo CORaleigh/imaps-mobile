@@ -16,6 +16,21 @@ class LayerViewModel: ObservableObject, Equatable {
     }
 }
 
+class LegendItem: ObservableObject, Identifiable , Hashable {
+    static func == (lhs: LegendItem, rhs: LegendItem) -> Bool {
+        return lhs.label == rhs.label && lhs.swatches == rhs.swatches
+    }
+    @Published var label: String
+    @Published var swatches: [LegendSwatch]
+    init(label: String, swatches: [LegendSwatch]) {
+        self.label = label
+        self.swatches = swatches
+    }
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(label)
+        hasher.combine(swatches)
+    }
+}
 
 
 class LegendSwatch: ObservableObject, Identifiable , Hashable {
@@ -24,7 +39,6 @@ class LegendSwatch: ObservableObject, Identifiable , Hashable {
     }
     @Published var label: String
     @Published var swatch: UIImage
-    
     init(label: String, swatch: UIImage) {
         self.label = label
         self.swatch = swatch

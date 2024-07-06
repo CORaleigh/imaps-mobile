@@ -10,12 +10,12 @@ struct ContentView: View {
     @State var basemapVM = BasemapViewModel(selected: .Maps, center: Point(x:0,y:0))
     @State private var isKeyboardVisible = false
     @StateObject  var mapViewModel = MapViewModel()
+
     
     var body: some View {
         ZStack (alignment: .topTrailing) {
             if #available(iOS 16.4, *), UIDevice.current.userInterfaceIdiom == .phone {
                 WebMapView(mapViewModel: mapViewModel, popupVM: popupVM, panelVM: panelVM, basemapVM: basemapVM)
-                    
                     .sheet(isPresented: self.$panelVM.isPresented) {
                         PanelContentView(mapViewModel: self.mapViewModel, panelVM: self.panelVM, basemapVM: self.basemapVM)
                             .presentationDetents([.medium, .large, .bar], selection: self.$panelVM.selectedDetent)
@@ -23,11 +23,18 @@ struct ContentView: View {
                             .presentationContentInteraction(.scrolls)
                     }
                     .sheet(isPresented: self.$popupVM.isPresented) {
-                        PopupContentView(popupVM: popupVM)
-                        
-                            .presentationDetents([.medium, .large, .bar], selection: self.$popupVM.selectedDetent)
-                            .presentationBackgroundInteraction(.enabled)
-                            .presentationContentInteraction(.scrolls)
+                        if (self.popupVM.popupCount > 1 && self.popupVM.popup == nil) {
+                            
+                            PopupListView(popupVM: popupVM)
+                                .presentationDetents([.medium, .large, .bar], selection: self.$popupVM.selectedDetent)
+                                .presentationBackgroundInteraction(.enabled)
+                                .presentationContentInteraction(.scrolls)
+                        } else {
+                            PopupContentView(popupVM: popupVM, panelVM: self.panelVM, mapViewModel: mapViewModel)
+                                .presentationDetents([.medium, .large, .bar], selection: self.$popupVM.selectedDetent)
+                                .presentationBackgroundInteraction(.enabled)
+                                .presentationContentInteraction(.scrolls)
+                        }
                     }
             
             } else {
@@ -51,8 +58,12 @@ struct ContentView: View {
                         isPresented: self.$popupVM.isPresented
                         //UIDevice.current.userInterfaceIdiom == .pad ? self.$popupVM.isPresented :  .constant(false)
                     ) { [popupVM] in
-                        PopupContentView(popupVM: popupVM)
-                    }
+                        if (self.popupVM.popupCount > 1 && self.popupVM.popup == nil) {
+                            
+                            PopupListView(popupVM: popupVM)
+                        } else {
+                            PopupContentView(popupVM: popupVM, panelVM: self.panelVM, mapViewModel: mapViewModel)
+                        }                    }
                     .ignoresSafeArea(.keyboard, edges: .bottom)
             }
             
@@ -63,7 +74,6 @@ struct ContentView: View {
             }
         }
         .onReceive(panelVM.$isPresented) { isPresented in
-            print(isPresented)
             if !isPresented {
                 var keyWindow: UIWindow? {
                     return UIApplication.shared.connectedScenes
@@ -78,7 +88,8 @@ struct ContentView: View {
             }
         }
         .onReceive(popupVM.$isPresented) { _ in
-            if popupVM.isPresented {
+            if popupVM.isPresented && UIDevice.current.userInterfaceIdiom != .pad {
+                
                 self.panelVM.isPresented = false
             }
         }
@@ -92,7 +103,10 @@ struct ContentView: View {
             self.isKeyboardVisible = false
         }
         .onAppear {
-            self.panelVM.isPresented = UIDevice.current.userInterfaceIdiom == .pad
+            Task {
+                try await Task.sleep(nanoseconds: 1_000_000_000)
+                self.panelVM.isPresented = UIDevice.current.userInterfaceIdiom == .pad
+            }
         }
         .onChange(of: networkMonitor.isConnected) { connection in
             if connection {
@@ -102,6 +116,10 @@ struct ContentView: View {
                         
                     }
                 } else {
+                    Task {
+                        try? await mapViewModel.checkAlert()
+
+                    }
                     mapViewModel.map = mapViewModel.map.clone()
                     Task {
                         try? await mapViewModel.map.load()
@@ -110,6 +128,10 @@ struct ContentView: View {
                 }
             }
         }
+        .alert(mapViewModel.alertMessage,
+               isPresented: .constant(mapViewModel.showAlert == true)
+        )
+        {}
         .alert(
             "Network connection seems to be offline.",
             isPresented: .constant(networkMonitor.isConnected == false)
@@ -121,6 +143,7 @@ struct ContentView: View {
                     
                     
                     try await Task.sleep(nanoseconds: 500_000_000)
+
                     switch url.host {
                     case "pin":
                         if url.query != nil {
