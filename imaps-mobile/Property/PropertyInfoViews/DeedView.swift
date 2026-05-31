@@ -81,11 +81,18 @@ struct DeedView: View {
                                 .frame(maxWidth: .infinity)
                             }
                             .navigationDestination(isPresented: $isDeedActive) {
-                                if let docId = deed?["DEED_DOC_NUM"] {
-                                    let urlString = "https://rodcrpi.wakegov.com/booksweb/pdfview.aspx?docid=\(docId)&RecordDate="
+                                if let docId = deed?["DEED_DOC_NUM"],
+                                   let book = deed?["DEED_BOOK"],
+                                   let page = deed?["DEED_PAGE"] {
+                                    
+                                    let urlString = "https://rodrecords.wake.gov/web/document-image-pdf/DOCC\(docId)/063b1544-5bbd-437f-9a5c-f5e90107ae28/\(book)-\(page)-1.pdf?index=1"
+                                    
                                     if let url = URL(string: urlString) {
                                         WebView(request: URLRequest(url: url))
                                             .navigationTitle("Deed")
+                                            .toolbar {
+                                                FullscreenButton(panelVM: panelVM)
+                                            }
                                     }
                                 }
                             }
@@ -106,14 +113,22 @@ struct DeedView: View {
                                 
                             }
                             .navigationDestination(isPresented: $isPlatActive) {
-                                if let docId = deed?["BOM_DOC_NUM"] {
-                                    let urlString = "https://rodcrpi.wakegov.com/booksweb/pdfview.aspx?docid=\(docId)&RecordDate="
+                                if let docId = deed?["BOM_DOC_NUM"],
+                                   let book = deed?["BOM_BOOK"],
+                                   let page = deed?["BOM_PAGE"] {
+                                    
+                                    let urlString = "https://rodrecords.wake.gov/web/document-image-pdf/DOCC\(docId)/063b1544-5bbd-437f-9a5c-f5e90107ae28/BM\(book)-\(page)-1.pdf?index=1"
+                                    
                                     if let url = URL(string: urlString) {
                                         WebView(request: URLRequest(url: url))
                                             .navigationTitle("Plat")
+                                            .toolbar {
+                                                FullscreenButton(panelVM: panelVM)
+                                            }
                                     }
                                 }
                             }
+                            
                             .buttonStyle(.borderedProminent)
                             .controlSize(.large)
                         }
@@ -129,6 +144,7 @@ struct DeedView: View {
             self.isPlatActive = false
             
         }
+        
     }
 }
 //

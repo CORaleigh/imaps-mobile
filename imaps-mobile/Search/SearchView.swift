@@ -31,17 +31,18 @@ struct SearchView: View, Equatable {
                             }
                         }
                     }
+                    .id(UUID())
                     .background(Color("Background"))
                     .scrollContentBackground(.hidden)
                     .frame(height: searchText.count > 0 ? nil : 5)
                     .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: "Search by address, owner, PIN or REID")
                     
-                    .onChange(of: searchText) { value in
-                        searchListVM.handleSearchTextChange(value)
+                    .onChange(of: searchText) { oldValue, newValue in
+                        searchListVM.handleSearchTextChange(newValue)
                     }
 
-                    .onChange(of: propertySelected) { selected in
-                        if selected == false {
+                    .onChange(of: propertySelected) { oldValue, newValue in
+                        if newValue == false {
                             self.panelVM.selectedPinNum = ""
                             self.mapViewModel.graphics.removeAllGraphics()
                             searchHistory.history = getSearchHistory()

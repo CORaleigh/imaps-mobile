@@ -7,6 +7,7 @@ class PropertyInfoViewModel: ObservableObject {
     @Published var deed: [String: Any]?
     @Published var photos: [[String: Any]]
     @Published var property: Feature?
+    @Published var septicPermitId: String?
     
     init(deed: [String: Any]?, photos: [[String:Any]], property: Feature?) {
         self.deed = deed
@@ -77,6 +78,29 @@ class PropertyInfoViewModel: ObservableObject {
         }
 
         completion(AnySequence(relatedFeatures))
+    }
+    
+    func querySepticPoint(for table: ServiceFeatureTable, geometry: Geometry, completion: @escaping (AnySequence<Feature>) -> Void) async {
+        let params = QueryParameters()
+        params.geometry = geometry
+        guard let result = try? await table.queryFeatures(using: params, queryFeatureFields: .loadAll) else {
+            // Handle the error if needed
+            return
+        }
+
+        completion(result.features())
+    }
+    
+    func querySepticPermit(for table: ServiceFeatureTable, permitNum: String, completion: @escaping (AnySequence<Feature>) -> Void) async {
+        let params = QueryParameters()
+        params.whereClause = "PERMIT_NUMBER = '"+permitNum+"'"
+        print(table.url)
+        guard let result = try? await table.queryFeatures(using: params, queryFeatureFields: .loadAll) else {
+            // Handle the error if needed
+            return
+        }
+
+        completion(result.features())
     }
 
 }

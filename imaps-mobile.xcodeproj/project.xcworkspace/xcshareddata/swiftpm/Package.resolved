@@ -7,7 +7,7 @@
       "location" : "https://github.com/esri/arcgis-maps-sdk-swift",
       "state" : {
         "branch" : "main",
-        "revision" : "adf75175cefe345d8f3ebebbb03d799e1cbd206d"
+        "revision" : "4fef6fb832c21782616cb8d8d66c964c1885f238"
       }
     },
     {
@@ -16,7 +16,25 @@
       "location" : "https://github.com/Esri/arcgis-maps-sdk-swift-toolkit",
       "state" : {
         "branch" : "main",
-        "revision" : "7b3553985cff4140163fb49c11bd741128e50d52"
+        "revision" : "117a0a35662f7a2403b22d7048e4f0c53a97c07c"
+      }
+    },
+    {
+      "identity" : "swift-cmark",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-cmark.git",
+      "state" : {
+        "revision" : "b022b08312decdc46585e0b3440d97f6f22ef703",
+        "version" : "0.6.0"
+      }
+    },
+    {
+      "identity" : "swift-markdown",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/swiftlang/swift-markdown.git",
+      "state" : {
+        "revision" : "4aae40bf6fff5286e0e1672329d17824ce16e081",
+        "version" : "0.4.0"
       }
     }
   ],

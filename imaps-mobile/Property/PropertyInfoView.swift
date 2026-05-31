@@ -65,15 +65,34 @@ struct PropertyInfoView: View, Equatable {
                     BuildingView(attributes:feature.feature.attributes)
                     TaxInfoView(panelVM: self.panelVM, attributes: feature.feature.attributes)
 
+                    if let septicPermitId = propertyInfoVM.septicPermitId {
+                        Button {
+                            if let url = URL(string: "https://wakecountync-energovpub.tylerhost.net/apps/SelfService#/permit/\(septicPermitId)"),
+                               UIApplication.shared.canOpenURL(url) {
+                                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                            }
+                        } label: {
+                            HStack {
+                                Image(systemName: "doc")
+                                Text("Septic Permit")
+                            }
+                            .frame(maxWidth: .infinity)
+                        }
+                        .padding(.horizontal, 10)
+                        .buttonStyle(.borderedProminent)
+                        .controlSize(.large)
+                    }
+
                     
                     Button {
                         self.servicesActive = true
                     }
-                label: {
+                    label: {
                     HStack {
-                        Image(systemName: "doc")
+                        Image(systemName: "flag")
                         Text("Services")
-                    }                        .frame(maxWidth: .infinity)
+                    }
+                    .frame(maxWidth: .infinity)
                        
                     
                 }
@@ -83,6 +102,9 @@ struct PropertyInfoView: View, Equatable {
                 .navigationDestination(isPresented: $servicesActive) {
                     Services(mapViewModel: mapViewModel, propertyInfoViewModel: self.propertyInfoVM)
                         .navigationTitle("Services")
+                        .toolbar {
+                            FullscreenButton(panelVM: panelVM)
+                        }
                 }
 
                     PhotoView(photos: propertyInfoVM.photos)
@@ -119,20 +141,76 @@ struct PropertyInfoView: View, Equatable {
             .onReceive(feature.$feature) { feature in
  
                 Task {
-                    guard let table: ServiceFeatureTable =  mapViewModel.getCondoTable(map: mapViewModel.map),
-                          let oid = feature.attributes["OBJECTID"],
-                          let relInfo = table.layerInfo?.relationshipInfos.filter({ $0.name.contains("PROPERTY") }).first
-                    else { return }
-                    await propertyInfoVM.getProperty(id: Int(oid as! Int64), table: table, relationshipInfo: relInfo,  completion: { property in
-                        if property != nil {
-                            mapViewModel.propertySelected(map: mapViewModel.map, property: property!)
-                            DispatchQueue.main.async {
-                                propertyInfoVM.property = property
+                    // Safely unwrap table, oid, and relInfo using guard statements
+                    guard let table: ServiceFeatureTable = mapViewModel.getCondoTable(map: mapViewModel.map),
+                          let oid = feature.attributes["OBJECTID"] as? Int64, // Ensure oid is of type Int64
+                          let relInfo = table.layerInfo?.relationshipInfos.first(where: { $0.name.contains("PROPERTY") })
+                    else {
+                        return
+                    }
+                    
+                    // Await propertyInfoVM.getProperty call and handle the result
+                    await propertyInfoVM.getProperty(id: Int(oid), table: table, relationshipInfo: relInfo) { property in
+                        // Use Task to handle async code within the completion handler
+                        Task {
+                            if let property = property {
+                                // Handle successful property retrieval
+                                mapViewModel.propertySelected(map: mapViewModel.map, property: property)
+                                
+                                DispatchQueue.main.async {
+                                    propertyInfoVM.property = property
+                                }
+                                
+                                // Safely unwrap septicLayer
+                                guard let septicLayer = mapViewModel.getSepticPermitLayer(map: mapViewModel.map),
+                                      let septicPermitTable = mapViewModel.getSepticPermitTable(map: mapViewModel.map),
+                                      let septicFeatureTable = septicLayer.featureTable as? ServiceFeatureTable,
+                                      let propertyGeometry = property.geometry
+                                else {
+                                    return
+                                }
+                                
+                                // Await querySepticPoint call and handle the result
+                                
+                                // Use await to handle the async call
+                                
+                                await propertyInfoVM.querySepticPoint(for: septicFeatureTable, geometry: propertyGeometry) { septicFeatures in
+                                    for feature in septicFeatures {
+                                        // Safely unwrap the permit number using optional binding
+                                        if let permitNum = feature.attributes["PERMIT_NUMBER"] as? String {
+                                            // Call querySepticPermit with a completion handler
+                                            Task {
+                                                await propertyInfoVM.querySepticPermit(for: septicPermitTable, permitNum: permitNum) { permits in
+                                                    var permitId = ""
+                                                    for permit in permits {
+                                                        if let id = permit.attributes["PMPERMITID"] as? String {
+                                                            permitId = id
+                                                            // Process permitId if needed
+                                                        }
+                                                    }
+                                                    
+                                                    // Handle the permitId or any other logic here
+                                                    if !permitId.isEmpty {
+                                                        print("Found permit ID: \(permitId)")
+                                                        propertyInfoVM.septicPermitId = permitId
+                                                    } else {
+                                                        print("No permit ID found for permit number: \(permitNum)")
+                                                        propertyInfoVM.septicPermitId = nil
+                                                    }
+                                                }
+                                            }
+                                        } else {
+                                            // Handle the case where permitNum is nil
+                                            print("Permit number is missing or invalid for feature: \(feature)")
+                                        }
+                                    }
+                                }
+
                             }
                         }
-                        
-                    })
+                    }
                 }
+
             }
         }
         .scrollContentBackground(.hidden)
@@ -152,6 +230,18 @@ struct PropertyInfoView: View, Equatable {
                     }
                 }
             }
+            ToolbarItem(placement: .topBarTrailing) {
+                if (UIDevice.current.userInterfaceIdiom == .pad) {
+                    Button(action: {
+                        // Action to perform when the button is tapped
+                        self.panelVM.fullScreen.toggle()
+                        // Add your custom action here, for example, navigation or triggering some state change.
+                    }) {
+                        Image(systemName: self.panelVM.fullScreen == true ? "arrow.down.right.and.arrow.up.left.rectangle" : "arrow.down.backward.and.arrow.up.forward.rectangle")
+                            .foregroundColor(.blue) // Optional: Customize the color
+                    }
+                }
+            }
             ToolbarItem (placement: .topBarTrailing){
 
                 Button(action: {
@@ -166,8 +256,7 @@ struct PropertyInfoView: View, Equatable {
         
     }
     
-    
-    
+
     
 }
 

@@ -22,15 +22,20 @@ struct TaxInfoView: View {
                         if let url = URL(string: getUrlString(city: city, reid: reid)) {
                             WebView(request: URLRequest(url: url))
                                 .navigationTitle("Tax Info")
+                                .toolbar {
+                                    FullscreenButton(panelVM: panelVM)
+                                }
                         }
                     }
                 }
+  
         }
         .padding(.horizontal, 10)
         .buttonStyle(.borderedProminent)
         .controlSize(.large)
         .onReceive(panelVM.$selectedPinNum) { selectedPinNum in
             self.isActive = false
+
         }
     }
 }

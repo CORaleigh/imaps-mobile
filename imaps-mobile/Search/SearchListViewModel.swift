@@ -10,15 +10,13 @@ class SearchListViewModel: ObservableObject {
     ]
     
     func search(text: String) async {
-        
-        
         do {
-            for  group in self.groups {
+            for group in self.groups {
                 let features: [SearchFeature] = try await Search().getData(searchTerm: text, field: group.field)
-                DispatchQueue.main.async {
-                    
-                    group.features = features.map(SearchItem.init)
-                    
+                
+                // Ensure UI update is happening on the main thread
+                await MainActor.run {
+                    group.features = features.map { SearchItem(feature: $0) }
                 }
             }
         } catch {

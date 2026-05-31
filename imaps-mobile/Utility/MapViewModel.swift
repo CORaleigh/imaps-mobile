@@ -68,6 +68,28 @@ class MapViewModel: ObservableObject {
         let table = map.tables.first{$0.displayName.uppercased().contains("ADDRESS")} as? ServiceFeatureTable
         return table
     }
+    
+    func getSepticPermitTable (map: Map) -> ServiceFeatureTable? {
+        let table = map.tables.first{$0.displayName.contains("Septic Permits")} as? ServiceFeatureTable
+        return table
+    }
+    
+    func getSepticPermitLayer (map: Map) -> FeatureLayer? {
+        guard let group = map.operationalLayers.first(where: {$0.name == "Environmental" && $0 is GroupLayer})
+        else {
+            return nil
+        }
+
+        guard let groupLayer = group as? GroupLayer else {
+            return nil
+        }
+        let layer = groupLayer.layers.first(where: { $0.name.starts(with: "Septic") })
+        guard let featureLayer = layer as? FeatureLayer else {
+            return nil
+        }
+      
+        return featureLayer
+    }
 
     func setLayerVisibility (map: Map) async -> Void {
         try? await map.load()

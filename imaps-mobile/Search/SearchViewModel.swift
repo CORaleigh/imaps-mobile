@@ -19,13 +19,24 @@ class Search: ObservableObject {
 
         if field == "ADDRESS" {
             components.path = "/arcgis/rest/services/Property/Property/FeatureServer/4/query"
-
         }
+
+        let whereClause: String
+        let outFields: String
+
+        if field == "OWNER" {
+            whereClause = "OWNER LIKE '\(searchTerm)%' OR OWNER2 LIKE '\(searchTerm)%'"
+            outFields = "OWNER"
+        } else {
+            whereClause = "\(field) LIKE '\(searchTerm)%'"
+            outFields = field
+        }
+
         components.queryItems = [
             URLQueryItem(name: "f", value: "json"),
-            URLQueryItem(name: "where", value: "\(field) LIKE '\(searchTerm)%'"),
+            URLQueryItem(name: "where", value: whereClause),
             URLQueryItem(name: "returnDistinctValues", value: "true"),
-            URLQueryItem(name: "outFields", value: field),
+            URLQueryItem(name: "outFields", value: outFields),
             URLQueryItem(name: "returnGeometry", value: "false"),
             URLQueryItem(name: "orderByFields", value: field),
             URLQueryItem(name: "maxRecordCount", value: "10")
@@ -59,8 +70,7 @@ struct Attributes: Codable {
         case fullStreetName = "FULL_STREET_NAME"
         case owner = "OWNER"
         case reid = "REID"
-        case pin = "PIN"
-        
+        case pin = "PIN_NUM"
     }
 }
 struct SearchFeature: Decodable {

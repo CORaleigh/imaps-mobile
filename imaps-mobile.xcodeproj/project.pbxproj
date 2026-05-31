@@ -56,6 +56,7 @@
 		C7CEB37F2BE3CD220098DC1B /* ServiceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CEB37E2BE3CD220098DC1B /* ServiceViewModel.swift */; };
 		C7CEB3832BE4048D0098DC1B /* HTMLTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CEB3822BE4048D0098DC1B /* HTMLTextView.swift */; };
 		C7D41C5D2BFE2627001EBE50 /* PopupListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D41C5C2BFE2627001EBE50 /* PopupListView.swift */; };
+		C7EAC3B62DA8332E00CF6ED1 /* FullscreenButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7EAC3B52DA8332E00CF6ED1 /* FullscreenButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -109,6 +110,7 @@
 		C7CEB37E2BE3CD220098DC1B /* ServiceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceViewModel.swift; sourceTree = "<group>"; };
 		C7CEB3822BE4048D0098DC1B /* HTMLTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTMLTextView.swift; sourceTree = "<group>"; };
 		C7D41C5C2BFE2627001EBE50 /* PopupListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupListView.swift; sourceTree = "<group>"; };
+		C7EAC3B52DA8332E00CF6ED1 /* FullscreenButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullscreenButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -161,6 +163,7 @@
 				C70CB49E29E6E49D00B6A157 /* imaps_mobileApp.swift */,
 				C735C23629E9DFB3006A3767 /* AppSecrets.swift.masque.swift */,
 				C7692F0C2BB47170000DB711 /* PrivacyInfo.xcprivacy */,
+				C7EAC3B52DA8332E00CF6ED1 /* FullscreenButton.swift */,
 			);
 			path = "imaps-mobile";
 			sourceTree = "<group>";
@@ -367,6 +370,7 @@
 				C70E73352BBB3A540042A932 /* PanelViewModel.swift in Sources */,
 				C70CB4C629E6F7D400B6A157 /* GeneralView.swift in Sources */,
 				C70CB4CA29E6F7F100B6A157 /* ValuationView.swift in Sources */,
+				C7EAC3B62DA8332E00CF6ED1 /* FullscreenButton.swift in Sources */,
 				C738262529EB08FC0087431D /* LayerInfoView.swift in Sources */,
 				C70CB49F29E6E49D00B6A157 /* imaps_mobileApp.swift in Sources */,
 				C70CB4B829E6E84000B6A157 /* BasemapView.swift in Sources */,
@@ -524,7 +528,7 @@
 				CODE_SIGN_ENTITLEMENTS = "imaps-mobile/imaps_mobile.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 29;
+				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"imaps-mobile/Preview Content\"";
 				DEVELOPMENT_TEAM = MRWDJLVR85;
@@ -547,11 +551,11 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.1;
-				MARKETING_VERSION = 3.0;
+				MARKETING_VERSION = 3.0.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.raleigh.iMapsMobile;
 				PRODUCT_NAME = "iMAPS Beta";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -573,7 +577,7 @@
 				CODE_SIGN_ENTITLEMENTS = "imaps-mobile/imaps_mobile.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 29;
+				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"imaps-mobile/Preview Content\"";
 				DEVELOPMENT_TEAM = MRWDJLVR85;
@@ -596,11 +600,11 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.1;
-				MARKETING_VERSION = 3.0;
+				MARKETING_VERSION = 3.0.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.raleigh.iMapsMobile;
 				PRODUCT_NAME = "iMAPS Beta";
 				PROVISIONING_PROFILE_SPECIFIER = "";

@@ -22,6 +22,9 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "closure #2 in closure #1 in closure #2 in closure #1 in closure #3 in closure #1 in PropertyInfoView.body.getter:PropertyInfoView.swift">
+      </ContextState>
+      <ContextState
          contextName = "closure #7 in closure #1 in closure #1 in ContentView.body.getter:ContentView.swift">
          <PersistentStrings>
             <PersistentString
@@ -150,6 +153,9 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "closure #1 in closure #2 in closure #1 in closure #2 in closure #1 in closure #3 in closure #1 in PropertyInfoView.body.getter:PropertyInfoView.swift">
+      </ContextState>
+      <ContextState
          contextName = "closure #6 in closure #1 in closure #1 in WebMapView.body.getter:WebMapView.swift">
       </ContextState>
       <ContextState
@@ -163,6 +169,14 @@
             </PersistentString>
             <PersistentString
                value = "UserDefaults.standard.array(forKey: &quot;searchHistory&quot;)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "MapViewModel.getSepticPermitLayer(map:):MapViewModel.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "group">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -195,6 +209,9 @@
       </ContextState>
       <ContextState
          contextName = "closure #1 in PhotoViews.body.getter:PhotoViews.swift">
+      </ContextState>
+      <ContextState
+         contextName = "PropertyInfoViewModel.querySepticPermit(for:permitNum:completion:):PropertyInfoViewModel.swift">
       </ContextState>
       <ContextState
          contextName = "closure #3 in closure #1 in ContentView.body.getter:ContentView.swift">
@@ -270,6 +287,9 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "closure #1 in closure #1 in closure #2 in closure #1 in closure #2 in closure #1 in closure #3 in closure #1 in PropertyInfoView.body.getter:PropertyInfoView.swift">
+      </ContextState>
+      <ContextState
          contextName = "closure #1 in closure #1 in closure #1 in closure #1 in closure #2 in PropertyInfoView.body.getter:PropertyInfoView.swift">
       </ContextState>
       <ContextState
@@ -335,15 +355,15 @@
          contextName = "closure #1 in closure #1 in closure #1 in closure #1 in closure #1 in closure #1 in closure #1 in closure #1 in BasemapView.body.getter:BasemapView.swift">
       </ContextState>
       <ContextState
+         contextName = "closure #1 in closure #1 in closure #1 in closure #2 in closure #1 in closure #1 in closure #1 in closure #1 in BasemapView.body.getter:BasemapView.swift">
+      </ContextState>
+      <ContextState
          contextName = "closure #1 in SearchListView.body.getter:SearchView.swift">
          <PersistentStrings>
             <PersistentString
                value = "value.value">
             </PersistentString>
          </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "closure #1 in closure #1 in closure #1 in closure #2 in closure #1 in closure #1 in closure #1 in closure #1 in BasemapView.body.getter:BasemapView.swift">
       </ContextState>
       <ContextState
          contextName = "closure #1 in closure #1 in closure #1 in closure #1 in closure #1 in LayersView.body.getter:LayersView.swift">
@@ -397,7 +417,7 @@
          contextName = "GLOBAL">
          <PersistentStrings>
             <PersistentString
-               value = "raster.maxScale">
+               value = "feature.attributes[&quot;PERMIT_NUMBER&quot;] ">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

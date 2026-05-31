@@ -8,6 +8,7 @@ class PanelViewModel: ObservableObject {
     @Published var selectedDetent: PresentationDetent = .medium
     @Published var selectedPanel: SelectedPanel = SelectedPanel.search
     @Published var selectedPinNum: String = ""
+    @Published var fullScreen: Bool = false
     init(isPresented: Bool) {
         self.isPresented = isPresented
     }
@@ -19,3 +20,4 @@ class PanelViewModel: ObservableObject {
 enum SelectedPanel {
     case search, layers, basemap, property
 }
+

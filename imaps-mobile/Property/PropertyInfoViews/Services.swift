@@ -95,7 +95,9 @@ struct Services: View, Equatable {
                         }
                     }
                 }
-            }.background(Color("Background"))
+            }
+            
+            .background(Color("Background"))
         }
             .onChange(of: selectedCategory, perform: { index in
                 Task {

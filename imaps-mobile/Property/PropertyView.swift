@@ -28,13 +28,16 @@ struct PropertyView: View, Equatable {
             }
         }
 
+
         .onReceive(viewModel.$text) { text in
             Task {
                 var data: [Feature] = []
                 guard let condoTable: ServiceFeatureTable =  mapViewModel.getCondoTable(map: mapViewModel.map) else { return }
                 if group.field == "ADDRESS" {
                     guard let addressTable: ServiceFeatureTable =  mapViewModel.getAddressTable(map: mapViewModel.map) else { return }
+                    try await(addressTable.load())
                     guard let info = addressTable.layerInfo?.relationshipInfos.first else { return }
+                   
 
                     await queryRelatedCondos(for: addressTable, relationshipInfo: info, address: viewModel.text) { result in
                         data = result
@@ -81,7 +84,7 @@ struct PropertyView: View, Equatable {
                     
                 }
             }
-            
+
         }
     }
 }
