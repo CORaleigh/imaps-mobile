@@ -123,24 +123,20 @@ struct WebMapView: View {
                     self.mapViewModel.proxy = proxy
                     let center: String? = UserDefaults.standard.string(forKey: "center")
                     let scale: Double = UserDefaults.standard.double(forKey: "scale")
-                    if (center != nil) {
-                        do {
-                            if let center = center {
-                                mapViewModel.viewpoint = try Viewpoint(center:  Geometry.fromJSON(center) as! Point, scale: scale)
-                            }
-                        } catch {
-                            print("Error initializing Viewpoint: \(error)")
-                        }
-                    }
-                    else {
+                    
+                    if let center = center,
+                       let centerData = center.data(using: .utf8),
+                       let centerGeometry = try? Geometry.fromJSON(centerData) as? Point {
+                        mapViewModel.viewpoint = Viewpoint(center: centerGeometry, scale: scale)
+                    } else {
                         mapViewModel.viewpoint = Viewpoint(latitude: 35.7796, longitude: -78.6382, scale: 500_000)
                     }
+                    
                     if let viewpoint = mapViewModel.viewpoint {
                         basemapVM.center = viewpoint.targetGeometry.extent.center
                     }
-
                 }
-                .onChange(of: geo.size) { _ in
+                .onChange(of: geo.size) {  oldValue, newValue in
                     self.isPortrait = geo.size.height > geo.size.width
                 }
             }

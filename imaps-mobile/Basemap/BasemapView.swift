@@ -94,7 +94,7 @@ struct BasemapView: View, Equatable {
                     
                     self.basemapVM.inRaleigh = GeometryEngine.isGeometry(basemapVM.center, intersecting: boundary)
                 }
-                .onChange(of: basemapVM.center) { center in
+                .onChange(of: basemapVM.center) { oldValue, center in
                     let boundary = Boundary().boundary
                     self.basemapVM.objectWillChange.send()
                     

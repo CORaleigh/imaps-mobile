@@ -26,8 +26,7 @@ struct PopupContentView: View {
 
                         }
                         if let popup = popupVM.popup {
-                            PopupView(popup: popup, isPresented: $popupVM.isPresented)
-                                .showCloseButton(false)
+                            PopupView(root: popup, isPresented: $popupVM.isPresented)
                                 .padding()
                         }
                     }
@@ -50,19 +49,19 @@ struct PopupContentView: View {
                                 })
                             }
                         }
-                            ToolbarItem (placement: .navigationBarTrailing){
-                                Button(action: {
-                                    if (lastLayer != nil) {
-                                        lastLayer?.clearSelection()
-                                    }
-                                    self.popupVM.popup = nil
-                                    self.popupVM.dismiss()
-                                },label: {
-                                    
-                                    Image(systemName: "xmark")
-                                    
-                                })
-                            }
+//                            ToolbarItem (placement: .navigationBarTrailing){
+//                                Button(action: {
+//                                    if (lastLayer != nil) {
+//                                        lastLayer?.clearSelection()
+//                                    }
+//                                    self.popupVM.popup = nil
+//                                    self.popupVM.dismiss()
+//                                },label: {
+//                                    
+//                                    Image(systemName: "xmark")
+//                                    
+//                                })
+//                            }
                     }
                     .navigationTitle(popupVM.layerName).navigationBarTitleDisplayMode(.inline)
                 Spacer()

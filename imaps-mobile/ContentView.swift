@@ -112,7 +112,7 @@ struct ContentView: View {
                     self.panelVM.isPresented = UIDevice.current.userInterfaceIdiom == .pad
                 }
             }
-            .onChange(of: networkMonitor.isConnected) { connection in
+            .onChange(of: networkMonitor.isConnected) { oldValue, connection in
                 if connection {
                     if mapViewModel.map.loadStatus != .loaded {
                         Task {

@@ -94,7 +94,6 @@ class PropertyInfoViewModel: ObservableObject {
     func querySepticPermit(for table: ServiceFeatureTable, permitNum: String, completion: @escaping (AnySequence<Feature>) -> Void) async {
         let params = QueryParameters()
         params.whereClause = "PERMIT_NUMBER = '"+permitNum+"'"
-        print(table.url)
         guard let result = try? await table.queryFeatures(using: params, queryFeatureFields: .loadAll) else {
             // Handle the error if needed
             return

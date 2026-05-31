@@ -99,13 +99,13 @@ struct Services: View, Equatable {
             
             .background(Color("Background"))
         }
-            .onChange(of: selectedCategory, perform: { index in
-                Task {
-                    searching = true
-                    try await serviceViewModel.getPopups(selectedCategory: serviceViewModel.categories[selectedCategory], property: propertyInfoViewModel.property)
-                    searching = false
-                }
-            })
+        .onChange(of: selectedCategory) { oldValue, newValue in
+            Task {
+                searching = true
+                try? await serviceViewModel.getPopups(selectedCategory: serviceViewModel.categories[newValue], property: propertyInfoViewModel.property)
+                searching = false
+            }
+        }
             .onReceive(propertyInfoViewModel.$property) { feature in
                 Task {
                     searching = true

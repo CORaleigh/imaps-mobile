@@ -154,7 +154,7 @@ struct Category: Hashable, Identifiable {
         hasher.combine(title)
     }
 }
-
+@MainActor
 func getLayer(name: String, mapViewModel: MapViewModel) -> Layer? {
     func findLayer(layer: Layer) -> Layer? {
         if layer.name == name {

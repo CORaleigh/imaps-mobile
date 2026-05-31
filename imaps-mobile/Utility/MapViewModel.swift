@@ -2,6 +2,7 @@
 import SwiftUI
 import ArcGIS
 
+@MainActor
 class MapViewModel: ObservableObject {
     @Published var viewpoint: Viewpoint? = nil
     @Published var longPressScreenPoint: CGPoint? = nil
@@ -180,7 +181,7 @@ class MapViewModel: ObservableObject {
         var viewpoint = Viewpoint(center: Point(latitude: 35.7796, longitude: -78.6382), scale: 500_000)
         
         if let centerJSON = UserDefaults.standard.string(forKey: "center"),
-           let centerGeometry = try? Geometry.fromJSON(centerJSON) as? Point,
+           let centerGeometry = try? Geometry.fromJSON(Data(centerJSON.utf8)) as? Point,
            let scale = UserDefaults.standard.value(forKey: "scale") as? Double {
             viewpoint = Viewpoint(center: centerGeometry, scale: scale)
         }

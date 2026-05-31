@@ -29,7 +29,7 @@ struct SubLayerView: View, Equatable {
                     }
                 }
 
-                .onChange(of: isExpanded) { newValue in
+                .onChange(of: isExpanded) { oldValue, newValue in
                     if newValue {
                         // Perform actions or display views when expanded
                         layerVM.expandedLayers.append(layer.name)
